@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="Styles.css">
+
+</head>
+<body>
+  <p1>WELCOME EVERYBODY</p1>
+    <button onclick="showPhpCode()">Show PHP Code</button>
+    <button onclick="showCV()">Show CV</button>
+
+    <div id="phpCode" style="display:none;">
+        <?php
+        
+            // قم بإضافة كود PHP الخاص بك هنا
+            echo "This is PHP code";
+        ?>
+    </div>
+
+    <div id="cv" style="display:none;">
+        <!-- قم بإضافة محتوى CV الخاص بك هنا -->
+        <h2>Curriculum Vitae</h2>
+        <p>Name: AHMED ALIZZI</p>
+        <p>Education: Bachelor's in Computer Science</p>
+        <P> Aga: 21 </P>
+        <!-- وما إلى ذلك -->
+    </div>
+
+    <script>
+        function showPhpCode() {
+            document.getElementById("phpCode").style.display = "block";
+            document.getElementById("cv").style.display = "none";
+        }
+
+        function showCV() {
+            document.getElementById("phpCode").style.display = "none";
+            document.getElementById("cv").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
