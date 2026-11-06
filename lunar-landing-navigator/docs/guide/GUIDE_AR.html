@@ -53,8 +53,8 @@ figcaption{font-size:13px;color:var(--muted);margin-top:4px}
 <section class="cover">
   <div class="kicker">LUNAR LANDING SITE NAVIGATOR</div>
   <h1>🌕 مستكشف مواقع الهبوط القمري<br>الدليل الكامل من الألف إلى الياء</h1>
-  <div class="sub">نظام يختار أفضل الأماكن لهبوط المركبات على القطب الجنوبي للقمر، بنفس الطريقة اللي استخدمتها ناسا في اختيار مناطق Artemis III</div>
-  <img src="img/map_overview.png" alt="الخريطة التفاعلية">
+  <div class="sub">نظام يختار أفضل الأماكن لهبوط المركبات على القطب الجنوبي للقمر، بنفس الطريقة اللي استخدمتها ناسا في اختيار مناطق Artemis III. يشتغل على <b>بيانات ناسا الرسمية</b> ويحلل نوافذ الإطلاق الحقيقية لعام 2027، ودقته متحقق منها مقابل خرائط ناسا ومقابل دراسة علمية مستقلة.</div>
+  <img src="img/nasa_map_overview.jpg" alt="الخريطة التفاعلية على بيانات ناسا">
   <div class="chips"><span style="background:var(--green)">آمن</span><span style="background:var(--yellow)">متوسط</span><span style="background:var(--red)">خطر</span><span style="background:var(--blue)">ظل دائم (جليد محتمل)</span></div>
 </section>
 
@@ -70,7 +70,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:4px}
 <li>أول تشغيل (البيانات التجريبية)</li>
 <li>كيف تقرأ الخريطة والنتائج</li>
 <li>التشغيل على سيرفرات GitHub</li>
-<li>التشغيل على بيانات ناسا الحقيقية</li>
+<li>التحليل على بيانات ناسا الحقيقية: النتائج والتحقق</li>
 <li>كيف يشتغل النظام من الداخل</li>
 <li>تعديل الشروط والأوزان</li>
 <li>كشف الحفر والصخور بـ YOLO</li>
@@ -188,14 +188,23 @@ python3 -m venv .venv
 source .venv/bin/activate</code></pre></li>
 <li>ثبّت المكتبات:
 <pre><code>pip install -r requirements.txt</code></pre>
-المكتبات هي: <code>numpy</code> و <code>scipy</code> للحسابات، و <code>matplotlib</code> و <code>pillow</code> للصور، و <code>pytest</code> للاختبارات.</li>
+المكتبات هي:
+<ul>
+<li><code>numpy</code> و <code>scipy</code>: للحسابات</li>
+<li><code>matplotlib</code> و <code>pillow</code>: للصور</li>
+<li><code>rasterio</code>: لقراءة ملفات ناسا GeoTIFF</li>
+<li><code>numba</code>: لتسريع حساب الأفق أكثر من 100 مرة</li>
+<li><code>astropy</code>: لحساب مواقع الشمس والأرض الحقيقية</li>
+<li><code>pytest</code>: للاختبارات</li>
+</ul></li>
 <li>تأكد إن كل شي شغال:
 <pre><code>python -m pytest -q
-# المفروض يطلع: 8 passed</code></pre></li>
+# المفروض يطلع: 14 passed</code></pre></li>
 </ol>
 
 <h2>7. أول تشغيل (البيانات التجريبية)</h2>
 <pre><code>python -m lunar_nav --demo</code></pre>
+<div class="note">هذا الوضع التجريبي سريع ومفيد للتعلم. للنتائج الحقيقية استخدم <code>--nasa</code>، وهو مشروح في الفصل 10.</div>
 <p>هذا يولّد منطقة قطبية تجريبية مساحتها 60×60 كم. فيها حفرة كبيرة عميقة جنب القطب (شبه حفرة Shackleton) أرضيتها مظلمة دايمًا، وسلسلة مرتفعات مضيئة، وحوالي 220 حفرة صغيرة، وحقول صخور. التحليل ياخذ تقريبًا 30 ثانية، ويطلع شي زي كذا:</p>
 <pre><code>[1/5] slope: 69.0% of area &lt;= 10.0 deg
 [2/5] illumination: mission mean 0.38, PSR 9.1% of area, Earth visible 0.67
@@ -254,10 +263,11 @@ Top regions:
 <h3>وش يسوي في كل تشغيل؟</h3>
 <ol class="steps">
 <li>يجهز سيرفر Ubuntu عليه Python 3.12 ويثبت المكتبات.</li>
-<li>يشغّل الاختبارات الثمانية، وإذا فشل واحد يوقف ويعلمك.</li>
-<li>يشغّل التحليل كامل.</li>
-<li>يكتب جدول أفضل المناطق في صفحة نتيجة التشغيل نفسها.</li>
-<li>يرفع الخريطة التفاعلية والصور والجداول كملف تنزله (Artifact) ويحتفظ فيه 30 يوم.</li>
+<li>يشغّل الاختبارات الـ14، وإذا فشل واحد يوقف ويعلمك.</li>
+<li>ينزّل بيانات ناسا الرسمية (حوالي 1.2 جيجا) من خوادم NASA Goddard. أول مرة بس، وبعدها يحفظها في الكاش.</li>
+<li>يشغّل التحليل كامل على بيانات ناسا، مع نوافذ 2027 والتحقق من الدقة. ياخذ حوالي 3 إلى 5 دقايق.</li>
+<li>يكتب جدول أفضل المناطق ونتائج التحقق في صفحة نتيجة التشغيل نفسها.</li>
+<li>يرفع الخريطة التفاعلية والصور والتقرير والجداول كملف تنزله (Artifact) ويحتفظ فيه 30 يوم.</li>
 </ol>
 <h3>كيف تشغّله يدويًا وتشوف النتيجة</h3>
 <ol class="steps">
@@ -270,41 +280,84 @@ Top regions:
 <h3>الإعدادات اللي تقدر تغيّرها وقت التشغيل اليدوي</h3>
 <table>
 <tr><th>الإعداد</th><th>الوظيفة</th></tr>
-<tr><td><code>dem_url</code></td><td>رابط ملف ارتفاعات حقيقي من ناسا. إذا خليته فاضي يشتغل على البيانات التجريبية</td></tr>
-<tr><td><code>pixel_size</code></td><td>دقة البكسل بالمتر للملف الحقيقي</td></tr>
-<tr><td><code>downsample</code></td><td>كم مرة يصغّر الملف عشان يكون الحساب أسرع</td></tr>
-<tr><td><code>dem_scale</code></td><td>معامل يحوّل القيم في الملف إلى متر</td></tr>
+<tr><td><code>mode</code></td><td><b>nasa</b> (الافتراضي): بيانات ناسا الرسمية · <b>demo</b>: البيانات التجريبية · <b>custom</b>: ملف ارتفاعات من اختيارك</td></tr>
+<tr><td><code>year</code></td><td>سنة المهمة اللي تنحسب نوافذها (الافتراضي 2027)</td></tr>
 <tr><td><code>max_slope</code></td><td>أقصى ميلان مسموح بالدرجات</td></tr>
-<tr><td><code>seed</code></td><td>رقم يغيّر شكل البيانات التجريبية</td></tr>
+<tr><td><code>dem_url</code> و <code>pixel_size</code> و <code>downsample</code> و <code>dem_scale</code></td><td>لوضع custom بس: رابط الملف، ودقة البكسل، ومعامل التصغير، ومعامل التحويل لمتر</td></tr>
 </table>
-<div class="note">ميزة كبيرة لسيرفرات GitHub إنها متصلة بالإنترنت بدون قيود، فتقدر تنزّل بيانات ناسا الحقيقية مباشرة. يكفي تحط رابط الملف في <code>dem_url</code>.</div>
-<div class="note warn"><b>عن الـ repo الخاص:</b> GitHub Actions تشتغل على الـ repo الخاص، والحساب المجاني فيه 2000 دقيقة تشغيل في الشهر، وكل تشغيل ياخذ تقريبًا 2 إلى 3 دقايق على البيانات التجريبية. أما نشر الخريطة كموقع عام عن طريق GitHub Pages فيحتاج repo عام أو حساب مدفوع، عشان كذا النتائج تنزل كملف.</div>
+<div class="note">سيرفرات GitHub متصلة بالإنترنت، فتنزّل بيانات ناسا مباشرة من مصدرها الرسمي (<span class="ltr">pgda.gsfc.nasa.gov</span>) في كل تشغيل جديد، وبعدها تحفظها في الكاش عشان التشغيلات الجاية تكون أسرع.</div>
+<div class="note warn"><b>عن الـ repo الخاص:</b> GitHub Actions تشتغل على الـ repo الخاص، والحساب المجاني فيه 2000 دقيقة تشغيل في الشهر، وكل تشغيل كامل على بيانات ناسا ياخذ حوالي 5 دقايق. أما نشر الخريطة كموقع عام عن طريق GitHub Pages فيحتاج repo عام أو حساب مدفوع، عشان كذا النتائج تنزل كملف.</div>
 
-<h2>10. التشغيل على بيانات ناسا الحقيقية</h2>
-<h3>أ) وين تلقى البيانات</h3>
-<pre><code>python scripts/download_nasa_data.py --list</code></pre>
+<h2>10. التحليل على بيانات ناسا الحقيقية: النتائج والتحقق</h2>
+<p>هذا هو الوضع الرئيسي للمشروع. أمر واحد ينزّل بيانات ناسا الرسمية ويحللها كاملة:</p>
+<pre><code>python -m lunar_nav --nasa -o output
+# خيارات: --year 2027  --half-width-km 240  --res 80  --max-slope 10</code></pre>
+<p>أول تشغيل ينزّل حوالي 1.2 جيجا لمجلد <code>data/nasa</code>، والتحليل ياخذ حوالي 2.5 دقيقة على جهاز عادي فيه 4 أنوية.</p>
+
+<h3>أ) البيانات الرسمية المستخدمة</h3>
 <table>
-<tr><th>البيانات</th><th>المصدر</th></tr>
-<tr><td>خرائط ارتفاع LOLA للقطبين</td><td class="ltr">pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/</td></tr>
-<tr><td>ارتفاعات عالية الدقة وخرائط إضاءة للقطب الجنوبي</td><td class="ltr">pgda.gsfc.nasa.gov/products/</td></tr>
-<tr><td>خرائط الصخور من Diviner</td><td class="ltr">pds-geosciences.wustl.edu/missions/lro/diviner.htm</td></tr>
-<tr><td>صور LROC NAC (لـ YOLO)</td><td class="ltr">wms.lroc.asu.edu/lroc/rdr_product_select</td></tr>
+<tr><th>الطبقة</th><th>الملف</th><th>المصدر</th></tr>
+<tr><td>الارتفاع</td><td class="ltr">LDEM_80S_80MPP_ADJ.TIF (80 m/px)</td><td>Barker et al. 2023: أحدث خريطة LOLA للقطب الجنوبي (PGDA 90)</td></tr>
+<tr><td>الميلان</td><td class="ltr">LDSM_80S_80MPP_ADJ.TIF</td><td>Barker et al. 2023</td></tr>
+<tr><td>الخشونة (بدل الصخور)</td><td class="ltr">LDRM_80S_50MPP_ADJ_ROUGH_100M.TIF</td><td>Barker et al. 2023</td></tr>
+<tr><td>متوسط الإضاءة لمدة 18.6 سنة</td><td class="ltr">AVGVISIB_75S_120M_201608.TIF</td><td>Mazarico et al. 2011 (PGDA 69)</td></tr>
+<tr><td>متوسط رؤية الأرض</td><td class="ltr">AVGVISIB_75S_120M_201608_EARTH.TIF</td><td>Mazarico et al. 2011</td></tr>
+<tr><td>الظل الدائم (PSR)</td><td class="ltr">LPSR_75S_120M_201608.TIF</td><td>Mazarico et al. 2011</td></tr>
 </table>
-<h3>ب) نصايح لاختيار الملف</h3>
-<ul>
-<li>ابدأ بملف دقته 20 إلى 80 متر للبكسل للقطب الجنوبي (85S أو 80S). ملفات الـ 5 متر حجمها عدة جيجابايت.</li>
-<li>ملفات LOLA بصيغة <code>.IMG</code> يجي معها ملف <code>.LBL</code>. اقرأ فيه <code>SCALING_FACTOR</code>، ومرّر القيمة اللي تحوّل الأرقام لمتر في <code>--dem-scale</code>.</li>
-<li>ملفات GeoTIFF أسهل. إذا ثبّت <code>rasterio</code> النظام يعرف دقة البكسل من الملف نفسه.</li>
-</ul>
-<h3>ج) التشغيل</h3>
-<pre><code>python scripts/download_nasa_data.py &lt;رابط-الملف&gt; -o data/
-pip install rasterio          # اختياري لكنه مستحسن مع GeoTIFF
-python -m lunar_nav --dem data/&lt;اسم-الملف&gt;.tif --pixel-size 20 --downsample 4
+<p>كل الملفات بنفس الإسقاط القطبي، فالنظام يركّبها على شبكة وحدة مساحتها 480×480 كم بدقة 80 م (36 مليون بكسل). وتأكدنا من دقة الإحداثيات: إحداثيات حفرة Shackleton من دليل IAU تطلع على عمق ‎−2788 م‎ داخل ظل دائم.</p>
 
-# مع خريطة صخور وخريطة إضاءة جاهزة من ناسا:
-python -m lunar_nav --dem data/dem.tif --pixel-size 20 --downsample 4 \
-    --rocks data/rocks.tif --illum data/avg_illum.tif</code></pre>
-<div class="note">النظام يفترض إن الخريطة بإسقاط قطبي ستيريوغرافي، والقطب في منتصفها، وخط الطول 0 لفوق. هذا هو التنسيق المعتاد في ملفات LOLA القطبية. إذا القطب في مكان ثاني، حدده بـ <code class="ltr">--pole ROW COL</code>.</div>
+<h3>ب) خطوات التحليل</h3>
+<ol class="steps">
+<li><b>منطقة استكشاف Artemis:</b> نحصر البحث في دائرة 6° حول القطب (لين خط عرض 84° جنوب تقريبًا)، وهذا شرط ناسا لمهمة Artemis III.</li>
+<li><b>النقاط والتصنيف:</b> نفس المعايير الخمسة، لكن بقيم معايرة على توزيع البيانات الحقيقية. متوسط الإضاءة لمدة 18.6 سنة حتى في أفضل المواقع حوالي 0.35 إلى 0.5، لأنه يشمل الشتاء القطبي.</li>
+<li><b>المناطق:</b> نختار 13 منطقة مرشحة، كل وحدة 15×15 كم، ما تتداخل، وبينها 20 كم على الأقل. المنطقة تاخذ نقاط كاملة على المساحة الآمنة إذا كانت كافية (15% من مساحتها)، والباقي يعتمد على جودة أفضل المواقع فيها.</li>
+<li><b>نوافذ الإطلاق الحقيقية لعام 2027:</b> لكل منطقة مرشحة نحسب أفق أفضل نقطة فيها في 128 اتجاه لين 150 كم، ونحرّك الشمس والأرض ساعة بساعة بمواقعها الحقيقية على مدار السنة. بعدها نعد النوافذ اللي مدتها 6.5 يوم ويكون فيها <b>ضوء متواصل</b>.</li>
+<li><b>الاختيار النهائي من 13 إلى 9:</b> 60% من نقاط التضاريس والمعايير، و40% من توفر نوافذ الإطلاق. هذا نفس منطق ناسا في تقريرها (NTRS 20250011660): المناطق اللي تعطي فرص إطلاق أكثر على مدار السنة تتقدم.</li>
+</ol>
+
+<h3>ج) النتائج: أفضل 9 مناطق</h3>
+<figure><img src="img/nasa_map_overview.jpg" alt="خريطة ناسا"><figcaption>الخريطة التفاعلية على بيانات ناسا: المربعات البيضاء مناطقنا، والنجوم ★ مناطق ناسا التسع، والمعينات ◆ أفضل 20 نقطة في دراسة TOPSIS، مع شبكة خطوط العرض والطول وأسماء المعالم</figcaption></figure>
+<table>
+<tr><th>#</th><th>الموقع</th><th>نوافذ 2027</th><th>أفضل نافذة (UTC)</th><th>رؤية الأرض</th><th>أقرب ظل دائم</th><th>قريبة من منطقة ناسا</th></tr>
+<tr><td>1</td><td class="ltr">85.08°S, 37.2°E</td><td>36%</td><td class="ltr">2027-01-09</td><td>81%</td><td>2.3 كم</td><td>Mons Mouton، Nobile Rim 1 و 2</td></tr>
+<tr><td>2</td><td class="ltr">85.01°S, 143.0°E</td><td>28%</td><td class="ltr">2027-03-10</td><td>33%</td><td>1.6 كم</td><td>—</td></tr>
+<tr><td>3</td><td class="ltr">84.11°S, 32.7°E</td><td>26%</td><td class="ltr">2027-01-13</td><td>83%</td><td>1.2 كم</td><td>Mons Mouton</td></tr>
+<tr><td>4</td><td class="ltr">85.34°S, 127.6°E</td><td>25%</td><td class="ltr">2027-03-09</td><td>33%</td><td>1.7 كم</td><td>—</td></tr>
+<tr><td>5</td><td class="ltr">84.58°S, 27.0°E</td><td>24%</td><td class="ltr">2027-01-13</td><td>87%</td><td>2.2 كم</td><td>Mons Mouton</td></tr>
+<tr><td>6</td><td class="ltr">84.38°S, 39.2°E</td><td>24%</td><td class="ltr">2027-01-12</td><td>80%</td><td>0.6 كم</td><td>Mons Mouton، Nobile</td></tr>
+<tr><td>7</td><td class="ltr">84.23°S, 109.1°E</td><td>24%</td><td class="ltr">2027-02-10</td><td>34%</td><td>2.2 كم</td><td>—</td></tr>
+<tr><td>8</td><td class="ltr">84.76°S, 134.5°E</td><td>23%</td><td class="ltr">2027-03-09</td><td>33%</td><td>0.6 كم</td><td>—</td></tr>
+<tr><td>9</td><td class="ltr">86.01°S, 290.1°E</td><td>23%</td><td class="ltr">2027-06-22</td><td>56%</td><td>0.6 كم</td><td>—</td></tr>
+</table>
+<p>"نوافذ 2027" معناها نسبة اللحظات في السنة اللي لو بدأت فيها المهمة، تحصل 6.5 يوم ضوء متواصل. كل المناطق ميلان أفضل نقطة فيها أقل من 1°. ناسا نفسها تقول إن "كل منطقة لوحدها تعطي فرص محدودة"، وعشان كذا تحتفظ بأكثر من منطقة، ونتائجنا (23% إلى 36%) تأكد هذا الكلام.</p>
+<figure><img src="img/nasa_map_region.jpg" alt="تفاصيل المنطقة 1"><figcaption>المنطقة 1 قريبة من Mons Mouton: تفاصيلها، وأفضل نافذة إطلاق، والرسم البياني لضوء الشمس ورؤية الأرض يوم بيوم في 2027</figcaption></figure>
+<figure><img src="img/nasa_summary.jpg" alt="ملخص ناسا"><figcaption>لوحة الملخص على البيانات الحقيقية: الميلان، ومتوسط الإضاءة (ناسا)، ورؤية الأرض، والخطر، والنقاط، والتصنيف النهائي داخل منطقة الاستكشاف</figcaption></figure>
+
+<h3>د) التحقق من الدقة</h3>
+<p><b>1. نموذج الإضاءة مقابل خرائط ناسا:</b> حسبنا متوسط 18.6 سنة بأنفسنا لـ 111,556 نقطة × 13,588 لحظة زمنية، وقارنّاه نقطة بنقطة بخرائط ناسا الرسمية:</p>
+<table>
+<tr><th></th><th>الارتباط r</th><th>متوسط الخطأ</th><th>نسبة النقاط اللي خطأها أقل من 10 نقاط</th></tr>
+<tr><td>☀️ الشمس</td><td><b>0.91</b></td><td>3.7 نقطة مئوية</td><td>91%</td></tr>
+<tr><td>🌍 الأرض</td><td><b>0.94</b></td><td>5.8 نقطة مئوية</td><td>84%</td></tr>
+</table>
+<figure><img src="img/nasa_validation.png" alt="التحقق"><figcaption>يسار ووسط: نموذجنا (المحور الرأسي) مقابل ناسا (المحور الأفقي)، وكل ما كانت النقاط أقرب للخط المتقطع كان التطابق أعلى. يمين: تقويم 2027 لكل منطقة (أصفر = شمس، أزرق = الأرض بس، أسود = ظلام)</figcaption></figure>
+<p><b>2. مقارنة مع دراسة علمية مستقلة</b> (Peña-Asensio وزملاؤه 2024، arXiv:2406.19863). هذي الدراسة رتبت 1247 نقطة في مناطق ناسا الـ13 بطريقة TOPSIS وبيانات مختلفة عن بياناتنا. النتيجة: <b>70%</b> من أفضل 20 نقطة عندهم تقع ضمن أفضل 10% من خريطتنا، وأفضل نقطة عندهم (Nobile Rim 2، <span class="ltr">84.20°S, 60.70°E</span>) تطلع عندنا "آمنة" وأعلى من 94% من المنطقة.</p>
+<p><b>3. مقارنة مع مناطق ناسا التسع</b> (أكتوبر 2024): مناطقنا التسع تغطي <b>4 من 9</b> مناطق ناسا (Mons Mouton و Mons Mouton Plateau و Nobile Rim 1 و Nobile Rim 2)، ومرشحينا الـ13 يغطون <b>5 من 9</b> لأنهم يضيفون Malapert Massif. وحول 8 من 9 مناطق ناسا فيه نقاط عندنا ضمن أفضل 1% من الخريطة. الاستثناء Cabeus B، لأن مَعْلمها خارج منطقة البحث.</p>
+<div class="note warn"><b>ليش ما تطابقنا مع ناسا في كل المناطق؟</b>
+<ul>
+<li>ناسا ما تنشر حدود مناطقها، فنحدد مكان كل منطقة بالمَعْلم اللي سُمّيت عليه.</li>
+<li>المَعْلم Cabeus B نفسه يقع خارج دائرة 84° اللي نشتغل فيها، مع إن المنطقة اللي ناسا سمتها عليه أقرب للقطب.</li>
+<li>ناسا تعتمد كمان على قيود ما تدخل في نموذجنا: مدار NRHO، ومسارات الإطلاق، وتصميم مركبة SpaceX HLS، وصور LROC بدقة 0.5 م للصخور.</li>
+</ul>
+عشان كذا التطابق الجزئي متوقع، وما عدّلنا النموذج عشان "نطابق" ناسا بالقوة، لأن هذا يخرّب قيمة التحقق.</div>
+<p>كل هذي الأرقام تنحفظ تلقائي في <code>REPORT.md</code> و <code>validation.json</code> داخل مجلد المخرجات، ونسخة منها موجودة في المشروع في <code>results/nasa_2027/</code>.</p>
+
+<h3>هـ) ملف ارتفاعات من اختيارك (وضع custom)</h3>
+<pre><code>python scripts/download_nasa_data.py --list         # روابط المصادر الرسمية
+python scripts/download_nasa_data.py &lt;رابط&gt; -o data/
+python -m lunar_nav --dem data/&lt;الملف&gt;.tif --pixel-size 20 --downsample 4 \
+    [--rocks data/rocks.tif] [--illum data/avg_illum.tif]</code></pre>
+<div class="note">النظام يفترض إسقاطًا قطبيًا ستيريوغرافيًا والقطب في منتصف الملف. إذا القطب في مكان ثاني، حدده بـ <code class="ltr">--pole ROW COL</code>. ولملفات <code>.IMG</code> اقرأ ملف <code>.LBL</code> اللي معها وحدد <code>--dem-scale</code>.</div>
 
 <h2>11. كيف يشتغل النظام من الداخل</h2>
 <h3>الخطوة 1: الميلان (<code>terrain.py</code>)</h3>
@@ -324,6 +377,14 @@ python -m lunar_nav --dem data/dem.tif --pixel-size 20 --downsample 4 \
 </ul>
 <p>بعدها نحرك الشمس والأرض كل 3 ساعات طول مدة المهمة، ونقارن ارتفاعهم بالأفق اللي حسبناه، ونطلع نسبة الوقت اللي يكونون فيها ظاهرين.</p>
 <p>وعشان نختار <b>وقت المهمة</b>، النظام يدوّر على أفضل 6.5 يوم في السنة: يكون فيها صيف القطب الجنوبي، والأرض فوق الأفق أغلب الوقت. نفس الشي اللي تسويه ناسا لما تختار نافذة الإطلاق.</p>
+
+<div class="note"><b>في وضع بيانات ناسا</b> (<code>--nasa</code>) نستخدم نسخة أدق من هذي الخطوة:
+<ul>
+<li><b>مواقع حقيقية للشمس والأرض</b> لأي تاريخ، من مكتبة astropy (تقويم ERFA المدمج، يشتغل بدون إنترنت).</li>
+<li><b>اتجاه القمر في الفضاء</b> من نموذج الاتحاد الفلكي الدولي (IAU 2009، Archinal وزملاؤه 2011). وتأكدنا من النتائج: تمايل الأرض ±6.8° و±7.7°، وارتفاع الشمس ±1.55°، والمسافة من 357 إلى 407 ألف كم.</li>
+<li><b>الأفق</b> يُحسب بتتبع الأشعة على خريطة LOLA نفسها (حتى 150 كم وفي 64 إلى 128 اتجاه) مع انحناء القمر. وفرق الزاوية من مكان الراصد للأرض (parallax) داخل في الحساب.</li>
+<li>الكود مكتوب بـ <b>numba</b>، فحساب ملايين النقاط على آلاف اللحظات الزمنية ياخذ ثواني بس.</li>
+</ul></div>
 
 <h3>الخطوة 4: الظل الدائم (PSR)</h3>
 <p>نحسب الإضاءة على مدار 6 سنوات قمرية، وأي بكسل متوسط إضاءته أقل من <b>0.5%</b> ينحسب ظل دائم. هذي الأماكن حرارتها تقريبًا ‎−230°C‎، وهي اللي يُحتمل فيها جليد الماء. بعدين نحسب لكل بكسل المسافة لأقرب ظل دائم.</p>
@@ -394,20 +455,28 @@ python -m lunar_nav --demo --seed 42 --size 800</code></pre>
 <tr><td>test_pipeline_end_to_end</td><td>النظام كامل يشتغل، والترتيب صحيح، وما فيه نقطة هبوط حمراء</td></tr>
 <tr><td>test_steep_areas_are_red</td><td>كل منطقة ميلانها فوق 10° أو فيها ظل دائم تطلع حمراء</td></tr>
 <tr><td>test_html_export</td><td>الخريطة تنحفظ وتشتغل بدون إنترنت</td></tr>
+<tr><td>test_ephemeris_matches_known_…</td><td>مواقع الشمس والأرض تطابق الأرقام المعروفة: الميل 1.54°، والتمايل 6.7° و7.9°، وأقرب وأبعد مسافة للأرض</td></tr>
+<tr><td>test_numba_horizon_agrees_…</td><td>حساب الأفق السريع يطابق الحساب المرجعي</td></tr>
+<tr><td>test_flat_ground_at_pole_…</td><td>الأرض المستوية في القطب تشوف الشمس والأرض تقريبًا نص الوقت</td></tr>
+<tr><td>test_nearside_slope_…</td><td>الجهة القريبة من الأرض تشوف الأرض أكثر من الجهة البعيدة</td></tr>
+<tr><td>test_stereographic_roundtrip</td><td>تحويل الإحداثيات من الخريطة وإليها دقيق لـ 6 خانات عشرية</td></tr>
+<tr><td>test_reference_data_is_complete</td><td>بيانات المقارنة كاملة: مناطق ناسا التسع وأفضل 20 نقطة في الدراسة</td></tr>
 </table>
 
 <h2>15. حدود النظام وأفكار للتطوير</h2>
 <h3>الحدود الحالية</h3>
 <ul>
 <li>هذا نظام تعليمي وبحثي، <b>مو أداة طيران معتمدة</b>.</li>
-<li>حساب الإضاءة مبسّط: 32 اتجاه للأفق، والشمس قرص بتقريب خطي، وزاوية الشمس تقريبية وتكون دقيقة للمناطق القريبة من القطب (حوالي 5°).</li>
-<li>البيانات التجريبية مولّدة عشوائيًا. الأرقام الحقيقية تطلع بس مع بيانات LOLA.</li>
+<li>نموذج الإضاءة متحقق منه مقابل ناسا (ارتباط 0.91 للشمس و0.94 للأرض)، لكنه مو مطابق 100%. الفروق تجي من دقة الأفق (240 م في التحقق)، وطريقة تمثيل قرص الشمس والأرض.</li>
+<li>الصخور الصغيرة (أقل من 100 م) ما تبين في بيانات LOLA. تحتاج صور LROC NAC بدقة 0.5 م وتدريب YOLO.</li>
+<li>ما يدخل في الحساب مدار NRHO ولا مسارات الإطلاق ولا قيود مركبة HLS اللي تستخدمها ناسا.</li>
+<li>الوضع التجريبي (<code>--demo</code>) مولّد عشوائيًا وهو للتعلم والعرض بس.</li>
 <li>أطراف أي خريطة ما تنحسب، لأن الجبال اللي وراها مو معروفة. عشان كذا حمّل منطقة أكبر شوي من اللي تحتاجه.</li>
 </ul>
 <h3>أفكار للتطوير</h3>
 <ul>
-<li>استخدام خرائط الإضاءة الرسمية من ناسا (PGDA) مع الخيار <code>--illum</code> بدل الحساب المبسّط.</li>
-<li>زيادة عدد الاتجاهات لـ 180 أو أكثر، وتسريع الحساب بـ GPU.</li>
+<li>تحليل نوافذ المهمة لكل بكسل في الخريطة، مو بس لأفضل نقطة في كل منطقة.</li>
+<li>استخدام خرائط LOLA بدقة 5 إلى 20 م للمناطق النهائية (PGDA 78 و 90).</li>
 <li>تدريب YOLO فعلي على صور NAC.</li>
 <li>حساب أطول فترة متواصلة في الظلام لكل نقطة، لأن البطاريات لازم تتحملها.</li>
 <li>تخطيط مسار للعربة الجوالة من نقطة الهبوط للظل الدائم.</li>
@@ -442,6 +511,15 @@ python -m lunar_nav --demo --seed 42 --size 800</code></pre>
 <li>Robbins, S.J. (2019). <i>A New Global Database of Lunar Impact Craters &gt;1–2 km.</i> JGR Planets 124. <span class="ltr">doi:10.1029/2018JE005592</span></li>
 <li>NASA (2024). <i>NASA Provides Update on Artemis III Moon Landing Regions.</i> <span class="ltr">nasa.gov</span></li>
 </ol>
+<h3>مراجع البيانات الرسمية والطرق الإضافية</h3>
+<ol start="11">
+<li>Barker, M.K. et al. (2023). <i>A New View of the Lunar South Pole from LOLA.</i> NASA PGDA product 90. <span class="ltr">pgda.gsfc.nasa.gov/products/90</span>. مصدر خرائط الارتفاع والميلان والخشونة.</li>
+<li>Mazarico, E. — <i>Lunar Polar Illumination.</i> NASA PGDA product 69. <span class="ltr">pgda.gsfc.nasa.gov/products/69</span>. مصدر متوسط الإضاءة ورؤية الأرض والظل الدائم.</li>
+<li>NASA (2025). <i>Artemis III Site Selection Update: Downselection From Thirteen to Nine Candidate Regions.</i> NTRS 20250011660. منه أسماء المناطق التسع ومنطق الاختيار.</li>
+<li>Archinal, B.A. et al. (2011). <i>Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009.</i> Celestial Mechanics and Dynamical Astronomy 109, 101–135. نموذج اتجاه القمر.</li>
+<li>IAU / USGS. <i>Gazetteer of Planetary Nomenclature.</i> <span class="ltr">planetarynames.wr.usgs.gov</span>. إحداثيات المعالم وأقطارها.</li>
+<li>Astropy Collaboration (2022). <i>The Astropy Project.</i> ApJ 935, 167. ومكتبة ERFA لمواقع الأجسام.</li>
+</ol>
 <h3>مصادر البيانات</h3>
 <ul>
 <li>PDS Geosciences Node: LOLA GDR Polar: <span class="ltr">pds-geosciences.wustl.edu</span></li>
@@ -450,7 +528,7 @@ python -m lunar_nav --demo --seed 42 --size 800</code></pre>
 </ul>
 <h3>الأدوات المستخدمة</h3>
 <p>Python و NumPy و SciPy و Matplotlib و Pillow و Leaflet (الخرائط، رخصة BSD-2) و Ultralytics YOLO (اختياري) و GitHub Actions. والخط المستخدم Cairo (رخصة OFL).</p>
-<div class="note warn">ملاحظة أمانة: في البيئة اللي انبنى فيها المشروع ما كان فيه وصول لمواقع ناسا، فالنتائج والصور في هذا الدليل كلها من البيانات التجريبية. والروابط اللي فوق هي البوابات الرسمية، لكن مسارات الملفات داخلها ممكن تتغير مع الوقت.</div>
+<div class="note">ملاحظة أمانة: نتائج الفصل 10 كلها من بيانات ناسا الرسمية اللي نزّلناها مباشرة من خوادم NASA Goddard (PGDA). أما صور الفصول 7 و 8 فمن الوضع التجريبي، وهذا موضح تحت كل صورة.</div>
 
 </main>
 </body>

@@ -36,6 +36,25 @@ class MissionConstraints:
     landing_ellipse_radius_m: float = 300
     n_final_regions: int = 9             # NASA went 13 -> 9
     edge_margin_m: float = 3_000         # horizon beyond raster edge is unknown
+    max_colatitude_deg: float | None = None  # Artemis Exploration Zone: within 6 deg of the pole
+    region_max_overlap: float = 0.25     # allowed overlap between selected regions
+    min_region_separation_km: float = 0.0  # spread regions apart (NASA keeps several distinct regions)
+    sufficient_safe_fraction: float = 1.0  # safe area beyond this share of a region adds no credit
+    illum_full_score: float = 1.0        # illumination value that earns a full score
+    earth_full_score: float = 1.0        # Earth visibility value that earns a full score
+
+    @classmethod
+    def nasa_long_term(cls):
+        """Thresholds for NASA's 18.6-year *average* products (Mazarico 2011).
+
+        Long-term averages include polar winters, so even the best-lit Artemis
+        sites average 0.35-0.8; the AOI median is ~0.29 and p99 ~0.5. Earth
+        visibility p50 ~0.23, p90 ~0.69 (measured on the data)."""
+        return cls(min_illumination=0.15, illum_full_score=0.5,
+                   min_earth_visibility=0.15, earth_full_score=0.6,
+                   landing_ellipse_radius_m=200, edge_margin_m=0,
+                   max_colatitude_deg=6.0, region_max_overlap=0.0,
+                   min_region_separation_km=20.0, sufficient_safe_fraction=0.15)
 
 
 @dataclass

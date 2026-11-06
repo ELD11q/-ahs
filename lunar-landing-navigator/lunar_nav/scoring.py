@@ -25,8 +25,8 @@ class Layers:
 def criteria_scores(L: Layers, c: MissionConstraints) -> dict[str, np.ndarray]:
     """Map every criterion to 0 (bad) .. 1 (ideal)."""
     s_slope = np.clip(1 - L.slope / c.max_slope_deg, 0, 1)
-    s_illum = np.clip(L.illumination, 0, 1)
-    s_earth = np.clip(L.earth, 0, 1)
+    s_illum = np.clip(L.illumination / c.illum_full_score, 0, 1)
+    s_earth = np.clip(L.earth / c.earth_full_score, 0, 1)
     d = L.psr_distance
     s_psr = np.where(d <= c.psr_ideal_distance_m, 1.0,
                      np.clip(1 - (d - c.psr_ideal_distance_m)
@@ -36,7 +36,8 @@ def criteria_scores(L: Layers, c: MissionConstraints) -> dict[str, np.ndarray]:
             "psr_proximity": s_psr, "hazard": s_haz}
 
 
-def score(L: Layers, c: MissionConstraints, w: ScoringWeights, pixel_size_m: float):
+def score(L: Layers, c: MissionConstraints, w: ScoringWeights, pixel_size_m: float,
+          excluded: np.ndarray | None = None):
     """Return (score 0..1, class map GREEN/YELLOW/RED, per-criterion scores)."""
     crit = criteria_scores(L, c)
     wn = w.normalised()
@@ -50,6 +51,8 @@ def score(L: Layers, c: MissionConstraints, w: ScoringWeights, pixel_size_m: flo
     yy, xx = np.ogrid[-r:r + 1, -r:r + 1]
     disk = xx**2 + yy**2 <= r * r
     unsafe = ndimage.binary_dilation(unsafe, structure=disk)
+    if excluded is not None:  # e.g. outside the Artemis Exploration Zone
+        unsafe |= excluded
     # Near the raster edge the far horizon is missing, so lighting is
     # over-estimated there: never recommend those pixels.
     m = int(round(c.edge_margin_m / pixel_size_m))

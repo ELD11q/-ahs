@@ -87,5 +87,5 @@ def test_html_export(tmp_path, demo_result):
     from lunar_nav.viz import write_html
     p = write_html(demo_result, tmp_path / "map.html")
     html = p.read_text(encoding="utf-8")
-    assert "L.map(" in html and "data:image/png;base64" in html
+    assert "L.map(" in html and "data:image/webp;base64" in html
     assert "cdnjs" not in html  # leaflet is inlined, works offline

@@ -1,7 +1,7 @@
 """Candidate regions (~15 x 15 km, like NASA's Artemis III regions) and ranking."""
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 
 import numpy as np
 from scipy import ndimage
@@ -33,8 +33,15 @@ class Region:
     lat_deg: float = 0.0
     lon_deg: float = 0.0
 
-    def to_dict(self):
-        return asdict(self)
+    extra: dict = field(default_factory=dict)  # e.g. mission availability
+
+    def to_dict(self, series: bool = False):
+        d = asdict(self)
+        extra = d.pop("extra")
+        if not series:
+            extra = {k: v for k, v in extra.items() if not k.startswith("daily_")}
+        d.update(extra)
+        return d
 
 
 def pixel_to_latlon(row, col, pole_rc, pixel_size_m, radius_m=1_737_400.0):
@@ -48,7 +55,9 @@ def pixel_to_latlon(row, col, pole_rc, pixel_size_m, radius_m=1_737_400.0):
 
 
 def rank_regions(score, cls, layers, pixel_size_m, region_size_m, pole_rc,
-                 n_keep: int = 9, n_candidates: int = 13) -> tuple[list[Region], list[Region]]:
+                 n_keep: int = 9, n_candidates: int = 13, max_overlap: float = 0.25,
+                 excluded=None, min_separation_km: float = 0.0,
+                 sufficient_safe: float = 1.0) -> tuple[list[Region], list[Region]]:
     """Slide a region-sized window over the map (half-overlapping), score each,
     keep the best non-overlapping `n_candidates`, then the top `n_keep`.
 
@@ -64,13 +73,20 @@ def rank_regions(score, cls, layers, pixel_size_m, region_size_m, pole_rc,
     for r0 in range(0, h - size + 1, stride):
         for c0 in range(0, w - size + 1, stride):
             sl = (slice(r0, r0 + size), slice(c0, c0 + size))
+            if excluded is not None and excluded[r0 + size // 2, c0 + size // 2]:
+                continue  # region centre outside the allowed zone
             sub_cls = cls[sl]
             safe = float((sub_cls == GREEN).mean())
             marg = float((sub_cls == 1).mean())
             sub = smooth[sl]
             br, bc = np.unravel_index(np.argmax(sub), sub.shape)
             top = np.sort(sub, axis=None)[-max(1, sub.size // 20):].mean()
-            reg_score = 0.45 * safe + 0.15 * marg + 0.40 * float(top)
+            # A region needs *enough* safe ground for several landing sites,
+            # not as much as possible: area credit saturates at `sufficient_safe`.
+            if sufficient_safe < 1.0:
+                reg_score = 0.30 * min(1.0, safe / sufficient_safe) + 0.70 * float(top)
+            else:
+                reg_score = 0.45 * safe + 0.15 * marg + 0.40 * float(top)
             R, Cc = r0 + br, c0 + bc
             lat, lon = pixel_to_latlon(R, Cc, pole_rc, pixel_size_m)
             cands.append(Region(
@@ -93,12 +109,13 @@ def rank_regions(score, cls, layers, pixel_size_m, region_size_m, pole_rc,
     for r in cands:  # greedy non-overlap (allow <=25% overlap)
         ok = True
         for q in chosen:
-            if q.row0 <= r.best_row < q.row1 and q.col0 <= r.best_col < q.col1:
+            if (q.row0 <= r.best_row < q.row1 and q.col0 <= r.best_col < q.col1) or \
+                    np.hypot(q.best_row - r.best_row, q.best_col - r.best_col) * pixel_size_m / 1000 < min_separation_km:
                 ok = False  # same best landing point already covered
                 break
             ov_r = max(0, min(r.row1, q.row1) - max(r.row0, q.row0))
             ov_c = max(0, min(r.col1, q.col1) - max(r.col0, q.col0))
-            if ov_r * ov_c > 0.25 * size * size:
+            if ov_r * ov_c > max_overlap * size * size:
                 ok = False
                 break
         if ok:
