@@ -1,0 +1,548 @@
+{
+  "profiles": {
+    "baseline": {
+      "weights": {
+        "slope": 0.3,
+        "illumination": 0.25,
+        "earth_visibility": 0.15,
+        "psr_proximity": 0.15,
+        "hazard": 0.15
+      },
+      "green_share": 0.0817,
+      "final9": [
+        [
+          -85.083,
+          37.2
+        ],
+        [
+          -85.009,
+          142.99
+        ],
+        [
+          -84.112,
+          32.66
+        ],
+        [
+          -85.343,
+          127.64
+        ],
+        [
+          -84.578,
+          27.0
+        ],
+        [
+          -84.377,
+          39.22
+        ],
+        [
+          -84.227,
+          109.1
+        ],
+        [
+          -84.763,
+          134.47
+        ],
+        [
+          -86.012,
+          290.05
+        ]
+      ],
+      "overlap_with_baseline": 9
+    },
+    "equal": {
+      "weights": {
+        "slope": 0.2,
+        "illumination": 0.2,
+        "earth_visibility": 0.2,
+        "psr_proximity": 0.2,
+        "hazard": 0.2
+      },
+      "green_share": 0.0833,
+      "final9": [
+        [
+          -85.085,
+          37.17
+        ],
+        [
+          -84.112,
+          32.66
+        ],
+        [
+          -84.578,
+          27.0
+        ],
+        [
+          -84.377,
+          39.22
+        ],
+        [
+          -85.292,
+          128.54
+        ],
+        [
+          -86.086,
+          290.36
+        ],
+        [
+          -85.345,
+          27.04
+        ],
+        [
+          -84.478,
+          352.69
+        ],
+        [
+          -86.927,
+          336.99
+        ]
+      ],
+      "overlap_with_baseline": 6
+    },
+    "power_first": {
+      "weights": {
+        "slope": 0.25,
+        "illumination": 0.45,
+        "earth_visibility": 0.1,
+        "psr_proximity": 0.1,
+        "hazard": 0.1
+      },
+      "green_share": 0.0769,
+      "final9": [
+        [
+          -84.443,
+          42.88
+        ],
+        [
+          -85.471,
+          29.18
+        ],
+        [
+          -85.009,
+          142.99
+        ],
+        [
+          -85.238,
+          128.8
+        ],
+        [
+          -85.973,
+          150.69
+        ],
+        [
+          -85.255,
+          120.13
+        ],
+        [
+          -84.11,
+          32.65
+        ],
+        [
+          -84.603,
+          110.19
+        ],
+        [
+          -84.575,
+          27.01
+        ]
+      ],
+      "overlap_with_baseline": 6
+    },
+    "comms_first": {
+      "weights": {
+        "slope": 0.25,
+        "illumination": 0.2,
+        "earth_visibility": 0.35,
+        "psr_proximity": 0.1,
+        "hazard": 0.1
+      },
+      "green_share": 0.0768,
+      "final9": [
+        [
+          -85.083,
+          37.2
+        ],
+        [
+          -84.112,
+          32.66
+        ],
+        [
+          -84.578,
+          27.0
+        ],
+        [
+          -84.377,
+          39.22
+        ],
+        [
+          -86.572,
+          296.67
+        ],
+        [
+          -85.345,
+          27.04
+        ],
+        [
+          -84.478,
+          352.69
+        ],
+        [
+          -84.475,
+          19.35
+        ],
+        [
+          -86.927,
+          336.99
+        ]
+      ],
+      "overlap_with_baseline": 4
+    },
+    "science_first": {
+      "weights": {
+        "slope": 0.25,
+        "illumination": 0.15,
+        "earth_visibility": 0.1,
+        "psr_proximity": 0.4,
+        "hazard": 0.1
+      },
+      "green_share": 0.0834,
+      "final9": [
+        [
+          -84.656,
+          109.86
+        ],
+        [
+          -85.273,
+          125.67
+        ],
+        [
+          -85.419,
+          135.47
+        ],
+        [
+          -84.978,
+          143.26
+        ],
+        [
+          -84.763,
+          134.47
+        ],
+        [
+          -84.085,
+          27.11
+        ],
+        [
+          -85.05,
+          25.64
+        ],
+        [
+          -84.563,
+          33.67
+        ],
+        [
+          -86.251,
+          270.34
+        ]
+      ],
+      "overlap_with_baseline": 7
+    },
+    "safety_first": {
+      "weights": {
+        "slope": 0.45,
+        "illumination": 0.15,
+        "earth_visibility": 0.1,
+        "psr_proximity": 0.05,
+        "hazard": 0.25
+      },
+      "green_share": 0.0774,
+      "final9": [
+        [
+          -85.273,
+          125.67
+        ],
+        [
+          -85.419,
+          135.47
+        ],
+        [
+          -84.978,
+          143.26
+        ],
+        [
+          -84.578,
+          27.0
+        ],
+        [
+          -84.227,
+          109.1
+        ],
+        [
+          -84.763,
+          134.47
+        ],
+        [
+          -85.805,
+          117.14
+        ],
+        [
+          -85.088,
+          116.61
+        ],
+        [
+          -84.473,
+          264.92
+        ]
+      ],
+      "overlap_with_baseline": 5
+    }
+  },
+  "slope": {
+    "8": {
+      "green_share": 0.0678,
+      "overlap_with_baseline": 8
+    },
+    "10": {
+      "green_share": 0.0817,
+      "overlap_with_baseline": 9
+    },
+    "12": {
+      "green_share": 0.0857,
+      "overlap_with_baseline": 9
+    }
+  },
+  "years": {
+    "2026": [
+      {
+        "availability": 0.3477,
+        "best_window": {
+          "start": "2026-01-21 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2539,
+        "best_window": {
+          "start": "2026-02-21 12:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2621,
+        "best_window": {
+          "start": "2026-01-01 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.232,
+        "best_window": {
+          "start": "2026-02-21 12:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2437,
+        "best_window": {
+          "start": "2026-01-01 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2444,
+        "best_window": {
+          "start": "2026-01-01 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2272,
+        "best_window": {
+          "start": "2026-02-21 06:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2033,
+        "best_window": {
+          "start": "2026-03-20 06:00",
+          "earth_contact": 0.942
+        }
+      },
+      {
+        "availability": 0.2601,
+        "best_window": {
+          "start": "2026-01-01 00:00",
+          "earth_contact": 1.0
+        }
+      }
+    ],
+    "2027": [
+      {
+        "availability": 0.3587,
+        "best_window": {
+          "start": "2027-01-09 06:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2793,
+        "best_window": {
+          "start": "2027-03-10 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2567,
+        "best_window": {
+          "start": "2027-01-13 06:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2533,
+        "best_window": {
+          "start": "2027-03-09 18:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2389,
+        "best_window": {
+          "start": "2027-01-13 06:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.243,
+        "best_window": {
+          "start": "2027-01-12 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2416,
+        "best_window": {
+          "start": "2027-02-10 12:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2272,
+        "best_window": {
+          "start": "2027-03-09 12:00",
+          "earth_contact": 0.981
+        }
+      },
+      {
+        "availability": 0.2307,
+        "best_window": {
+          "start": "2027-06-22 18:00",
+          "earth_contact": 1.0
+        }
+      }
+    ],
+    "2028": [
+      {
+        "availability": 0.3676,
+        "best_window": {
+          "start": "2028-01-01 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2608,
+        "best_window": {
+          "start": "2028-01-30 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2793,
+        "best_window": {
+          "start": "2028-01-02 18:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2348,
+        "best_window": {
+          "start": "2028-01-29 18:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2594,
+        "best_window": {
+          "start": "2028-01-02 18:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2642,
+        "best_window": {
+          "start": "2028-01-01 06:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2293,
+        "best_window": {
+          "start": "2028-01-02 12:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2088,
+        "best_window": {
+          "start": "2028-02-26 00:00",
+          "earth_contact": 1.0
+        }
+      },
+      {
+        "availability": 0.2382,
+        "best_window": {
+          "start": "2028-05-15 00:00",
+          "earth_contact": 1.0
+        }
+      }
+    ]
+  },
+  "baseline_final9": [
+    [
+      -85.083,
+      37.2
+    ],
+    [
+      -85.009,
+      142.99
+    ],
+    [
+      -84.112,
+      32.66
+    ],
+    [
+      -85.343,
+      127.64
+    ],
+    [
+      -84.578,
+      27.0
+    ],
+    [
+      -84.377,
+      39.22
+    ],
+    [
+      -84.227,
+      109.1
+    ],
+    [
+      -84.763,
+      134.47
+    ],
+    [
+      -86.012,
+      290.05
+    ]
+  ],
+  "runtime_s": 130.6
+}

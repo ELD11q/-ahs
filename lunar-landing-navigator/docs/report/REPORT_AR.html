@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تقرير مستكشف مواقع الهبوط القمري</title>
+<style>
+@font-face{font-family:Cairo;font-weight:400;src:url(../guide/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:700;src:url(../guide/fonts/cairo-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:400;src:url(../guide/fonts/cairo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2212}
+@font-face{font-family:Cairo;font-weight:700;src:url(../guide/fonts/cairo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2212}
+:root{--navy:#0B1220;--ink:#14213D;--muted:#55607A;--line:#E1E5EE;--soft:#F5F7FB;--amber:#F5B942;--amberd:#B7791F;--blue:#2F5BD3;--sky:#38BDF8;--green:#16A34A;--red:#DC2626}
+*{box-sizing:border-box}
+html{background:#fff}
+body{margin:0;font-family:Cairo,"DejaVu Sans",sans-serif;color:var(--ink);font-size:13.5px;line-height:1.85;background:#fff}
+main{max-width:820px;margin:0 auto;padding:0 16px 40px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.small{font-size:11.5px}
+.nw{white-space:nowrap}
+h1,h2,h3{line-height:1.35}
+h2.ch{font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:12px}
+h2.ch .n{background:var(--ink);color:var(--amber);border-radius:10px;min-width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:20px}
+.chsub{color:var(--muted);margin:0 0 18px;font-size:14px;border-bottom:3px solid var(--amber);padding-bottom:10px}
+h3{font-size:16.5px;margin:22px 0 6px;color:var(--ink)}
+h3::before{content:"";display:inline-block;width:8px;height:8px;background:var(--amber);border-radius:2px;margin-left:8px;vertical-align:2px}
+p{margin:7px 0}
+ul,ol{margin:6px 0;padding-right:22px}
+li{margin:3px 0}
+code,pre{font-family:"DejaVu Sans Mono",monospace;font-size:11.5px;direction:ltr;unicode-bidi:isolate}
+code{background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+pre{background:var(--navy);color:#E2E8F0;border-radius:8px;padding:12px 14px;text-align:left;white-space:pre-wrap;break-inside:avoid;line-height:1.6;margin:10px 0}
+pre code{background:none;border:0;color:inherit;padding:0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;break-inside:avoid}
+th,td{border-bottom:1px solid var(--line);padding:6px 7px;text-align:right;vertical-align:top}
+th{background:var(--ink);color:#fff;font-weight:700}
+tr:nth-child(even) td{background:#FAFBFD}
+tr.hl td{background:#FFF4D6 !important;font-weight:700}
+figure{margin:14px 0;break-inside:avoid;text-align:center}
+figure img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
+figcaption{font-size:11.5px;color:var(--muted);margin-top:5px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0;break-inside:avoid}
+.kpi{background:var(--soft);border:1px solid var(--line);border-top:4px solid var(--amber);border-radius:10px;padding:10px 12px}
+.kpi b{display:block;font-size:24px;color:var(--ink);line-height:1.3}
+.kpi span{font-size:11.5px;color:var(--muted);line-height:1.5;display:block}
+.note{border-right:4px solid var(--blue);background:#EEF3FF;padding:9px 14px;border-radius:6px;margin:12px 0;break-inside:avoid}
+.warn{border-right-color:var(--amber);background:#FFF8E6}
+.ok{border-right-color:var(--green);background:#EAF8EF}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fff;break-inside:avoid}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--blue)}
+.bmc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;break-inside:avoid}
+.bmc div{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;font-size:12px;line-height:1.7}
+.bmc div b{display:block;color:var(--amberd);font-size:13px}
+.bmc .v{background:#FFF4D6;border-color:#F5D58A}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps>li{counter-increment:s;position:relative;padding-right:34px;margin:8px 0;break-inside:avoid}
+.steps>li::before{content:counter(s);position:absolute;right:0;top:2px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--amber);text-align:center;line-height:24px;font-weight:700;font-size:12px}
+section.chapter{break-before:page;padding-top:8px}
+/* cover */
+.cover{break-after:page;background:var(--navy);color:#EEF2F8;margin:0 -16px;padding:56px 48px;min-height:1040px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
+.cover .k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px;direction:ltr;text-align:right}
+.cover h1{font-size:40px;margin:0;line-height:1.3}
+.cover .s{font-size:16px;color:#B8C4D6;max-width:620px}
+.cover img{width:100%;border-radius:12px;margin-top:10px;border:1px solid #23314D}
+.cover .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.cover .meta span{background:#16233A;color:#7DD3FC;border-radius:16px;padding:3px 12px;font-size:12px}
+.cover .foot{font-size:12px;color:#8A97AD;border-top:1px solid #23314D;padding-top:12px}
+.toc{columns:2;column-gap:30px;padding-right:22px;font-size:14px}
+.toc li{break-inside:avoid;margin:4px 0}
+@page{size:A4;margin:18mm 15mm 18mm 15mm}
+@page :first{margin:0}
+@media print{main{padding:0}.cover{margin:0;min-height:297mm;width:210mm;padding:22mm 18mm}}
+@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}.grid2,.bmc{grid-template-columns:1fr}.toc{columns:1}.cover{min-height:auto}}
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="k">LUNAR LANDING SITE NAVIGATOR · TECHNICAL REPORT</div>
+  <h1>مستكشف مواقع الهبوط القمري<br><span style="color:var(--amber)">التقرير الكامل من الألف إلى الياء</span></h1>
+  <div class="s">نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر، ببيانات ناسا الرسمية ونوافذ الإطلاق الحقيقية لعام 2027. دقته متحقق منها مقابل خرائط ناسا، ومقابل دراسة علمية منشورة، ومقابل مناطق Artemis III الرسمية.</div>
+  <img src="../guide/img/nasa_map_overview.jpg" alt="الخريطة التفاعلية">
+  <div class="meta"><span>بيانات NASA PGDA</span><span>LOLA · Barker 2023</span><span>Mazarico 2011</span><span>Python · numba · astropy</span><span>GitHub Actions</span></div>
+  <div class="foot">الإصدار 1.0 · نوفمبر 2026 · <span class="ltr">github.com/ELD11q/-ahs</span> · [اسم الفريق]</div>
+</section>
+
+<!-- ============ EXEC SUMMARY ============ -->
+<section>
+<h2 class="ch"><span class="n">★</span>الملخص التنفيذي</h2>
+<p class="chsub">الفكرة والنتيجة في صفحة وحدة</p>
+<p><b>المشكلة:</b> القطب الجنوبي للقمر هو الهدف الأول لمهمة Artemis III، لأن فيه حفرًا ظلها دائم يُحتمل فيها جليد ماء. لكن الشمس هناك ما ترتفع أكثر من 1.5° فوق الأفق، فالظلال طويلة والأرض وعرة، واختيار مكان الهبوط يحتاج تحليل بيانات ضخمة.</p>
+<p><b>الحل:</b> نظام بلغة بايثون ينزّل 6 منتجات رسمية من ناسا (1.2 جيجا)، ويركبها على شبكة وحدة 480×480 كم بدقة 80 م (36 مليون بكسل). بعدها يقيّم كل نقطة بخمسة معايير: الميلان، والإضاءة، ورؤية الأرض، والقرب من الجليد، والصخور. ويختار 13 منطقة مرشحة ثم أفضل 9، ويحسب لكل وحدة نوافذ الإطلاق الحقيقية في 2027 ساعة بساعة.</p>
+<div class="kpis">
+<div class="kpi"><b>0.909</b><span>ارتباط نموذج الشمس مع خرائط ناسا</span></div>
+<div class="kpi"><b>0.941</b><span>ارتباط نموذج رؤية الأرض مع ناسا</span></div>
+<div class="kpi"><b>70%</b><span>من أفضل نقاط دراسة TOPSIS ضمن أفضل 10% عندنا</span></div>
+<div class="kpi"><b>4/9</b><span>من مناطق ناسا لـ Artemis III تغطيها مناطقنا</span></div>
+</div>
+<p><b>أفضل منطقة:</b> <span class="ltr nw">85.08°S 37.2°E</span> قرب جبل Mons Mouton. فيها ضوء متواصل لمدة 6.5 يوم في <b>36%</b> من أوقات البدء الممكنة في 2027، والأرض ظاهرة 81% من الوقت، وأقرب ظل دائم (جليد محتمل) على بعد 2.33 كم. وأفضل نافذة إطلاق تبدأ <span class="ltr">2027-01-09</span>. وتبقى الأفضل في 2026 و2027 و2028.</p>
+<p><b>القيمة:</b> اللي ياخذ أسابيع من التحليل اليدوي في نظم المعلومات الجغرافية، يطلع هنا بأمر واحد خلال 3 دقايق تقريبًا، وقابل للتكرار لأي سنة أو أي قيود. والنواة مفتوحة المصدر، ونموذج العمل Open-Core مشروح في الفصل 10.</p>
+<h3>المحتويات</h3>
+<ol class="toc">
+<li>المشكلة ولماذا القطب الجنوبي</li><li>كيف تختار ناسا مواقع الهبوط</li><li>معمارية النظام</li><li>البيانات الرسمية</li>
+<li>المنهجية خطوة بخطوة</li><li>النتائج</li><li>التحقق من الدقة</li><li>اختبارات المتانة</li>
+<li>التشغيل من الألف إلى الياء</li><li>نموذج العمل وملف الهاكثون</li><li>الحدود وخطة التطوير</li><li>المراجع والملاحق</li>
+</ol>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">1</span>المشكلة ولماذا القطب الجنوبي</h2>
+<p class="chsub">أهم مكان على القمر، وأصعب مكان للهبوط</p>
+<div class="grid2">
+<div class="card"><h4>لماذا مهم؟</h4>
+<ul><li>حفر <b>ظلها دائم</b>، حرارتها تقريبًا ‎−230°C‎، ويُحتمل فيها جليد ماء.</li>
+<li>الماء معناه شرب، وأكسجين، ووقود هيدروجين للصواريخ.</li>
+<li>قمم قريبة منها <b>مضيئة أغلب الوقت</b>، يعني طاقة شمسية شبه متواصلة.</li></ul></div>
+<div class="card"><h4>لماذا صعب؟</h4>
+<ul><li>الشمس ما ترتفع أكثر من ~1.5° فوق الأفق، فأي تل يحجبها.</li>
+<li>الأرض أحيانًا تحت الأفق، والاتصال المباشر ينقطع.</li>
+<li>منحدرات وحفر وصخور، والمركبة تحتاج ميلانًا أقل من 8° إلى 10°.</li></ul></div>
+</div>
+<h3>شروط المكان الآمن</h3>
+<table>
+<tr><th>الشرط</th><th>القيمة في النظام</th><th>السبب</th></tr>
+<tr><td>الميلان</td><td>أحمر فوق 10°، أصفر بين 8° و10°</td><td>ثبات المركبة وعدم انقلابها</td></tr>
+<tr><td>الإضاءة</td><td>6.5 يوم ضوء متواصل (مدة المهمة)</td><td>الطاقة والحرارة</td></tr>
+<tr><td>الاتصال بالأرض</td><td>نسبة الوقت اللي الأرض فيه فوق الأفق</td><td>الاتصال المباشر DTE</td></tr>
+<tr><td>القرب من الظل الدائم</td><td>مثالي ≤ 2 كم، بدون قيمة بعد 15 كم</td><td>الوصول للجليد مشيًا</td></tr>
+<tr><td>الصخور والحفر</td><td>الخشونة على مسافة 100 م + الحفر المكتشفة</td><td>سلامة الهبوط</td></tr>
+<tr><td>منطقة الاستكشاف</td><td>داخل 6° من القطب (~84° جنوب)</td><td>شرط Artemis III</td></tr>
+<tr><td>قطع الهبوط</td><td>دائرة 200 م حول كل نقطة كلها آمنة</td><td>دقة الهبوط محدودة</td></tr>
+</table>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">2</span>كيف تختار ناسا مواقع الهبوط</h2>
+<p class="chsub">مركبة LRO ومن 13 منطقة إلى 9</p>
+<p>تدور مركبة <b>LRO</b> (Lunar Reconnaissance Orbiter) حول القمر من 2009، وتجمع البيانات بثلاث أدوات:</p>
+<table>
+<tr><th>الأداة</th><th>تقيس</th><th>في مشروعنا</th></tr>
+<tr><td class="ltr">LOLA</td><td>ارتفاعات بالليزر، ومنها الميلان والخشونة والإضاءة</td><td>خرائط Barker 2023 + خرائط الإضاءة Mazarico 2011</td></tr>
+<tr><td class="ltr">Diviner</td><td>الحرارة، ومنها وفرة الصخور</td><td>الخشونة من LOLA، مع خيار <code>--rocks</code></td></tr>
+<tr><td class="ltr">LROC NAC</td><td>صور بدقة ~0.5 م للحفر والصخور</td><td>وحدة YOLO جاهزة (<code>hazards.py</code>)</td></tr>
+</table>
+<p>في 2022 أعلنت ناسا <b>13 منطقة</b> مرشحة لـ Artemis III، كل وحدة تقريبًا 15×15 كم. وفي أكتوبر 2024 قلّصتها إلى <b>9 مناطق</b>: Peak near Cabeus B، وHaworth، وMalapert Massif، وMons Mouton Plateau، وMons Mouton، وNobile Rim 1، وNobile Rim 2، وde Gerlache Rim 2، وSlater Plain. وحسب ملخص ناسا (NTRS 20250011660) اعتمد التقليص على:</p>
+<ul>
+<li>توفر المهمة طوال السنة (<i>mission availability</i>): كل قيود الإطلاق والمدار والإضاءة مجتمعة.</li>
+<li>سلامة التضاريس: مساحة منخفضة الميلان "كافية"، وتجنّب الحفر والصخور.</li>
+<li>الاتصال المباشر مع الأرض، والإضاءة المتواصلة طول مدة البقاء (5.75 إلى 6.25 يوم).</li>
+<li>الاحتفاظ بأكثر من منطقة، لأن "كل منطقة لوحدها تعطي فرصًا محدودة".</li>
+</ul>
+<div class="note ok">مشروعنا يطبّق نفس المنطق: نختار 13 ثم 9، ونعطي 40% من الترتيب النهائي لتوفر نوافذ الإطلاق، ونكافئ المساحة الآمنة "الكافية" مو "الأكبر"، ونفرض مسافة بين المناطق عشان تتنوع.</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">3</span>معمارية النظام</h2>
+<p class="chsub">من الملفات الخام إلى قرار الهبوط</p>
+<figure>
+<svg viewBox="0 0 800 330" width="100%" role="img" aria-label="معمارية النظام" style="font-family:Cairo,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#55607A"/></marker></defs>
+<g font-size="13" text-anchor="middle">
+<rect x="620" y="20" width="160" height="78" rx="10" fill="#0B1220"/><text x="700" y="50" fill="#F5B942" font-weight="700">NASA PGDA</text><text x="700" y="72" fill="#B8C4D6" font-size="11">6 منتجات · 1.2 GB</text><text x="700" y="88" fill="#B8C4D6" font-size="11">nasa.py</text>
+<rect x="420" y="20" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="505" y="50" font-weight="700">تركيب على شبكة وحدة</text><text x="505" y="72" fill="#55607A" font-size="11">80 م · 6000×6000</text><text x="505" y="88" fill="#55607A" font-size="11">rasterio</text>
+<rect x="220" y="20" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="305" y="50" font-weight="700">الحفر والخطر</text><text x="305" y="72" fill="#55607A" font-size="11">hazards.py</text><text x="305" y="88" fill="#55607A" font-size="11">20,564 حفرة</text>
+<rect x="20" y="20" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="105" y="50" font-weight="700">النقاط والتصنيف</text><text x="105" y="72" fill="#55607A" font-size="11">scoring.py</text><text x="105" y="88" fill="#55607A" font-size="11">أخضر · أصفر · أحمر</text>
+<rect x="20" y="140" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="105" y="170" font-weight="700">13 منطقة مرشحة</text><text x="105" y="192" fill="#55607A" font-size="11">regions.py</text><text x="105" y="208" fill="#55607A" font-size="11">15×15 كم · ≥20 كم</text>
+<rect x="220" y="140" width="170" height="78" rx="10" fill="#FFF4D6" stroke="#F5B942"/><text x="305" y="170" font-weight="700">نوافذ 2027</text><text x="305" y="192" fill="#55607A" font-size="11">ephemeris + sunmodel</text><text x="305" y="208" fill="#55607A" font-size="11">ساعة بساعة · 128 اتجاه</text>
+<rect x="420" y="140" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="505" y="170" font-weight="700">أفضل 9</text><text x="505" y="192" fill="#55607A" font-size="11">60% تضاريس</text><text x="505" y="208" fill="#55607A" font-size="11">40% توفر النوافذ</text>
+<rect x="620" y="140" width="160" height="78" rx="10" fill="#EAF8EF" stroke="#16A34A"/><text x="700" y="170" font-weight="700">التحقق</text><text x="700" y="192" fill="#55607A" font-size="11">ناسا · TOPSIS</text><text x="700" y="208" fill="#55607A" font-size="11">Artemis III</text>
+<rect x="220" y="250" width="370" height="62" rx="10" fill="#0B1220"/><text x="405" y="277" fill="#fff" font-weight="700">المخرجات: خريطة تفاعلية · تقرير · صور · CSV/JSON</text><text x="405" y="298" fill="#B8C4D6" font-size="11">viz.py · report.py · GitHub Actions</text>
+</g>
+<g stroke="#55607A" stroke-width="1.6" fill="none" marker-end="url(#a)">
+<path d="M620 59 H592"/><path d="M420 59 H392"/><path d="M220 59 H192"/><path d="M105 98 V138"/>
+<path d="M190 179 H218"/><path d="M390 179 H418"/><path d="M590 179 H618"/><path d="M700 218 V281 H592"/>
+</g>
+</svg>
+<figcaption>شكل 1: مراحل النظام، وكل مربع وحدة برمجية مستقلة ومختبرة</figcaption>
+</figure>
+<h3>الوحدات البرمجية</h3>
+<table>
+<tr><th>الملف</th><th>الوظيفة</th></tr>
+<tr><td><code>nasa.py</code></td><td>كتالوج المنتجات، والتنزيل القابل للاستئناف، وإعادة التشكيل على شبكة وحدة</td></tr>
+<tr><td><code>ephemeris.py</code></td><td>مواقع الشمس والأرض (astropy/ERFA) + اتجاه القمر (IAU 2009)</td></tr>
+<tr><td><code>sunmodel.py</code></td><td>تتبع أشعة الأفق وحساب الرؤية الزمنية (numba، متوازي)</td></tr>
+<tr><td><code>terrain.py</code> · <code>hazards.py</code></td><td>الميلان، والخشونة، وكشف الحفر، وYOLO الاختياري، وخريطة الخطر</td></tr>
+<tr><td><code>scoring.py</code> · <code>regions.py</code></td><td>النقاط الموزونة، والتصنيف، واختيار المناطق، وتحويل الإحداثيات</td></tr>
+<tr><td><code>nasa_pipeline.py</code></td><td>يربط كل شي: المرشحين، والنوافذ، والاختيار النهائي، والتحقق</td></tr>
+<tr><td><code>reference.py</code></td><td>مناطق ناسا التسع، وأفضل 20 نقطة في TOPSIS، ومعالم IAU</td></tr>
+<tr><td><code>experiments.py</code></td><td>اختبارات المتانة: الأوزان، وحد الميلان، والسنوات</td></tr>
+<tr><td><code>viz.py</code> · <code>report.py</code> · <code>cli.py</code></td><td>الخريطة التفاعلية، والصور، والتقرير، وسطر الأوامر</td></tr>
+</table>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">4</span>البيانات الرسمية</h2>
+<p class="chsub">6 منتجات من مختبر NASA Goddard، مجانية ومفتوحة</p>
+<table>
+<tr><th>الطبقة</th><th>الملف</th><th>الدقة</th><th>المرجع</th></tr>
+<tr><td>الارتفاع</td><td class="ltr small">LDEM_80S_80MPP_ADJ.TIF</td><td>80 م</td><td>Barker et al. 2023 · PGDA 90</td></tr>
+<tr><td>الميلان</td><td class="ltr small">LDSM_80S_80MPP_ADJ.TIF</td><td>80 م</td><td>Barker et al. 2023</td></tr>
+<tr><td>الخشونة (100 م)</td><td class="ltr small">LDRM_80S_50MPP_ADJ_ROUGH_100M.TIF</td><td>50 م</td><td>Barker et al. 2023</td></tr>
+<tr><td>متوسط الإضاءة</td><td class="ltr small">AVGVISIB_75S_120M_201608.TIF</td><td>120 م</td><td>Mazarico et al. 2011 · PGDA 69</td></tr>
+<tr><td>متوسط رؤية الأرض</td><td class="ltr small">AVGVISIB_75S_120M_201608_EARTH.TIF</td><td>120 م</td><td>Mazarico et al. 2011</td></tr>
+<tr><td>الظل الدائم</td><td class="ltr small">LPSR_75S_120M_201608.TIF</td><td>120 م</td><td>Mazarico et al. 2011</td></tr>
+</table>
+<ul>
+<li>كل الملفات بإسقاط قطبي ستيريوغرافي (كرة نصف قطرها 1737.4 كم، وخط الطول 0 لفوق)، فالتركيب يتم بدقة رياضية بدون تشويه.</li>
+<li>تحققنا من دقة الإحداثيات: مركز حفرة Shackleton (من دليل IAU) يطلع على عمق ‎−2788 م‎ داخل ظل دائم، والتحويل العكسي يرجع نفس الإحداثيات.</li>
+<li>متوسطات الإضاءة محسوبة ساعة بساعة على دورة كاملة طولها 18.6 سنة، وتشمل الشتاء القطبي. عشان كذا حتى أفضل المواقع متوسطها حوالي 0.35 إلى 0.5، وعايرنا الحدود على هذا التوزيع: الوسيط 0.29، وأعلى 1% قيمته 0.49.</li>
+</ul>
+<figure><img src="../guide/img/nasa_summary.jpg" alt="الطبقات"><figcaption>شكل 2: الطبقات على البيانات الحقيقية: الميلان، ومتوسط الإضاءة، ورؤية الأرض، والخطر، والنقاط، والتصنيف داخل منطقة الاستكشاف (النجوم = مناطق ناسا)</figcaption></figure>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">5</span>المنهجية خطوة بخطوة</h2>
+<p class="chsub">كيف يتحول كل بكسل إلى قرار</p>
+<h3>5.1 الميلان والخشونة والحفر</h3>
+<p>الميلان من منتج ناسا الرسمي. الخشونة على مسافة 100 م تتحول لمؤشر خطر من 0 إلى 1 (ما فوق 3 م يعتبر صخري ووعر). والحفر نكشفها من خريطة الارتفاع بطرح نسخة منعّمة على 3 مقاييس: تطلع 20,564 حفرة أكبر من 400 م.</p>
+<h3>5.2 محرك الإضاءة الفيزيائي</h3>
+<ol class="steps">
+<li><b>الأفق:</b> لكل نقطة نتتبع الأشعة على خريطة LOLA في 64 إلى 128 اتجاه لين 150 كم، بعينات خطية ثنائية، مع حساب انحناء القمر <code>d²/2R</code>.</li>
+<li><b>مواقع الشمس والأرض:</b> من تقويم ERFA المدمج في astropy، ويتحول لإطار القمر بنموذج IAU 2009 (Archinal 2011). القيم المتحقق منها: ارتفاع الشمس ±1.55°، وتمايل الأرض ±6.8° و±7.7°، والمسافة من 357 إلى 407 ألف كم.</li>
+<li><b>الرؤية:</b> لكل لحظة نحسب ارتفاع الجسم واتجاهه في إطار الشبكة (مع فرق زاوية الرؤية للأرض)، ونقارنه بالأفق، ونحسب الجزء الظاهر من القرص (الشمس 0.53°، والأرض 1.9°).</li>
+<li><b>السرعة:</b> مكتوب بـ numba ويشتغل على كل الأنوية: 111 ألف نقطة × 13.6 ألف لحظة في حوالي 35 ثانية.</li>
+</ol>
+<h3>5.3 النقاط والتصنيف</h3>
+<table>
+<tr><th>المعيار</th><th>التحويل إلى 0–1</th><th>الوزن</th></tr>
+<tr><td>الميلان</td><td>1 − الميلان ÷ 10°</td><td>30%</td></tr>
+<tr><td>الإضاءة</td><td>متوسط ناسا ÷ 0.5 (بحد أقصى 1)</td><td>25%</td></tr>
+<tr><td>رؤية الأرض</td><td>متوسط ناسا ÷ 0.6 (بحد أقصى 1)</td><td>15%</td></tr>
+<tr><td>القرب من الظل الدائم</td><td>1 حتى 2 كم، ثم ينزل لين 0 عند 15 كم</td><td>15%</td></tr>
+<tr><td>الصخور والحفر</td><td>1 − مؤشر الخطر</td><td>15%</td></tr>
+</table>
+<p><b>أحمر:</b> ميلان فوق 10°، أو ظل دائم، أو إضاءة أقل من 0.15، أو خطر فوق 0.6، أو خارج منطقة الاستكشاف، وكلها موسّعة 200 م لقطع الهبوط. <b>أصفر:</b> ميلان فوق 8°، أو رؤية أرض أقل من 0.15، أو نقاط أقل من 0.55. <b>أخضر:</b> الباقي.</p>
+<h3>5.4 اختيار المناطق</h3>
+<p>نافذة 15×15 كم تتحرك بخطوة 7.5 كم. نقاط المنطقة = 30% للمساحة الآمنة (تكتمل عند 15% من مساحتها) + 70% لمتوسط أفضل 5% من النقاط فيها. بعدها نختار 13 منطقة ما تتداخل، وبين أفضل نقاطها 20 كم على الأقل.</p>
+<h3>5.5 نوافذ الإطلاق والاختيار النهائي</h3>
+<p>لأفضل نقطة في كل منطقة مرشحة نحسب الإضاءة ورؤية الأرض كل ساعة على مدار السنة (لراصد على ارتفاع 2 م). <b>النافذة الصالحة</b> = 6.5 يوم متواصلة فيها أكثر من نصف قرص الشمس ظاهر في كل ساعة. و<b>التوفر</b> = نسبة أوقات البدء (كل 6 ساعات) اللي تعطي نافذة صالحة. <b>النقاط النهائية</b> = 60% نقاط التضاريس + 40% التوفر، وبعدها أفضل 9.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">6</span>النتائج</h2>
+<p class="chsub">أفضل 9 مناطق على بيانات ناسا الحقيقية، ونوافذ 2027</p>
+<table>
+<tr><th>#</th><th>الموقع</th><th>النقاط</th><th>نوافذ 2027</th><th>أفضل نافذة 2027 (شهر-يوم)</th><th>الميلان</th><th>الإضاءة</th><th>الأرض</th><th>الجليد</th><th>آمن</th><th>منطقة ناسا</th></tr>
+<tr class=hl><td>1</td><td><span class="ltr nw">85.08°S 37.2°E</span></td><td>0.992</td><td>36%</td><td><span class="ltr nw">01-09</span></td><td>0.47°</td><td>50%</td><td>81%</td><td class="nw">2.33 كم</td><td>33%</td><td class="ltr small">Mons Mouton / Nobile</td></tr>
+<tr><td>2</td><td><span class="ltr nw">85.01°S 143.0°E</span></td><td>0.894</td><td>28%</td><td><span class="ltr nw">03-10</span></td><td>0.65°</td><td>49%</td><td>33%</td><td class="nw">1.62 كم</td><td>64%</td><td class="ltr small">—</td></tr>
+<tr><td>3</td><td><span class="ltr nw">84.11°S 32.7°E</span></td><td>0.882</td><td>26%</td><td><span class="ltr nw">01-13</span></td><td>0.24°</td><td>49%</td><td>83%</td><td class="nw">1.19 كم</td><td>43%</td><td class="ltr small">Mons Mouton</td></tr>
+<tr><td>4</td><td><span class="ltr nw">85.34°S 127.6°E</span></td><td>0.876</td><td>25%</td><td><span class="ltr nw">03-09</span></td><td>0.18°</td><td>48%</td><td>33%</td><td class="nw">1.66 كم</td><td>77%</td><td class="ltr small">—</td></tr>
+<tr><td>5</td><td><span class="ltr nw">84.58°S 27.0°E</span></td><td>0.866</td><td>24%</td><td><span class="ltr nw">01-13</span></td><td>0.58°</td><td>48%</td><td>87%</td><td class="nw">2.17 كم</td><td>51%</td><td class="ltr small">Mons Mouton</td></tr>
+<tr><td>6</td><td><span class="ltr nw">84.38°S 39.2°E</span></td><td>0.857</td><td>24%</td><td><span class="ltr nw">01-12</span></td><td>0.29°</td><td>52%</td><td>80%</td><td class="nw">0.62 كم</td><td>39%</td><td class="ltr small">Mons Mouton / Nobile</td></tr>
+<tr><td>7</td><td><span class="ltr nw">84.23°S 109.1°E</span></td><td>0.852</td><td>24%</td><td><span class="ltr nw">02-10</span></td><td>0.29°</td><td>46%</td><td>34%</td><td class="nw">2.15 كم</td><td>59%</td><td class="ltr small">—</td></tr>
+<tr><td>8</td><td><span class="ltr nw">84.76°S 134.5°E</span></td><td>0.843</td><td>23%</td><td><span class="ltr nw">03-09</span></td><td>0.32°</td><td>46%</td><td>33%</td><td class="nw">0.56 كم</td><td>67%</td><td class="ltr small">—</td></tr>
+<tr><td>9</td><td><span class="ltr nw">86.01°S 290.1°E</span></td><td>0.838</td><td>23%</td><td><span class="ltr nw">06-22</span></td><td>0.57°</td><td>51%</td><td>56%</td><td class="nw">0.64 كم</td><td>30%</td><td class="ltr small">—</td></tr>
+</table>
+<p class="small">الإضاءة ورؤية الأرض متوسطات ناسا لمدة 18.6 سنة عند أفضل نقطة. "آمن" = نسبة المساحة الخضراء في المنطقة. "الجليد" = المسافة لأقرب ظل دائم.</p>
+<figure><img src="../guide/img/nasa_map_region.jpg" alt="المنطقة 1"><figcaption>شكل 3: المنطقة 1 قرب Mons Mouton في الخريطة التفاعلية، مع تفاصيلها ورسم الشمس والأرض يوم بيوم في 2027</figcaption></figure>
+<div class="note">أربع من مناطقنا (1 و3 و5 و6) تقع حول جبل Mons Mouton، اللي اختارت ناسا عنده منطقتين. كل المناطق ميلان أفضل نقطة فيها أقل من 1°، وأقرب جليد على بعد 0.6 إلى 2.3 كم.</div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">7</span>التحقق من الدقة</h2>
+<p class="chsub">ثلاث مراجع مستقلة</p>
+<h3>7.1 نموذجنا مقابل خرائط ناسا الرسمية</h3>
+<p>حسبنا متوسط 18.6 سنة بأنفسنا لـ 111,556 نقطة × 13,588 لحظة زمنية، وقارنّاه نقطة بنقطة بخرائط Mazarico et al. (2011):</p>
+<table>
+<tr><th></th><th>الارتباط r</th><th>متوسط الخطأ</th><th>الانحياز</th><th>خطأ أقل من 5 نقاط</th><th>خطأ أقل من 10 نقاط</th></tr>
+<tr><td>☀️ الشمس</td><td><b>0.909</b></td><td>3.7 نقطة</td><td>-0.6 نقطة</td><td>78%</td><td>91%</td></tr>
+<tr><td>🌍 الأرض</td><td><b>0.941</b></td><td>5.8 نقطة</td><td>-2.3 نقطة</td><td>63%</td><td>84%</td></tr>
+</table>
+<figure><img src="../guide/img/nasa_validation.png" alt="التحقق"><figcaption>شكل 4: يسار ووسط: نموذجنا مقابل ناسا. يمين: تقويم 2027 لكل منطقة (أصفر = شمس، أزرق = الأرض بس، أسود = ظلام)</figcaption></figure>
+<h3>7.2 مقابل دراسة TOPSIS المستقلة (arXiv:2406.19863)</h3>
+<p>هذي الدراسة رتبت 1247 نقطة في مناطق ناسا بطريقة TOPSIS وببيانات مختلفة (خرائط 5 م، ورؤية الأفق، والمعادن). <b>70%</b> من أفضل 20 نقطة عندهم تقع ضمن أفضل 10% من خريطتنا، والوسيط أعلى من 93%. وأفضل نقطة عندهم (#358، Nobile Rim 2) نقاطها عندنا 0.763، أعلى من 94% من المنطقة.</p>
+<table>
+<tr><th>النقطة</th><th>المنطقة</th><th>R عندهم</th><th>نقاطنا</th><th>ترتيبها عندنا</th><th>الميلان</th></tr>
+<tr><td>358</td><td class="ltr small">Nobile Rim 2</td><td>0.6916</td><td>0.763</td><td>94%</td><td>2.64°</td></tr>
+<tr><td>356</td><td class="ltr small">Nobile Rim 2</td><td>0.6869</td><td>0.752</td><td>93%</td><td>2.68°</td></tr>
+<tr><td>357</td><td class="ltr small">Nobile Rim 2</td><td>0.6711</td><td>0.752</td><td>93%</td><td>2.68°</td></tr>
+<tr><td>354</td><td class="ltr small">Nobile Rim 2</td><td>0.6684</td><td>0.752</td><td>93%</td><td>2.68°</td></tr>
+<tr><td>350</td><td class="ltr small">Nobile Rim 2</td><td>0.661</td><td>0.745</td><td>92%</td><td>2.61°</td></tr>
+<tr><td>355</td><td class="ltr small">Nobile Rim 2</td><td>0.6487</td><td>0.752</td><td>93%</td><td>2.68°</td></tr>
+<tr><td>352</td><td class="ltr small">Nobile Rim 2</td><td>0.6455</td><td>0.785</td><td>96%</td><td>1.54°</td></tr>
+<tr><td>351</td><td class="ltr small">Nobile Rim 2</td><td>0.6408</td><td>0.745</td><td>92%</td><td>2.61°</td></tr>
+<tr><td>353</td><td class="ltr small">Nobile Rim 2</td><td>0.622</td><td>0.8</td><td>97%</td><td>1.33°</td></tr>
+<tr><td>1121</td><td class="ltr small">Amundsen Rim</td><td>0.5653</td><td>0.866</td><td>100%</td><td>0.42°</td></tr>
+<tr><td>1122</td><td class="ltr small">Amundsen Rim</td><td>0.5649</td><td>0.824</td><td>98%</td><td>1.8°</td></tr>
+<tr><td>995</td><td class="ltr small">Nobile Rim 2</td><td>0.5353</td><td>0.11</td><td>12%</td><td>17.32°</td></tr>
+<tr><td>661</td><td class="ltr small">Site 004 (near the pole)</td><td>0.5294</td><td>0.099</td><td>7%</td><td>30.28°</td></tr>
+<tr><td>998</td><td class="ltr small">Nobile Rim 2</td><td>0.4916</td><td>0.866</td><td>100%</td><td>1.57°</td></tr>
+<tr><td>1223</td><td class="ltr small">Peak Near Shackleton</td><td>0.4689</td><td>0.884</td><td>100%</td><td>0.94°</td></tr>
+<tr><td>744</td><td class="ltr small">Faustini Rim A</td><td>0.4567</td><td>0.728</td><td>90%</td><td>1.58°</td></tr>
+<tr><td>1043</td><td class="ltr small">Nobile Rim 2</td><td>0.4373</td><td>0.263</td><td>68%</td><td>1.16°</td></tr>
+<tr><td>657</td><td class="ltr small">Site 004 (near the pole)</td><td>0.4179</td><td>0.096</td><td>6%</td><td>28.93°</td></tr>
+<tr><td>726</td><td class="ltr small">de Gerlache Rim 2</td><td>0.3907</td><td>0.152</td><td>42%</td><td>20.07°</td></tr>
+<tr><td>1005</td><td class="ltr small">Peak Near Shackleton</td><td>0.3714</td><td>0.221</td><td>67%</td><td>0.67°</td></tr>
+</table>
+<h3>7.3 مقابل مناطق ناسا التسع</h3>
+<p>مناطقنا التسع تغطي <b>4/9</b> من مناطق ناسا، ومرشحونا الـ13 يغطون <b>5/9</b>. وبما إن ناسا ما تنشر حدود مناطقها، نحدد كل منطقة بمركز المَعْلم اللي سُمّيت عليه (دليل IAU)، ونصف قطر المطابقة = نصف قطر المعلم + 10 كم (بين 20 و50 كم).</p>
+<table>
+<tr><th>منطقة ناسا</th><th>المعلم</th><th>نصف القطر</th><th>أقرب منطقة لنا</th><th>مناطقنا داخلها</th><th>أفضل نقاط قريبة</th></tr>
+<tr><td class="ltr">Peak near Cabeus B</td><td class="ltr small">Cabeus B (crater)</td><td>40 كم</td><td>122.7 كم</td><td>—</td><td>68%</td></tr>
+<tr><td class="ltr">Haworth</td><td class="ltr small">Haworth (crater)</td><td>36 كم</td><td>105.8 كم</td><td>—</td><td>100%</td></tr>
+<tr><td class="ltr">Malapert Massif</td><td class="ltr small">Mons Malapert</td><td>44 كم</td><td>82.0 كم</td><td>—</td><td>100%</td></tr>
+<tr><td class="ltr">Mons Mouton Plateau</td><td class="ltr small">Mons Mouton</td><td>50 كم</td><td>11.5 كم</td><td>#1, #3, #5, #6</td><td>100%</td></tr>
+<tr><td class="ltr">Mons Mouton</td><td class="ltr small">Mons Mouton</td><td>50 كم</td><td>11.5 كم</td><td>#1, #3, #5, #6</td><td>100%</td></tr>
+<tr><td class="ltr">Nobile Rim 1</td><td class="ltr small">Nobile (crater)</td><td>50 كم</td><td>41.3 كم</td><td>#1, #6</td><td>100%</td></tr>
+<tr><td class="ltr">Nobile Rim 2</td><td class="ltr small">Nobile (crater)</td><td>50 كم</td><td>41.3 كم</td><td>#1, #6</td><td>100%</td></tr>
+<tr><td class="ltr">de Gerlache Rim 2</td><td class="ltr small">de Gerlache (crater)</td><td>26 كم</td><td>78.6 كم</td><td>—</td><td>100%</td></tr>
+<tr><td class="ltr">Slater Plain</td><td class="ltr small">Slater (crater)</td><td>23 كم</td><td>87.0 كم</td><td>—</td><td>100%</td></tr>
+</table>
+<div class="note warn"><b>تفسير الفروق:</b> المَعْلم Cabeus B نفسه خارج دائرة 84° (بينما المنطقة اللي ناسا سمتها عليه أقرب للقطب). وناسا تعتمد على قيود ما يشملها نموذجنا: مدار NRHO، ومسارات الإطلاق، وتصميم مركبة SpaceX HLS، وصور LROC بدقة 0.5 م. وما عدّلنا النموذج عشان "نطابق" ناسا، حتى يبقى التحقق صادق.</div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">8</span>اختبارات المتانة</h2>
+<p class="chsub">هل تتغير النتائج لو غيرنا الافتراضات؟ (زمن التشغيل 130.6 ثانية)</p>
+<figure><img src="../guide/img/nasa_experiments.png" alt="المتانة"><figcaption>شكل 5: تأثير الأوزان، وحد الميلان، والسنة على النتائج</figcaption></figure>
+<h3>8.1 أوزان مختلفة لصاحب القرار</h3>
+<table>
+<tr><th>الملف</th><th>الميلان</th><th>الإضاءة</th><th>الأرض</th><th>الجليد</th><th>الصخور</th><th>مشتركة مع الأساسي</th></tr>
+<tr><td>الأساسي</td><td>30%</td><td>25%</td><td>15%</td><td>15%</td><td>15%</td><td><b>9/9</b></td></tr>
+<tr><td>أوزان متساوية</td><td>20%</td><td>20%</td><td>20%</td><td>20%</td><td>20%</td><td><b>6/9</b></td></tr>
+<tr><td>الطاقة أولًا</td><td>25%</td><td>45%</td><td>10%</td><td>10%</td><td>10%</td><td><b>6/9</b></td></tr>
+<tr><td>الاتصال أولًا</td><td>25%</td><td>20%</td><td>35%</td><td>10%</td><td>10%</td><td><b>4/9</b></td></tr>
+<tr><td>العلم (الجليد) أولًا</td><td>25%</td><td>15%</td><td>10%</td><td>40%</td><td>10%</td><td><b>7/9</b></td></tr>
+<tr><td>السلامة أولًا</td><td>45%</td><td>15%</td><td>10%</td><td>5%</td><td>25%</td><td><b>5/9</b></td></tr>
+</table>
+<h3>8.2 حد الميلان الأقصى</h3>
+<table><tr><th>8°</th><th>10° (الأساسي)</th><th>12°</th></tr><tr><td>8/9 <span class="small">(آمن 6.8%)</span></td><td>9/9 <span class="small">(آمن 8.2%)</span></td><td>9/9 <span class="small">(آمن 8.6%)</span></td></tr></table>
+<h3>8.3 نوافذ الإطلاق في ثلاث سنوات</h3>
+<table>
+<tr><th>المنطقة</th><th>2026</th><th>2027</th><th>2028</th></tr>
+<tr><td>#1</td><td>35%<br><span class="ltr small">2026-01-21</span></td><td>36%<br><span class="ltr small">2027-01-09</span></td><td>37%<br><span class="ltr small">2028-01-01</span></td></tr>
+<tr><td>#2</td><td>25%<br><span class="ltr small">2026-02-21</span></td><td>28%<br><span class="ltr small">2027-03-10</span></td><td>26%<br><span class="ltr small">2028-01-30</span></td></tr>
+<tr><td>#3</td><td>26%<br><span class="ltr small">2026-01-01</span></td><td>26%<br><span class="ltr small">2027-01-13</span></td><td>28%<br><span class="ltr small">2028-01-02</span></td></tr>
+<tr><td>#4</td><td>23%<br><span class="ltr small">2026-02-21</span></td><td>25%<br><span class="ltr small">2027-03-09</span></td><td>23%<br><span class="ltr small">2028-01-29</span></td></tr>
+<tr><td>#5</td><td>24%<br><span class="ltr small">2026-01-01</span></td><td>24%<br><span class="ltr small">2027-01-13</span></td><td>26%<br><span class="ltr small">2028-01-02</span></td></tr>
+<tr><td>#6</td><td>24%<br><span class="ltr small">2026-01-01</span></td><td>24%<br><span class="ltr small">2027-01-12</span></td><td>26%<br><span class="ltr small">2028-01-01</span></td></tr>
+<tr><td>#7</td><td>23%<br><span class="ltr small">2026-02-21</span></td><td>24%<br><span class="ltr small">2027-02-10</span></td><td>23%<br><span class="ltr small">2028-01-02</span></td></tr>
+<tr><td>#8</td><td>20%<br><span class="ltr small">2026-03-20</span></td><td>23%<br><span class="ltr small">2027-03-09</span></td><td>21%<br><span class="ltr small">2028-02-26</span></td></tr>
+<tr><td>#9</td><td>26%<br><span class="ltr small">2026-01-01</span></td><td>23%<br><span class="ltr small">2027-06-22</span></td><td>24%<br><span class="ltr small">2028-05-15</span></td></tr>
+</table>
+<div class="note ok"><b>الخلاصة:</b> المنطقة 1 تبقى الأفضل في كل السنوات، وتغيير حد الميلان ما يغير النتائج تقريبًا. أما الأوزان، فلو أعطيت الاتصال بالأرض أولوية قصوى تتغير بعض المناطق، وهذا يعطي صاحب القرار صورة واضحة عن البدائل.</div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">9</span>التشغيل من الألف إلى الياء</h2>
+<p class="chsub">على جهازك، وعلى سيرفرات GitHub</p>
+<h3>9.1 على جهازك</h3>
+<ol class="steps">
+<li>ثبّت Python 3.10 أو أحدث، وGit.</li>
+<li>نزّل المشروع:<pre><code>git clone https://github.com/ELD11q/-ahs.git
+cd -ahs/lunar-landing-navigator
+python -m venv .venv &amp;&amp; source .venv/bin/activate   # ويندوز: .venv\Scripts\activate
+pip install -r requirements.txt</code></pre></li>
+<li>تأكد إن كل شي شغال: <code>python -m pytest -q</code>، والمفروض يطلع 14 passed.</li>
+<li>شغّل التحليل الكامل على بيانات ناسا:<pre><code>python -m lunar_nav --nasa -o output          # أول مرة ينزّل ~1.2 GB
+python -m lunar_nav.experiments -o output       # اختبارات المتانة (اختياري)</code></pre></li>
+<li>افتح <code>output/landing_sites_map.html</code> في المتصفح، واقرأ <code>output/REPORT.md</code>.</li>
+</ol>
+<h3>9.2 خيارات مفيدة</h3>
+<table>
+<tr><th>الخيار</th><th>الوظيفة</th></tr>
+<tr><td><code>--year 2028</code></td><td>سنة نوافذ الإطلاق</td></tr>
+<tr><td><code>--max-slope 8</code></td><td>حد الميلان</td></tr>
+<tr><td><code>--weights '{"illumination":0.4}'</code></td><td>تغيير أوزان المعايير</td></tr>
+<tr><td><code>--half-width-km 240 --res 80</code></td><td>حجم المنطقة ودقتها</td></tr>
+<tr><td><code>--demo</code></td><td>وضع تجريبي سريع ببيانات مولّدة</td></tr>
+<tr><td><code>--dem file.tif --pixel-size 20</code></td><td>ملف ارتفاعات من اختيارك</td></tr>
+</table>
+<h3>9.3 على سيرفرات GitHub</h3>
+<p>الملف <code>.github/workflows/lunar-navigator.yml</code> يشغّل الاختبارات، وبعدها التحليل الكامل على بيانات ناسا مع كل تحديث (والبيانات محفوظة في الكاش). وللتشغيل اليدوي: <b>Actions ← Lunar Landing Navigator ← Run workflow</b>، واختر الوضع (nasa / demo / custom) والسنة. النتائج تطلع في صفحة التشغيل، وتنزل كملف اسمه <b>landing-sites-nasa</b>.</p>
+<h3>9.4 المخرجات</h3>
+<table>
+<tr><th>الملف</th><th>المحتوى</th></tr>
+<tr><td><code>landing_sites_map.html</code></td><td>خريطة تفاعلية تشتغل بدون إنترنت (~5 MB)</td></tr>
+<tr><td><code>REPORT.md</code></td><td>تقرير عربي بكل الأرقام</td></tr>
+<tr><td><code>summary.png</code> · <code>validation.png</code></td><td>لوحات الطبقات والتحقق</td></tr>
+<tr><td><code>ranked_regions.csv/json</code> · <code>validation.json</code></td><td>البيانات الكاملة للبرامج وExcel</td></tr>
+</table>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">10</span>نموذج العمل وملف الهاكثون</h2>
+<p class="chsub">Open-Core: النواة مفتوحة، والخدمات المتقدمة مدفوعة</p>
+<div class="bmc">
+<div><b>الشركاء الرئيسيون</b>وكالة الفضاء السعودية، والجامعات ومراكز الأبحاث، ومزود سحابي، وشركات المركبات القمرية التجارية</div>
+<div><b>الأنشطة الرئيسية</b>تطوير المحرك، والتحقق العلمي المستمر، وتحديث البيانات، والنشر العلمي</div>
+<div class="v"><b>القيمة المقدمة</b>قرار هبوط متحقق منه خلال دقايق بدل أسابيع، مع تقويم نوافذ الإطلاق، وشفافية كاملة لأنه مفتوح المصدر</div>
+<div><b>الموارد</b>بيانات ناسا المفتوحة، والمحرك الفيزيائي، وخبرة الفريق، ونتائج التحقق</div>
+<div><b>العلاقة مع العميل</b>مجتمع مفتوح على GitHub، ودعم مدفوع، وورش تدريب</div>
+<div class="v"><b>شرائح العملاء</b>وكالات الفضاء، وشركات المركبات والحمولات، والجامعات وفرق الروبوتات، والتعليم والهاكثونات</div>
+<div><b>القنوات</b>GitHub، والمؤتمرات والأوراق العلمية، والهاكثونات، والشراكات المباشرة</div>
+<div><b>هيكل التكاليف</b>الحوسبة السحابية والتخزين، والفريق، والتحقق، والتسويق. البيانات نفسها مجانية</div>
+<div class="v"><b>مصادر الدخل</b>اشتراك سحابي احترافي، ودراسات مواقع مخصصة، وواجهة API، وتدريب وشهادات</div>
+</div>
+<h3>الباقات المقترحة</h3>
+<table>
+<tr><th>الباقة</th><th>السعر</th><th>تشمل</th><th>العميل</th></tr>
+<tr><td>مفتوح</td><td>مجاني</td><td>الكود كامل، وبيانات ناسا، والخريطة، والتقرير</td><td>الطلاب والباحثون</td></tr>
+<tr><td>احترافي سحابي</td><td>[$__ شهريًا]</td><td>دقة 5 إلى 20 م، وقيود مخصصة، ونوافذ أي سنة، وAPI</td><td>الشركات والفرق</td></tr>
+<tr><td>مؤسسات</td><td>[$__ لكل دراسة]</td><td>دراسة موقع كاملة لمهمة محددة، وتقرير، ودعم</td><td>الوكالات</td></tr>
+</table>
+<p class="small">الأسعار بين أقواس مقترحة، وتتحدد بعد التحقق من السوق.</p>
+<h3>التميّز التنافسي</h3>
+<ul>
+<li>أدوات ناسا الداخلية ما هي متاحة للعامة، والدراسات الأكاديمية (مثل TOPSIS) تطلع مرة وحدة ويدويًا عبر برامج GIS.</li>
+<li>نظامنا <b>مفتوح، وقابل للتكرار، ومتحقق منه</b>، ويعيد التحليل لأي سنة أو قيود خلال دقايق.</li>
+<li>يحسب <b>نوافذ الإطلاق الحقيقية</b>، وهذا الشي اللي ناسا تقول إنه حاسم، ومتوسطاتها المنشورة ما تغطيه.</li>
+<li>عربي وإنجليزي، ومناسب للبرامج الفضائية الناشئة في المنطقة.</li>
+</ul>
+<h3>عرض الهاكثون في 3 دقايق</h3>
+<ol class="steps">
+<li><b>30 ثانية، المشكلة:</b> القطب الجنوبي فيه ماء، لكن الهبوط فيه صعب.</li>
+<li><b>30 ثانية، الحل:</b> أمر واحد يحول بيانات ناسا إلى قرار.</li>
+<li><b>60 ثانية، العرض المباشر:</b> افتح الخريطة، واضغط على المنطقة 1، وشغّل طبقة الإضاءة.</li>
+<li><b>30 ثانية، الدقة:</b> 0.91 و0.94، و70%، و4 من 9.</li>
+<li><b>30 ثانية، نموذج العمل وخارطة الطريق.</b></li>
+</ol>
+<h3>خارطة الطريق</h3>
+<table>
+<tr><th>المرحلة</th><th>المدة</th><th>المخرجات</th></tr>
+<tr><td>النموذج الأول ✓</td><td>الآن</td><td>بيانات ناسا، ونوافذ 2027، والتحقق، وGitHub Actions</td></tr>
+<tr><td>دقة أعلى</td><td>3 أشهر</td><td>خرائط LOLA بدقة 5 م للمناطق النهائية، وصور LROC + YOLO للصخور، ونوافذ لكل بكسل</td></tr>
+<tr><td>منصة سحابية</td><td>6 أشهر</td><td>تطبيق ويب، وواجهة API، وتخطيط مسار العربة للظل الدائم</td></tr>
+<tr><td>التوسع</td><td>12 شهر</td><td>القطب الشمالي، والمريخ، وشراكات مع الوكالات</td></tr>
+</table>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">11</span>الحدود وخطة التطوير</h2>
+<p class="chsub">وش يقدر النظام عليه، ووش ما يقدر</p>
+<ul>
+<li>أداة بحثية وتعليمية، <b>مو أداة طيران معتمدة</b>.</li>
+<li>الصخور الأصغر من حوالي 100 م ما تبين في بيانات LOLA، وتحتاج صور LROC NAC مع نموذج YOLO مدرّب (الكود جاهز، والنموذج المدرّب مو جاهز).</li>
+<li>نوافذ الإطلاق محسوبة لأفضل نقطة في كل منطقة مرشحة، مو لكل بكسل.</li>
+<li>نموذج الإضاءة قريب جدًا من ناسا لكنه مو مطابق 100%: الفرق 3.7 نقطة للشمس و5.8 للأرض، بسبب دقة الأفق وتمثيل القرص.</li>
+<li>ما يشمل مدار NRHO، ولا مسارات الإطلاق، ولا قيود مركبة HLS، ولا الحرارة.</li>
+<li>مناطق ناسا تحددت بمراكز المعالم، لأن حدودها الرسمية مو منشورة.</li>
+</ul>
+<h3>جودة الكود</h3>
+<ul>
+<li>14 اختبار آلي تشمل: الميلان على سطح معروف، والأفق المرجعي، والتمايل الفلكي، والتحويل الستيريوغرافي، والنظام كامل، والخريطة.</li>
+<li>تكامل مستمر على GitHub Actions مع كل تحديث.</li>
+<li>كل أرقام هذا التقرير تتولد آليًا من ملفات النتائج (<code>docs/report/build_report.py</code>).</li>
+</ul>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">12</span>المراجع والملاحق</h2>
+<p class="chsub">المصادر العلمية والبيانات</p>
+<h3>المصادر اللي جات مع فكرة المشروع</h3>
+<ol>
+<li>NASA Scientific Visualization Studio: الإضاءة في القطب الجنوبي. <span class="ltr small">svs.gsfc.nasa.gov/vis/a000000/a003500/a003587/</span></li>
+<li>NASA (2025). <i>Artemis III Site Selection Update: Downselection From Thirteen to Nine Candidate Regions.</i> NTRS 20250011660.</li>
+<li>Aerospace America (AIAA). <i>The Choice.</i> <span class="ltr small">aerospaceamerica.aiaa.org/features/the-choice/</span></li>
+<li>Peña-Asensio, E., Neira-Acosta, Á.-S., Sánchez-Lozano, J.M. (2024). <i>Evaluating potential landing sites for the Artemis III mission using a multi-criteria decision making approach.</i> arXiv:2406.19863.</li>
+</ol>
+<h3>البيانات والطرق</h3>
+<ol start="5">
+<li>Barker, M.K. et al. (2023). <i>A New View of the Lunar South Pole from LOLA.</i> NASA PGDA product 90.</li>
+<li>Mazarico, E., Neumann, G.A., Smith, D.E., Zuber, M.T., Torrence, M.H. (2011). <i>Illumination conditions of the lunar polar regions using LOLA topography.</i> Icarus 211, 1066–1081. PGDA product 69.</li>
+<li>Smith, D.E. et al. (2010). <i>The Lunar Orbiter Laser Altimeter Investigation on the LRO Mission.</i> Space Sci. Rev. 150.</li>
+<li>Archinal, B.A. et al. (2011). <i>Report of the IAU WGCCRE: 2009.</i> Celest. Mech. Dyn. Astr. 109, 101–135.</li>
+<li>Robinson, M.S. et al. (2010). <i>LROC Instrument Overview.</i> Space Sci. Rev. 150.</li>
+<li>Bandfield, J.L. et al. (2011). <i>Lunar surface rock abundance … Diviner.</i> JGR Planets 116.</li>
+<li>Robbins, S.J. (2019). <i>A New Global Database of Lunar Impact Craters &gt;1–2 km.</i> JGR Planets 124.</li>
+<li>IAU / USGS. <i>Gazetteer of Planetary Nomenclature.</i></li>
+<li>Astropy Collaboration (2022). <i>The Astropy Project.</i> ApJ 935, 167. · Lam, S.K. et al. (2015). <i>Numba.</i> LLVM-HPC.</li>
+</ol>
+<h3>ملحق أ: المصطلحات</h3>
+<table>
+<tr><th>المصطلح</th><th>المعنى</th></tr>
+<tr><td>PSR</td><td>منطقة ظلها دائم (Permanently Shadowed Region)</td></tr>
+<tr><td>LOLA / LRO</td><td>مقياس الارتفاع الليزري / المركبة المدارية</td></tr>
+<tr><td>DEM</td><td>خريطة ارتفاعات رقمية</td></tr>
+<tr><td>Libration</td><td>تمايل القمر الظاهري، اللي يحرك الأرض في سماء القطب</td></tr>
+<tr><td>TOPSIS</td><td>طريقة لاتخاذ القرار متعدد المعايير</td></tr>
+<tr><td>AEZ</td><td>منطقة استكشاف Artemis (حتى 6° من القطب)</td></tr>
+<tr><td>NRHO</td><td>المدار الهالي القريب من الخط المستقيم، اللي تستخدمه Artemis</td></tr>
+</table>
+<div class="note">المستودع: <span class="ltr">github.com/ELD11q/-ahs</span> · المجلد <code>lunar-landing-navigator/</code> · النتائج <code>results/nasa_2027/</code> · الدليل <code>docs/guide/</code> · هذا التقرير <code>docs/report/</code></div>
+</section>
+
+</main>
+</body>
+</html>

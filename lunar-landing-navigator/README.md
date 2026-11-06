@@ -6,7 +6,9 @@
 
 ![map](docs/guide/img/nasa_map_overview.jpg)
 
-📘 **الدليل الكامل بالعربي (من الألف إلى الياء):** [`docs/guide/Lunar_Navigator_Guide_AR.pdf`](docs/guide/Lunar_Navigator_Guide_AR.pdf)
+📕 **التقرير التقني الكامل (23 صفحة):** [`docs/report/Lunar_Navigator_Report_AR.pdf`](docs/report/Lunar_Navigator_Report_AR.pdf)
+
+📘 **دليل المستخدم (من الألف إلى الياء):** [`docs/guide/Lunar_Navigator_Guide_AR.pdf`](docs/guide/Lunar_Navigator_Guide_AR.pdf)
 
 ☁️ **التشغيل على سيرفرات GitHub:** كل push يشغّل الاختبارات والتحليل الكامل على بيانات ناسا تلقائيًا. أو من Actions ← Lunar Landing Navigator ← Run workflow (الأوضاع: nasa / demo / custom)، ونزّل ملف `landing-sites-nasa` من نتيجة التشغيل.
 
@@ -30,7 +32,8 @@ python -m lunar_nav --nasa -o output     # ينزّل ~1.2 GB أول مرة، و
 | 3 | 84.11°S, 32.7°E | 26% | 83% | Mons Mouton |
 | … | | | | ([الجدول كامل](results/nasa_2027/REPORT.md)) |
 
-### التحقق من الدقة
+### التحقق من الدقة والمتانة
+- **اختبارات المتانة** (`python -m lunar_nav.experiments`): المنطقة 1 الأفضل في 2026 و2027 و2028، وحد الميلان 8° أو 12° يحافظ على 8 إلى 9 من 9 مناطق.
 - **نموذج الإضاءة مقابل خرائط ناسا** (111,556 نقطة × 18.6 سنة): الشمس r = 0.91 (خطأ 3.7 نقطة)، الأرض r = 0.94 (خطأ 5.8 نقطة).
 - **دراسة TOPSIS مستقلة** (arXiv:2406.19863): 70% من أفضل 20 نقطة عندهم ضمن أفضل 10% من خريطتنا.
 - **مناطق ناسا التسع لـ Artemis III**: مناطقنا تغطي 4/9 (و5/9 من المرشحين الـ13). الأسباب في [التقرير](results/nasa_2027/REPORT.md).
