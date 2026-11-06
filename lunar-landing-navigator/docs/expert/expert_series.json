@@ -1,0 +1,753 @@
+[
+ {
+  "chapter": 1,
+  "title_ar": "العلم والمشكلة",
+  "title_en": "The science and the problem",
+  "scenes": [
+   {
+    "t": "عن هذي السلسلة",
+    "b": [
+     "8 فصول تخليك خبير في المشروع",
+     "كل قرار: وش هو، وليش، والدليل",
+     "شاهد بالترتيب، وارجع لأي فصل"
+    ],
+    "en": "Welcome to the expert series on the Lunar Landing Site Navigator. In eight chapters, you will learn every part of the project: what it does, why each decision was made, and the evidence behind it. By the end, you should be able to answer any question about it.",
+    "ar": "أهلًا بك في سلسلة الخبير لمستكشف مواقع الهبوط القمري. في 8 فصول بتتعلم كل جزء في المشروع: وش يسوي، وليش انتخذ كل قرار، والدليل عليه. وفي النهاية تقدر تجاوب على أي سؤال عنه."
+   },
+   {
+    "t": "ليش القطب الجنوبي؟",
+    "b": [
+     "حفر ظلها دائم",
+     "جليد ماء محتمل",
+     "ماء + أكسجين + وقود صواريخ"
+    ],
+    "en": "Why the lunar south pole? Because it holds craters whose floors have not seen sunlight for billions of years. These permanently shadowed regions can trap water ice. Water means drinking water, oxygen to breathe, and hydrogen and oxygen for rocket fuel. That is why NASA's Artemis program is going there.",
+    "ar": "ليش القطب الجنوبي؟ لأن فيه حفر ما شاف قاعها الشمس من مليارات السنين. هالمناطق اللي ظلها دائم ممكن تحبس جليد ماء. والماء معناه شرب، وأكسجين للتنفس، وهيدروجين وأكسجين لوقود الصواريخ. وعشان كذا برنامج Artemis رايح هناك."
+   },
+   {
+    "t": "الدليل على الجليد",
+    "b": [
+     "LCROSS 2009: ماء في غبار حفرة Cabeus",
+     "M3 على Chandrayaan-1: جليد مكشوف (2018)",
+     "Diviner على LRO: حرارة أقل من ‎−200°C"
+    ],
+    "en": "What is the evidence for ice? In 2009, NASA's LCROSS mission crashed a rocket stage into Cabeus crater and detected water in the debris plume, roughly five percent by mass. In 2018, data from NASA's M3 instrument on India's Chandrayaan-1 showed ice exposed at the surface in shadowed craters. And the Diviner instrument on LRO measured temperatures below minus two hundred degrees Celsius, cold enough to keep ice forever.",
+    "ar": "وش الدليل على الجليد؟ في 2009 مهمة LCROSS صدمت صاروخ في حفرة Cabeus، ولقت ماء في الغبار اللي طار، تقريبًا 5% من الوزن. وفي 2018 بيانات جهاز M3 على المركبة الهندية Chandrayaan-1 بيّنت جليد مكشوف على السطح في الحفر المظلمة. وجهاز Diviner على LRO قاس حرارة أقل من ‎−200°C‎، وهذي برودة تحفظ الجليد للأبد."
+   },
+   {
+    "t": "ليش الشمس واطية؟",
+    "b": [
+     "ميل محور القمر 1.54° فقط",
+     "الشمس عند القطب: ±1.5° حول الأفق",
+     "ظلال طويلة جدًا، وأي تل يحجبها"
+    ],
+    "en": "Why is the Sun so low? The Moon's spin axis is tilted only about one point five degrees from the plane of its orbit around the Sun. So at the pole, the Sun circles along the horizon, never more than about one and a half degrees up. Shadows are extremely long, and any small hill can block the Sun. This single fact drives the whole project.",
+    "ar": "ليش الشمس واطية؟ لأن محور دوران القمر مايل بس حوالي 1.5 درجة عن مستوى مداره حول الشمس. فعند القطب الشمس تدور على الأفق، وما ترتفع أكثر من درجة ونص تقريبًا. والظلال طويلة جدًا، وأي تل صغير يحجب الشمس. وهالحقيقة الوحدة هي اللي تحرك المشروع كله."
+   },
+   {
+    "t": "وليش الأرض تختفي أحيانًا؟",
+    "b": [
+     "الأرض ثابتة تقريبًا باتجاه الوجه القريب",
+     "التمايل (libration): ±6.8° و ±7.7°",
+     "عند القطب: الأرض تطلع وتنزل تحت الأفق"
+    ],
+    "en": "And why does Earth sometimes disappear? The Moon always shows the same face to Earth, so Earth stays almost fixed in the lunar sky. But the Moon wobbles slightly, which is called libration, by about seven degrees. At the pole, where Earth sits right at the horizon, this wobble moves Earth above and below the horizon. That interrupts direct radio contact.",
+    "ar": "وليش الأرض تختفي أحيانًا؟ القمر دايم يورّي الأرض نفس الوجه، فالأرض شبه ثابتة في سماء القمر. لكن القمر يتمايل شوي، واسمه libration، تقريبًا 7 درجات. وعند القطب، والأرض على الأفق بالضبط، هالتمايل يطلّعها وينزّلها تحت الأفق، فينقطع الاتصال المباشر."
+   },
+   {
+    "t": "شروط موقع الهبوط",
+    "b": [
+     "ميلان أقل من 8° إلى 10°",
+     "شمس متواصلة طول المهمة (6.5 يوم)",
+     "رؤية الأرض للاتصال",
+     "قريب من الظل الدائم",
+     "صخور وحفر قليلة"
+    ],
+    "en": "So a good landing site must meet five conditions. The ground must be flat, under eight to ten degrees of slope, so the lander does not tip over. It needs continuous sunlight for the whole stay, about six and a half days, for power. It should see Earth for communication. It should be close to a shadowed crater, to reach the ice. And it must be free of large rocks and craters.",
+    "ar": "فالموقع الجيد لازم يحقق 5 شروط. الأرض مستوية، والميلان أقل من 8 إلى 10 درجات عشان المركبة ما تنقلب. شمس متواصلة طول البقاء، تقريبًا 6.5 يوم، عشان الطاقة. يشوف الأرض عشان الاتصال. قريب من حفرة مظلمة عشان يوصل للجليد. وخالي من الصخور والحفر الكبيرة."
+   },
+   {
+    "t": "التناقض في قلب المشكلة",
+    "b": [
+     "تبغى تكون جنب أظلم مكان",
+     "وأنت واقف في أكثر مكان مضيء",
+     "الحل: حواف وقمم قريبة من الحفر"
+    ],
+    "en": "Notice the conflict at the heart of the problem. You want to be next to the darkest places on the Moon, while standing in one of the brightest. The answer is usually a crater rim or a high ridge, close to a shadowed crater. Finding those spots is exactly what our system does.",
+    "ar": "لاحظ التناقض في قلب المشكلة: تبغى تكون جنب أظلم الأماكن على القمر، وأنت واقف في واحد من أكثر الأماكن إضاءة. والجواب عادةً حافة حفرة أو مرتفع قريب من حفرة مظلمة. وإيجاد هالأماكن هو بالضبط شغل نظامنا.",
+    "img": "nasa_map_overview.jpg"
+   },
+   {
+    "t": "كيف اختارت ناسا",
+    "b": [
+     "مركبة LRO من 2009: LOLA و Diviner و LROC",
+     "2022: إعلان 13 منطقة",
+     "أكتوبر 2024: تقليص إلى 9 مناطق",
+     "المعيار الحاسم: توفر نوافذ المهمة"
+    ],
+    "en": "How did NASA choose? Using data from the Lunar Reconnaissance Orbiter, NASA announced thirteen candidate regions for Artemis Three in 2022, each about fifteen by fifteen kilometres. In October 2024, it cut the list to nine. NASA's own summary says the key factor was mission availability: how many launch opportunities a region offers when all constraints are combined.",
+    "ar": "كيف اختارت ناسا؟ ببيانات مركبة LRO أعلنت ناسا في 2022 عن 13 منطقة مرشحة لـ Artemis III، كل وحدة تقريبًا 15×15 كم. وفي أكتوبر 2024 قلّصتها إلى 9. وملخص ناسا نفسه يقول إن العامل الحاسم كان توفر المهمة: كم فرصة إطلاق تعطي المنطقة لما تجتمع كل القيود."
+   },
+   {
+    "t": "وش يسوي مشروعنا",
+    "b": [
+     "نفس منطق ناسا، على بيانات ناسا",
+     "13 مرشحة ← 9 نهائية",
+     "نوافذ 2027 الحقيقية",
+     "متحقق منه مقابل 3 مراجع"
+    ],
+    "en": "Our project reproduces this logic, openly. It uses NASA's own data, scores every pixel, picks thirteen candidates and then nine finalists, computes the real launch windows for 2027, and checks itself against three independent references. The next chapter explains the data.",
+    "ar": "مشروعنا يعيد نفس هالمنطق بشكل مفتوح. يستخدم بيانات ناسا نفسها، ويعطي كل بكسل نقاط، ويختار 13 مرشحة ثم 9 نهائية، ويحسب نوافذ الإطلاق الحقيقية لـ 2027، ويتحقق من نفسه مقابل 3 مراجع مستقلة. الفصل الجاي يشرح البيانات."
+   }
+  ]
+ },
+ {
+  "chapter": 2,
+  "title_ar": "البيانات، وليش هالملفات بالذات",
+  "title_en": "The data, and why these files",
+  "scenes": [
+   {
+    "t": "وش هي خريطة الارتفاع (DEM)؟",
+    "b": [
+     "شبكة أرقام: كل خانة = ارتفاع نقطة",
+     "LOLA: ليزر يقيس المسافة للسطح",
+     "مليارات القياسات ← خريطة كاملة"
+    ],
+    "en": "Everything starts with an elevation map, called a D E M, a digital elevation model. It is a grid of numbers, where each cell holds the height of the ground. The LOLA laser on LRO fires pulses at the surface and times their return, giving the height of each spot. Billions of these measurements are combined into one map.",
+    "ar": "كل شي يبدأ من خريطة الارتفاع، اسمها DEM. هي شبكة أرقام، وكل خانة فيها ارتفاع الأرض. ليزر LOLA على مركبة LRO يرسل نبضات للسطح ويحسب وقت رجوعها، فيعرف ارتفاع كل نقطة. ومليارات من هالقياسات تتجمع في خريطة وحدة.",
+    "img": "nasa_summary.jpg"
+   },
+   {
+    "t": "ليش Barker 2023؟",
+    "b": [
+     "أحدث خريطة LOLA للقطب الجنوبي",
+     "مدارات معدّلة (ADJ) ← أخطاء أقل",
+     "معها ميلان وخشونة وخريطة الخطأ",
+     "منشورة رسميًا في NASA PGDA 90"
+    ],
+    "en": "Why the Barker 2023 product? It is the newest LOLA compilation of the south pole, from NASA Goddard. The spacecraft orbits were re-adjusted, which removes many errors from older maps. It comes with matching slope, roughness, and error maps, all on the same grid. Using the most recent official product is the first rule of credible work.",
+    "ar": "ليش منتج Barker 2023؟ لأنه أحدث تجميع لبيانات LOLA للقطب الجنوبي من ناسا جودارد. مدارات المركبة انعدلت فيه، وهذا يشيل أخطاء كثيرة من الخرائط القديمة. ومعه خرائط ميلان وخشونة وخطأ على نفس الشبكة. واستخدام أحدث منتج رسمي هو أول قاعدة للشغل الموثوق."
+   },
+   {
+    "t": "ليش دقة 80 متر؟",
+    "b": [
+     "480×480 كم بدقة 80 م = 36 مليون بكسل",
+     "بدقة 20 م = 576 مليون (16 ضعف)",
+     "المناطق 15 كم: 80 م كافية للفرز",
+     "الخطوة الجاية: 5 م للمناطق النهائية"
+    ],
+    "en": "Why eighty metres per pixel, when twenty or even five exist? Our area is four hundred and eighty kilometres wide. At eighty metres, that is thirty six million pixels, which fits in memory and runs in minutes on a laptop or GitHub's free servers. At twenty metres it would be sixteen times more. Since we are screening fifteen kilometre regions, eighty metres is enough. Five metre maps are the next step, only for the final regions.",
+    "ar": "ليش 80 متر للبكسل، مع إن فيه 20 وحتى 5؟ منطقتنا عرضها 480 كم، وبدقة 80 م هذي 36 مليون بكسل، تكفيها الذاكرة وتخلص في دقايق على لابتوب أو على سيرفرات GitHub المجانية. وبدقة 20 م تصير 16 ضعف. ولأننا نفرز مناطق عرضها 15 كم، فـ 80 م تكفي. وخرائط 5 م هي الخطوة الجاية، للمناطق النهائية بس."
+   },
+   {
+    "t": "الميلان والخشونة",
+    "b": [
+     "ميلان ناسا: محسوب من البيانات الأصلية الأدق",
+     "الخشونة على 100 م ≈ الصخور والوعورة",
+     "نفس الفريق ونفس الشبكة ← متناسقة"
+    ],
+    "en": "For slope, we use NASA's slope map instead of computing our own, because NASA derived it from the finer original data. For hazards we use LOLA roughness at a one hundred metre baseline. It measures how much the ground deviates from a flat plane, which tracks boulder fields and rugged terrain. Both come from the same team and grid, so they are consistent.",
+    "ar": "للميلان نستخدم خريطة ناسا بدل ما نحسبه بأنفسنا، لأن ناسا حسبته من البيانات الأصلية الأدق. وللخطر نستخدم خشونة LOLA على مسافة 100 م، وهي تقيس كم تنحرف الأرض عن سطح مستوي، وهذا يعكس حقول الصخور والأرض الوعرة. وكلهم من نفس الفريق وعلى نفس الشبكة، فهم متناسقين."
+   },
+   {
+    "t": "خرائط الإضاءة الرسمية",
+    "b": [
+     "Mazarico 2011 (NASA PGDA 69)",
+     "كل ساعة على مدى 18.6 سنة",
+     "ليش 18.6؟ دورة تتكرر فيها هندسة القمر",
+     "متوسط الشمس + الأرض + الظل الدائم"
+    ],
+    "en": "For light, we use the official maps by Mazarico and colleagues. They computed sunlight and Earth visibility every hour for eighteen point six years. Why eighteen point six? That is the nodal cycle of the Moon's orbit, after which the Sun and Earth geometry repeats. So these averages cover every possible season. NASA also publishes the matching map of permanently shadowed regions.",
+    "ar": "للإضاءة نستخدم الخرائط الرسمية لـ Mazarico وفريقه. حسبوا ضوء الشمس ورؤية الأرض كل ساعة على مدى 18.6 سنة. ليش 18.6؟ لأنها دورة مدار القمر اللي بعدها تتكرر هندسة الشمس والأرض. فهالمتوسطات تغطي كل المواسم الممكنة. وناسا تنشر معها خريطة الظل الدائم."
+   },
+   {
+    "t": "الإسقاط القطبي",
+    "b": [
+     "كل الملفات: إسقاط ستيريوغرافي قطبي",
+     "أقل تشويه قرب القطب",
+     "تركيب الطبقات بدقة رياضية",
+     "تحقق: Shackleton = ‎−2788 م‎ وظل دائم ✓"
+    ],
+    "en": "All six files use the same polar stereographic projection, centred on the pole. This projection has the least distortion near the pole, and because the files share it, we can stack them exactly. We verified this: the official coordinates of Shackleton crater land at minus two thousand seven hundred and eighty eight metres, inside a shadowed region, exactly as expected.",
+    "ar": "الست ملفات كلها بنفس الإسقاط الستيريوغرافي القطبي، ومركزه القطب. هذا الإسقاط أقل تشويه قرب القطب، ولأن الملفات مشتركة فيه نقدر نركّبها فوق بعض بدقة. وتحققنا: إحداثيات حفرة Shackleton الرسمية تطلع على عمق ‎−2788 م‎ داخل منطقة ظل دائم، بالضبط مثل المتوقع.",
+    "img": "nasa_summary.jpg"
+   },
+   {
+    "t": "ليش نحسب نوافذ 2027 بأنفسنا؟",
+    "b": [
+     "متوسطات ناسا تشمل الشتاء القطبي",
+     "حتى أفضل المواقع متوسطها ~0.35 إلى 0.5",
+     "المهمة لها تاريخ محدد",
+     "ناسا ما تنشر نوافذ لكل تاريخ ← نحسبها"
+    ],
+    "en": "If NASA's maps are so good, why compute our own light? Because they are long term averages that include polar winters. Even the best sites average only about thirty five to fifty percent. A real mission happens on specific dates, and NASA does not publish date by date windows. So we built our own engine for real dates, and then checked it against NASA's averages.",
+    "ar": "إذا خرائط ناسا بهالجودة، ليش نحسب الإضاءة بأنفسنا؟ لأنها متوسطات طويلة المدى تشمل الشتاء القطبي، وحتى أفضل المواقع متوسطها بس 35 إلى 50%. والمهمة الحقيقية تصير في تواريخ محددة، وناسا ما تنشر نوافذ يوم بيوم. فبنينا محركنا للتواريخ الحقيقية، وبعدين تحققنا منه مقابل متوسطات ناسا."
+   },
+   {
+    "t": "ملخص البيانات",
+    "b": [
+     "6 ملفات رسمية، 1.2 جيجا، مجانية",
+     "تتنزل تلقائيًا أول مرة",
+     "كل رقم في النتائج يرجع لمصدر رسمي"
+    ],
+    "en": "To summarise: six official NASA files, about one point two gigabytes, all free and public. The program downloads them automatically on the first run. Every number in our results can be traced back to an official source.",
+    "ar": "الملخص: 6 ملفات رسمية من ناسا، تقريبًا 1.2 جيجا، كلها مجانية ومفتوحة. البرنامج ينزّلها تلقائيًا أول مرة. وكل رقم في نتائجنا يرجع لمصدر رسمي."
+   }
+  ]
+ },
+ {
+  "chapter": 3,
+  "title_ar": "الأدوات، وليش كل أداة",
+  "title_en": "The tools, and why each one",
+  "scenes": [
+   {
+    "t": "Python",
+    "b": [
+     "أكبر منظومة أدوات علمية",
+     "سهلة القراءة والمراجعة",
+     "البدائل: C++ أسرع لكن أبطأ بكثير في الكتابة، MATLAB مدفوع"
+    ],
+    "en": "Why Python? It has the largest ecosystem for scientific computing and geospatial data, it is free, and the code is easy to read and review. C plus plus would run faster, but would take far longer to write. MATLAB is paid. JavaScript lacks the scientific libraries. And the slow parts of Python we accelerate with numba, as you will see.",
+    "ar": "ليش Python؟ لأن عندها أكبر منظومة أدوات للحوسبة العلمية والبيانات الجغرافية، ومجانية، والكود سهل القراءة والمراجعة. C++ أسرع في التشغيل، لكن كتابتها تاخذ وقت أطول بكثير. MATLAB مدفوع. وJavaScript ما فيها المكتبات العلمية. والأجزاء البطيئة في Python نسرّعها بـ numba، مثل ما بتشوف."
+   },
+   {
+    "t": "NumPy و SciPy",
+    "b": [
+     "NumPy: عمليات على 36 مليون بكسل دفعة وحدة",
+     "SciPy: مرشحات، وتسمية الحفر، والمسافة للظل الدائم",
+     "مثال: المسافة لكل بكسل بخطوة وحدة دقيقة"
+    ],
+    "en": "NumPy stores each map as an array and applies one operation to all thirty six million pixels at once, in compiled code, which takes milliseconds instead of hours. SciPy adds image tools: smoothing filters to find craters, labelling of connected regions, and the distance transform, which gives the exact distance from every pixel to the nearest shadowed region in a single pass.",
+    "ar": "NumPy يخزن كل خريطة كمصفوفة، ويطبّق العملية على 36 مليون بكسل دفعة وحدة بكود مترجم، فتاخذ أجزاء من الثانية بدل ساعات. وSciPy يضيف أدوات الصور: مرشحات تنعيم لكشف الحفر، وتجميع المناطق المتصلة، وتحويل المسافة اللي يعطي المسافة الدقيقة من كل بكسل لأقرب ظل دائم بخطوة وحدة."
+   },
+   {
+    "t": "rasterio",
+    "b": [
+     "يقرأ GeoTIFF مع إحداثياته",
+     "يعيد تشكيل كل ملف على شبكة وحدة",
+     "البدائل: ArcGIS مدفوع ويدوي، GDAL مباشرة أصعب"
+    ],
+    "en": "Rasterio reads the NASA GeoTIFF files together with their map coordinates, and resamples each one onto our single analysis grid. The alternative used in many studies is ArcGIS, which is paid and manual, so the work cannot be repeated with one command. Rasterio is built on GDAL, the industry standard, but much easier to use from Python.",
+    "ar": "rasterio يقرأ ملفات ناسا GeoTIFF مع إحداثياتها، ويعيد تشكيل كل ملف على شبكة التحليل الوحدة. البديل اللي تستخدمه دراسات كثيرة هو ArcGIS، وهو مدفوع ويدوي، فما تقدر تعيد الشغل بأمر واحد. وrasterio مبني على GDAL، المعيار في الصناعة، لكنه أسهل بكثير من Python."
+   },
+   {
+    "t": "numba: ليش؟",
+    "b": [
+     "تتبع الأفق = حلقات فيها توقف مبكر",
+     "ما يناسب أسلوب NumPy الدفعي",
+     "numba يترجمها لكود آلة + كل الأنوية",
+     "الدليل: 111 ألف نقطة × 13.6 ألف لحظة ≈ 35 ثانية"
+    ],
+    "en": "Why numba? Tracing the horizon means stepping along a ray from each point and stopping when it leaves the map. That is a loop with early exits, which does not fit NumPy's all-at-once style, and plain Python loops are very slow. Numba compiles these loops to machine code and runs them on all processor cores. The evidence: one hundred and eleven thousand points, times thirteen thousand six hundred moments, in about thirty five seconds.",
+    "ar": "ليش numba؟ تتبع الأفق معناه تمشي على شعاع من كل نقطة وتوقف لما يطلع من الخريطة. هذي حلقة فيها توقف مبكر، ما تناسب أسلوب NumPy اللي يشتغل دفعة وحدة، وحلقات Python العادية بطيئة جدًا. numba يترجم هالحلقات لكود آلة ويشغّلها على كل أنوية المعالج. والدليل: 111 ألف نقطة × 13.6 ألف لحظة في حوالي 35 ثانية."
+   },
+   {
+    "t": "astropy: مواقع الشمس والأرض",
+    "b": [
+     "تقويم ERFA مدمج: بدون تنزيل",
+     "البدائل: SPICE يحتاج ملفات وإعداد",
+     "الدليل: التمايل ±6.8° و ±7.7°، والشمس ±1.55°، والمسافة 357 إلى 407 ألف كم"
+    ],
+    "en": "For the positions of the Sun and Earth we use astropy, with its built-in ERFA ephemeris. It works offline, with no files to download. NASA's SPICE toolkit is more precise, but needs kernel files and setup. We checked astropy against known values: the libration of plus or minus six point eight and seven point seven degrees, the Sun within one point five five degrees, and the Earth Moon distance from three hundred and fifty seven to four hundred and seven thousand kilometres.",
+    "ar": "لمواقع الشمس والأرض نستخدم astropy مع تقويم ERFA المدمج فيها. تشتغل بدون إنترنت وبدون تنزيل ملفات. أداة SPICE من ناسا أدق، لكنها تحتاج ملفات وإعداد. وتحققنا من astropy مقابل القيم المعروفة: تمايل ±6.8° و±7.7°، والشمس ضمن ±1.55°، ومسافة الأرض من 357 إلى 407 ألف كم."
+   },
+   {
+    "t": "نموذج IAU 2009 لاتجاه القمر",
+    "b": [
+     "المعيار الدولي لدوران القمر",
+     "يحوّل الشمس والأرض لإطار القمر",
+     "خطؤه أصغر بكثير من بكسل 80 م"
+    ],
+    "en": "To know where the Sun is as seen from the Moon's surface, we also need the Moon's orientation in space. We use the official model of the International Astronomical Union, from 2009. It turns the Sun and Earth positions into the Moon's own coordinate frame, the same frame the LOLA maps use, with an error far smaller than one eighty metre pixel.",
+    "ar": "عشان نعرف وين الشمس من سطح القمر، نحتاج كمان اتجاه القمر في الفضاء. نستخدم النموذج الرسمي للاتحاد الفلكي الدولي من 2009. يحوّل مواقع الشمس والأرض لإطار إحداثيات القمر نفسه، نفس الإطار اللي تستخدمه خرائط LOLA، وخطؤه أصغر بكثير من بكسل واحد بدقة 80 م."
+   },
+   {
+    "t": "Leaflet للخريطة",
+    "b": [
+     "مكتبة خفيفة ومفتوحة",
+     "مدمجة في الملف ← تشتغل بدون إنترنت",
+     "البدائل: Google Maps للأرض بس ويحتاج مفتاح"
+    ],
+    "en": "For the interactive map we use Leaflet, a light, open source mapping library. We embed it inside the HTML file, so the map works offline, even with no internet. Google Maps or Mapbox are built for Earth and need API keys and an account. To keep the file small, we encode the layers as WebP images, which cut it from thirty one megabytes to about five.",
+    "ar": "للخريطة التفاعلية نستخدم Leaflet، مكتبة خرائط خفيفة ومفتوحة المصدر. ندمجها داخل ملف HTML، فالخريطة تشتغل حتى بدون إنترنت. Google Maps وMapbox مصممة للأرض وتحتاج مفاتيح وحساب. وعشان نصغّر الملف نحفظ الطبقات بصيغة WebP، فنزل حجمه من 31 ميجا إلى حوالي 5.",
+    "img": "nasa_map_region.jpg"
+   },
+   {
+    "t": "pytest و matplotlib",
+    "b": [
+     "14 اختبار تثبت الفيزياء والكود",
+     "مثال: سطح مايل 12° يُقاس 12°",
+     "matplotlib: كل الرسوم والصور"
+    ],
+    "en": "Pytest runs our fourteen automated tests. They prove the physics, not just that the code runs. For example, a plane tilted at exactly twelve degrees must measure twelve degrees, a deep pit must be permanently dark, and the Moon's wobble must match known values. Matplotlib draws all the figures in the report.",
+    "ar": "pytest يشغّل 14 اختبار آلي. هالاختبارات تثبت الفيزياء، مو بس إن الكود يشتغل. مثلًا سطح مايل 12° بالضبط لازم ينقاس 12°، والحفرة العميقة لازم تطلع مظلمة دائمًا، وتمايل القمر لازم يطابق القيم المعروفة. وmatplotlib يرسم كل صور التقرير."
+   },
+   {
+    "t": "GitHub Actions و Pages",
+    "b": [
+     "Actions: تشغيل على جهاز نظيف مع كل تحديث",
+     "يثبت إن المشروع يتكرر عند أي أحد",
+     "Pages: استضافة مجانية للموقع",
+     "Playwright: صور الشاشة والفيديو"
+    ],
+    "en": "GitHub Actions runs the tests and the full analysis on a fresh server after every change. This proves the project works on any machine, not only on ours. GitHub Pages hosts the website for free. And for this video and the screenshots we used Playwright, which drives a real browser automatically.",
+    "ar": "GitHub Actions يشغّل الاختبارات والتحليل الكامل على سيرفر نظيف بعد كل تعديل، وهذا يثبت إن المشروع يشتغل على أي جهاز، مو بس جهازنا. وGitHub Pages يستضيف الموقع مجانًا. وفي هالفيديو وصور الشاشة استخدمنا Playwright، اللي يتحكم في متصفح حقيقي تلقائيًا."
+   }
+  ]
+ },
+ {
+  "chapter": 4,
+  "title_ar": "الطريقة، قرار قرار",
+  "title_en": "The method, decision by decision",
+  "scenes": [
+   {
+    "t": "خط سير البيانات",
+    "b": [
+     "تنزيل ← تركيب على شبكة وحدة",
+     "← خطر ← نقاط وتصنيف",
+     "← 13 مرشحة ← نوافذ 2027",
+     "← أفضل 9 ← تحقق ← خريطة وتقرير"
+    ],
+    "en": "Here is the full pipeline. Download the six files and stack them on one grid. Build the hazard map. Score and classify every pixel. Pick thirteen candidate regions. Compute their real twenty twenty seven launch windows. Choose the final nine. Validate. Then write the map and the report. Now let's look at each decision.",
+    "ar": "هذا خط السير كامل: ننزّل الست ملفات ونركّبها على شبكة وحدة، ونبني خريطة الخطر، ونعطي كل بكسل نقاط وتصنيف، ونختار 13 منطقة مرشحة، ونحسب نوافذ إطلاقها الحقيقية في 2027، ونختار التسع النهائية، ونتحقق، وبعدها نكتب الخريطة والتقرير. الحين نشوف كل قرار."
+   },
+   {
+    "t": "الميلان: 10° و 8°",
+    "b": [
+     "فوق 10° = أحمر (ممنوع)",
+     "8° إلى 10° = أصفر",
+     "من شروط المشروع الأصلية ومن متطلبات المركبات"
+    ],
+    "en": "Slope. Above ten degrees, a pixel is red, meaning unsafe. Between eight and ten it can only be yellow. These limits come from the project brief and match published lander requirements. Inside the score, slope earns one minus slope over ten, so flatter is better.",
+    "ar": "الميلان: فوق 10° البكسل أحمر يعني ممنوع، وبين 8 و10 أعلى شي يكون أصفر. هالحدود من شروط المشروع الأصلية، وتطابق متطلبات المركبات المنشورة. وداخل النقاط، الميلان ياخذ ‎1 − الميلان ÷ 10‎، فكل ما كانت الأرض أكثر استواء كان أفضل."
+   },
+   {
+    "t": "قطع الهبوط: 200 م",
+    "b": [
+     "المركبة ما تهبط في نقطة بالضبط",
+     "أي خطر داخل 200 م ← النقطة حمراء",
+     "الأمان للمنطقة كلها، مو لبكسل واحد"
+    ],
+    "en": "A lander cannot touch down on an exact point. It lands somewhere inside an area called the landing ellipse. So if any danger lies within two hundred metres, we mark the point red too. This is done with a dilation: the red areas are grown outward by two hundred metres. Safety must hold for the whole area, not one pixel.",
+    "ar": "المركبة ما تقدر تهبط على نقطة بالضبط، تهبط في مكان ما داخل منطقة اسمها قطع الهبوط. فإذا فيه خطر على بعد 200 م أو أقل، نخلي النقطة حمراء بعد. ونسويها بعملية توسيع: المناطق الحمراء تتمدد 200 م لبرا. فالأمان لازم يشمل المنطقة كلها، مو بكسل واحد."
+   },
+   {
+    "t": "الخطر: الخشونة والحفر",
+    "b": [
+     "الخشونة: فوق 3 م = وعر جدًا",
+     "كشف الحفر على 3 مقاييس: 20,564 حفرة",
+     "الحفرة = منخفض واضح عن محيطه"
+    ],
+    "en": "Hazards combine two things. Roughness, where above about three metres the ground counts as very rugged. And craters, which we detect by subtracting a smoothed copy of the elevation map at three scales. Anything clearly lower than its surroundings is a crater. We find twenty thousand five hundred and sixty four craters larger than four hundred metres.",
+    "ar": "الخطر يجمع شيئين. الخشونة، وفوق 3 م تقريبًا الأرض تنحسب وعرة جدًا. والحفر، ونكشفها بطرح نسخة منعّمة من خريطة الارتفاع على 3 مقاييس، وأي مكان أوطى بوضوح من محيطه يعتبر حفرة. ولقينا 20,564 حفرة أكبر من 400 م."
+   },
+   {
+    "t": "القرب من الجليد",
+    "b": [
+     "2 كم أو أقل = نقاط كاملة (مسافة مشي)",
+     "تنزل لين صفر عند 15 كم",
+     "الظل الدائم نفسه = أحمر"
+    ],
+    "en": "Closeness to ice. Within two kilometres, an astronaut walking distance, a point earns full marks. The score then falls to zero at fifteen kilometres. And the shadowed crater itself is always red, because a lander there would have no sunlight at all.",
+    "ar": "القرب من الجليد: لين 2 كم، وهي مسافة يمشيها رائد الفضاء، النقطة تاخذ نقاط كاملة، وبعدها تنزل النقاط لين صفر عند 15 كم. والحفرة المظلمة نفسها دائمًا حمراء، لأن المركبة فيها ما يوصلها ضوء أبد."
+   },
+   {
+    "t": "الأوزان: 30 / 25 / 15 / 15 / 15",
+    "b": [
+     "الميلان 30%: السلامة أولًا",
+     "الإضاءة 25%: الطاقة",
+     "الأرض 15% · الجليد 15% · الصخور 15%",
+     "مختبرة بـ 6 بدائل (الفصل 5)"
+    ],
+    "en": "The weights. Slope gets thirty percent, because safety comes first. Sunlight gets twenty five, because without power the mission ends. Earth visibility, closeness to ice and hazards get fifteen each. Weights are always a judgement call, so we did not just trust them. In chapter five we test six different weight profiles.",
+    "ar": "الأوزان: الميلان 30% لأن السلامة أولًا، والإضاءة 25% لأن بدون طاقة المهمة تنتهي، ورؤية الأرض والقرب من الجليد والصخور 15% لكل واحد. والأوزان دايم تقدير، فما وثقنا فيها وبس. وفي الفصل 5 نختبر 6 توزيعات مختلفة للأوزان."
+   },
+   {
+    "t": "معايرة الحدود على البيانات",
+    "b": [
+     "متوسط الإضاءة: الوسيط 0.29، وأعلى 1% = 0.49",
+     "← النقاط كاملة عند 0.5",
+     "رؤية الأرض كاملة عند 0.6",
+     "الحدود من البيانات، مو تخمين"
+    ],
+    "en": "We calibrated thresholds on the real data. Across the area, the median long term sunlight is zero point two nine, and the top one percent is zero point four nine. So a point earns full sunlight marks at zero point five. Earth visibility earns full marks at zero point six. The thresholds come from the data, not from guesses.",
+    "ar": "عايرنا الحدود على البيانات الحقيقية. في المنطقة كلها، وسيط متوسط الإضاءة 0.29، وأعلى 1% قيمته 0.49. فالنقطة تاخذ نقاط الإضاءة كاملة عند 0.5، ورؤية الأرض كاملة عند 0.6. الحدود جاية من البيانات، مو من التخمين."
+   },
+   {
+    "t": "قصة 1: منطقة الاستكشاف",
+    "b": [
+     "أول تشغيل: أفضل المناطق عند 82.3° جنوب",
+     "خارج منطقة Artemis (6° من القطب)",
+     "أضفنا الشرط ← كل المناطق داخل 84°"
+    ],
+    "en": "Two decisions came from real problems. First run: our top regions were at eighty two point three degrees south. Good terrain, but outside the Artemis exploration zone, which is limited to six degrees from the pole. So we added that rule. This is why testing on real data matters.",
+    "ar": "قرارين جوا من مشاكل حقيقية. في أول تشغيل، أفضل مناطقنا طلعت عند 82.3° جنوب. أرضها جيدة، لكنها برا منطقة استكشاف Artemis المحصورة في 6° من القطب. فأضفنا هالشرط. وهذا ليش التجربة على بيانات حقيقية مهمة."
+   },
+   {
+    "t": "قصة 2: المناطق المتكدسة",
+    "b": [
+     "التسع كلها كانت على سهل واحد",
+     "السبب: نكافئ المساحة الآمنة الأكبر",
+     "ناسا: مساحة كافية + مناطق متنوعة",
+     "الحل: سقف 15% للمساحة + 20 كم بين المناطق"
+    ],
+    "en": "Second: all nine regions landed side by side on one big plain. The cause was that we rewarded the largest safe area. But NASA asks for sufficient flat area, and keeps several distinct regions to have more launch dates. So we capped area credit at fifteen percent of a region, and required twenty kilometres between regions. After that, four of our regions matched NASA's Mons Mouton and Nobile areas.",
+    "ar": "الثانية: المناطق التسع كلها طلعت جنب بعض على سهل واحد كبير. السبب إننا كنا نكافئ أكبر مساحة آمنة. لكن ناسا تطلب مساحة مستوية كافية، وتحتفظ بمناطق متنوعة عشان يكون عندها تواريخ إطلاق أكثر. فحطينا سقف لنقاط المساحة عند 15% من المنطقة، وشرطنا 20 كم بين المناطق. وبعدها أربع من مناطقنا طابقت مناطق ناسا عند Mons Mouton وNobile.",
+    "img": "nasa_map_overview.jpg"
+   },
+   {
+    "t": "نوافذ 2027",
+    "b": [
+     "أفق أفضل نقطة: 128 اتجاه لين 150 كم",
+     "الشمس والأرض كل ساعة طول السنة",
+     "نافذة صالحة: 6.5 يوم وأكثر من نصف قرص الشمس ظاهر كل ساعة",
+     "التوفر = نسبة أوقات البدء الصالحة"
+    ],
+    "en": "Launch windows. For the best point of each candidate, we trace the horizon in one hundred and twenty eight directions out to one hundred and fifty kilometres. Then we move the real Sun and Earth hour by hour through twenty twenty seven. A window is valid if, for six and a half days, more than half of the Sun's disc is visible every single hour. Availability is the share of start times that give a valid window.",
+    "ar": "نوافذ الإطلاق: لأفضل نقطة في كل منطقة مرشحة، نتتبع الأفق في 128 اتجاه لين 150 كم. بعدها نحرك الشمس والأرض الحقيقيتين ساعة بساعة على مدار 2027. والنافذة صالحة إذا كان أكثر من نصف قرص الشمس ظاهر في كل ساعة لمدة 6.5 يوم. والتوفر هو نسبة أوقات البدء اللي تعطي نافذة صالحة."
+   },
+   {
+    "t": "الاختيار النهائي: 60 / 40",
+    "b": [
+     "60% نقاط التضاريس والمعايير",
+     "40% توفر نوافذ الإطلاق",
+     "ليش 40%؟ ناسا: التوفر هو العامل الحاسم"
+    ],
+    "en": "The final ranking is sixty percent terrain score and forty percent launch window availability. Why forty? Because NASA's own update says mission availability was the deciding factor in cutting thirteen regions to nine. The result: region one, near Mons Mouton, with thirty six percent availability, eighty one percent Earth visibility, and ice two point three kilometres away.",
+    "ar": "الترتيب النهائي: 60% نقاط التضاريس، و40% توفر نوافذ الإطلاق. ليش 40%؟ لأن تقرير ناسا نفسه يقول إن توفر المهمة كان العامل الحاسم في التقليص من 13 إلى 9. والنتيجة: المنطقة 1 قرب Mons Mouton، توفرها 36%، ورؤية الأرض 81%، والجليد على بعد 2.3 كم.",
+    "img": "nasa_map_region.jpg"
+   }
+  ]
+ },
+ {
+  "chapter": 5,
+  "title_ar": "التحقق، وليش نثق في النتائج",
+  "title_en": "Validation: why you can trust the results",
+  "scenes": [
+   {
+    "t": "ليش التحقق؟",
+    "b": [
+     "أي نظام يطلع أرقام",
+     "السؤال: هل الأرقام صحيحة؟",
+     "3 مراجع مستقلة ما بنيناها نحن"
+    ],
+    "en": "Any program can print numbers. The real question is whether they are right. So we compared our system with three references we did not build: NASA's official illumination maps, an independent published study, and NASA's own nine Artemis Three regions.",
+    "ar": "أي برنامج يقدر يطلع أرقام، والسؤال الحقيقي: هل هي صحيحة؟ فقارنّا نظامنا بثلاث مراجع ما بنيناها نحن: خرائط الإضاءة الرسمية من ناسا، ودراسة مستقلة منشورة، ومناطق Artemis III التسع اللي اختارتها ناسا."
+   },
+   {
+    "t": "1) نموذجنا مقابل خرائط ناسا",
+    "b": [
+     "111,556 نقطة × 13,588 لحظة على 18.6 سنة",
+     "الشمس: r = 0.91، الخطأ 3.7 نقطة",
+     "الأرض: r = 0.94، الخطأ 5.8 نقطة",
+     "91% من نقاط الشمس خطؤها أقل من 10 نقاط"
+    ],
+    "en": "First, our light engine against NASA's maps. We computed the eighteen point six year average ourselves for one hundred and eleven thousand points, at thirteen thousand moments each, and compared point by point. Sunlight correlation is zero point nine one, with an average error of three point seven percentage points. Earth visibility correlation is zero point nine four, error five point eight.",
+    "ar": "أولًا، محرك الإضاءة حقنا مقابل خرائط ناسا. حسبنا متوسط 18.6 سنة بأنفسنا لـ 111 ألف نقطة، كل وحدة في 13 ألف لحظة زمنية، وقارنّا نقطة بنقطة. ارتباط الشمس 0.91، ومتوسط الخطأ 3.7 نقطة مئوية. وارتباط رؤية الأرض 0.94، والخطأ 5.8.",
+    "img": "nasa_validation.png"
+   },
+   {
+    "t": "وش معنى r = 0.91؟",
+    "b": [
+     "r = 1: تطابق تام",
+     "r = 0: ما فيه علاقة",
+     "0.9 وأكثر: تطابق قوي جدًا",
+     "الفرق الباقي: دقة الأفق وطريقة تمثيل القرص"
+    ],
+    "en": "What does a correlation of zero point nine one mean? One means a perfect match, zero means no relationship at all. Above zero point nine is a very strong match. The remaining differences come from our horizon resolution, two hundred and forty metres in this test, and from how the Sun's disc is modelled. This is why we can trust our twenty twenty seven windows, which NASA does not publish.",
+    "ar": "وش معنى ارتباط 0.91؟ الواحد يعني تطابق تام، والصفر يعني ما فيه علاقة أبد، وفوق 0.9 تطابق قوي جدًا. والفروق الباقية سببها دقة الأفق، 240 م في هالاختبار، وطريقة تمثيل قرص الشمس. وعشان كذا نثق في نوافذ 2027 اللي ناسا ما تنشرها."
+   },
+   {
+    "t": "2) دراسة TOPSIS المستقلة",
+    "b": [
+     "Peña-Asensio وزملاؤه، arXiv:2406.19863",
+     "رتبوا 1247 نقطة ببيانات وطريقة مختلفة",
+     "70% من أفضل 20 نقطة عندهم ضمن أفضل 10% عندنا",
+     "أفضل نقطة عندهم (#358) أعلى من 94% عندنا"
+    ],
+    "en": "Second, an independent study by Peña-Asensio and colleagues, one of the sources in your original idea. They ranked one thousand two hundred and forty seven points using a different method, called TOPSIS, and different data. Seventy percent of their top twenty points fall in our top ten percent. Their best point, number three fifty eight on Nobile Rim Two, scores above ninety four percent of our area.",
+    "ar": "ثانيًا، دراسة مستقلة لـ Peña-Asensio وزملاؤه، وهي من مصادر فكرتك الأصلية. رتبوا 1247 نقطة بطريقة مختلفة اسمها TOPSIS وببيانات مختلفة. و70% من أفضل 20 نقطة عندهم تقع ضمن أفضل 10% عندنا. وأفضل نقطة عندهم، رقم 358 على Nobile Rim 2، أعلى من 94% من منطقتنا."
+   },
+   {
+    "t": "3) مناطق ناسا التسع",
+    "b": [
+     "مناطقنا التسع تغطي 4 من 9",
+     "مرشحونا الـ13 يغطون 5 من 9",
+     "Mons Mouton ×2، Nobile Rim 1 و 2، Malapert"
+    ],
+    "en": "Third, NASA's nine regions. Our final nine cover four of them: Mons Mouton, Mons Mouton Plateau, Nobile Rim One and Nobile Rim Two. Our thirteen candidates add Malapert Massif, making five. And near eight of the nine NASA regions, our map has points in its top one percent.",
+    "ar": "ثالثًا، مناطق ناسا التسع. مناطقنا التسع النهائية تغطي 4 منها: Mons Mouton، وMons Mouton Plateau، وNobile Rim 1، وNobile Rim 2. ومرشحونا الـ13 يضيفون Malapert Massif، فتصير 5. وحول 8 من 9 مناطق ناسا، خريطتنا فيها نقاط ضمن أفضل 1%.",
+    "img": "nasa_map_overview.jpg"
+   },
+   {
+    "t": "ليش مو 9 من 9؟",
+    "b": [
+     "ناسا ما تنشر حدود مناطقها ← نحددها بالمَعْلم",
+     "Cabeus B نفسه خارج منطقة 84°",
+     "ناسا تستخدم قيود ما عندنا: المدار، الإطلاق، مركبة HLS",
+     "ما عدّلنا النموذج عشان نطابق بالقوة"
+    ],
+    "en": "Why not nine out of nine? NASA does not publish region boundaries, so we locate each region by the feature it is named after, which is approximate. The crater Cabeus B itself lies outside the eighty four degree zone. And NASA uses constraints we do not model: the orbit, the launch trajectories, and the design of the lander. Most important: we did not tune our model to force a match. That would make the validation meaningless.",
+    "ar": "ليش مو 9 من 9؟ ناسا ما تنشر حدود مناطقها، فنحدد كل منطقة بالمَعْلم اللي سُمّيت عليه، وهذا تقريبي. وحفرة Cabeus B نفسها تقع برا منطقة 84°. وناسا تستخدم قيود ما يحسبها نموذجنا: المدار، ومسارات الإطلاق، وتصميم المركبة. والأهم: ما عدّلنا النموذج عشان نطابق بالقوة، لأن هذا يخلي التحقق بلا معنى."
+   },
+   {
+    "t": "اختبارات المتانة",
+    "b": [
+     "3 سنوات: المنطقة 1 الأفضل دائمًا (35% إلى 37%)",
+     "حد الميلان 8° أو 12°: تبقى 8 إلى 9 من 9",
+     "6 توزيعات أوزان: تبقى 4 إلى 7 من 9"
+    ],
+    "en": "Finally, robustness. Would the answer change if our assumptions changed? Across twenty twenty six, twenty seven and twenty eight, region one stays best, with thirty five to thirty seven percent availability. Changing the slope limit to eight or twelve degrees keeps eight or nine of the nine regions. Changing the weights keeps four to seven of nine. The biggest change comes when communication is made the top priority, which is expected and useful for decision makers.",
+    "ar": "وأخيرًا، المتانة: هل الجواب يتغير لو تغيرت الافتراضات؟ في 2026 و2027 و2028، المنطقة 1 تبقى الأفضل، وتوفرها من 35% إلى 37%. ولو غيرنا حد الميلان لـ 8° أو 12° تبقى 8 أو 9 من المناطق التسع. ولو غيرنا الأوزان تبقى من 4 إلى 7 من 9. وأكبر تغيير يصير لما يكون الاتصال الأولوية القصوى، وهذا متوقع ومفيد لصاحب القرار.",
+    "img": "nasa_experiments.png"
+   }
+  ]
+ },
+ {
+  "chapter": 6,
+  "title_ar": "الكود ملف ملف",
+  "title_en": "The code, file by file",
+  "scenes": [
+   {
+    "t": "هيكل المشروع",
+    "b": [
+     "lunar_nav/: الكود",
+     "tests/: الاختبارات",
+     "results/: النتائج الجاهزة",
+     "docs/: الدليل والتقرير والفيديو",
+     ".github/workflows/: التشغيل التلقائي"
+    ],
+    "en": "The project lives in the folder lunar landing navigator. Inside it: lunar nav holds the code, tests holds the fourteen tests, results holds the ready made results for twenty twenty seven, and docs holds the guide, the report and the videos. The automatic GitHub workflow lives in dot github slash workflows, at the top of the repository.",
+    "ar": "المشروع في مجلد lunar-landing-navigator. داخله: lunar_nav فيه الكود، وtests فيه الـ14 اختبار، وresults فيه نتائج 2027 الجاهزة، وdocs فيه الدليل والتقرير والفيديوهات. وملف التشغيل التلقائي في .github/workflows في أعلى الـ repo."
+   },
+   {
+    "t": "البيانات والفيزياء",
+    "b": [
+     "nasa.py: تنزيل الملفات وتركيبها",
+     "ephemeris.py: الشمس والأرض واتجاه القمر",
+     "sunmodel.py: الأفق والرؤية (numba)",
+     "terrain.py و hazards.py: الميلان والخشونة والحفر"
+    ],
+    "en": "Data and physics. nasa dot py lists the six products, downloads them with resume support, and resamples them onto one grid. ephemeris dot py gives the Sun and Earth in the Moon's frame. sunmodel dot py traces horizons and computes visibility, accelerated with numba. terrain and hazards compute slope, roughness and craters.",
+    "ar": "البيانات والفيزياء: nasa.py فيه قائمة المنتجات الستة، ينزّلها مع إمكانية الاستئناف، ويركّبها على شبكة وحدة. ephemeris.py يحسب الشمس والأرض في إطار القمر. sunmodel.py يتتبع الأفق ويحسب الرؤية، ومسرّع بـ numba. وterrain وhazards يحسبون الميلان والخشونة والحفر."
+   },
+   {
+    "t": "القرار والمخرجات",
+    "b": [
+     "scoring.py: النقاط والتصنيف",
+     "regions.py: المناطق والإحداثيات",
+     "nasa_pipeline.py: يربط كل شي + التحقق",
+     "viz.py و report.py: الخريطة والتقرير",
+     "experiments.py: اختبارات المتانة"
+    ],
+    "en": "Decisions and outputs. scoring dot py turns criteria into scores and colours. regions dot py chooses regions and converts pixels to latitude and longitude. nasa pipeline dot py connects every step, including launch windows and validation. viz and report write the map, the figures and the report. experiments runs the robustness tests.",
+    "ar": "القرار والمخرجات: scoring.py يحوّل المعايير لنقاط وألوان. regions.py يختار المناطق ويحوّل البكسل لخط عرض وطول. nasa_pipeline.py يربط كل الخطوات، ومنها نوافذ الإطلاق والتحقق. viz وreport يكتبون الخريطة والصور والتقرير. وexperiments يشغّل اختبارات المتانة."
+   },
+   {
+    "t": "config.py: كل الأرقام في مكان واحد",
+    "b": [
+     "حدود الميلان، والأوزان، ومدة المهمة",
+     "nasa_long_term(): حدود بيانات ناسا",
+     "تغيّر أي رقم بدون ما تلمس باقي الكود"
+    ],
+    "en": "All tunable numbers live in config dot py: slope limits, weights, mission length, region size and more. The function nasa long term holds the thresholds calibrated on NASA's data. This means you can change any assumption in one place, without touching the rest of the code.",
+    "ar": "كل الأرقام القابلة للتعديل موجودة في config.py: حدود الميلان، والأوزان، ومدة المهمة، وحجم المنطقة، وغيرها. والدالة nasa_long_term فيها الحدود اللي عايرناها على بيانات ناسا. يعني تقدر تغيّر أي افتراض في مكان واحد بدون ما تلمس باقي الكود."
+   },
+   {
+    "t": "أوامر التشغيل",
+    "b": [
+     "python -m lunar_nav --nasa",
+     "--year 2028 · --max-slope 8",
+     "--weights '{\"illumination\":0.4}'",
+     "python -m lunar_nav.experiments",
+     "python -m lunar_nav --demo"
+    ],
+    "en": "The main command is python dash m lunar nav dash dash nasa. Add dash dash year to choose another year, dash dash max slope to change the slope limit, or dash dash weights to change priorities. The experiments module runs the robustness tests. And dash dash demo runs a fast synthetic example, useful for learning.",
+    "ar": "الأمر الأساسي: python -m lunar_nav --nasa. وتضيف ‎--year‎ عشان تختار سنة ثانية، و‎--max-slope‎ عشان تغيّر حد الميلان، و‎--weights‎ عشان تغيّر الأولويات. ووحدة experiments تشغّل اختبارات المتانة. و‎--demo‎ يشغّل مثال سريع ببيانات مولّدة، مفيد للتعلم."
+   },
+   {
+    "t": "المخرجات",
+    "b": [
+     "landing_sites_map.html: الخريطة التفاعلية",
+     "REPORT.md: كل الأرقام",
+     "summary.png و validation.png",
+     "ranked_regions.csv/json و validation.json"
+    ],
+    "en": "Every run writes the interactive map, a report with all the numbers, summary and validation figures, and the ranked regions as C S V and JSON. The C S V opens in Excel, and the JSON files are for other programs.",
+    "ar": "كل تشغيل يكتب الخريطة التفاعلية، وتقرير فيه كل الأرقام، وصور الملخص والتحقق، والمناطق المرتبة بصيغة CSV وJSON. ملف CSV ينفتح في Excel، وملفات JSON للبرامج الثانية."
+   }
+  ]
+ },
+ {
+  "chapter": 7,
+  "title_ar": "GitHub من الصفر، وكيف تساعد الناس",
+  "title_en": "GitHub from zero, and how to help others",
+  "scenes": [
+   {
+    "t": "المفاهيم الأساسية",
+    "b": [
+     "repo: مجلد المشروع على GitHub مع تاريخه",
+     "commit: حفظة واحدة للتغييرات",
+     "branch: نسخة موازية للتعديل بأمان",
+     "Pull Request: طلب دمج الفرع في main",
+     "merge: الدمج"
+    ],
+    "en": "First, the basic GitHub words. A repo, or repository, is the project folder on GitHub with its full history. A commit is one saved set of changes. A branch is a parallel copy where you can change things safely. A pull request asks to merge a branch into main. And merging applies those changes to main.",
+    "ar": "أول شي، كلمات GitHub الأساسية. الـ repo هو مجلد المشروع على GitHub مع تاريخه كامل. الـ commit حفظة واحدة لمجموعة تغييرات. الـ branch نسخة موازية تعدّل فيها بأمان. الـ Pull Request طلب دمج الفرع في main. والـ merge هو تطبيق هالتغييرات على main."
+   },
+   {
+    "t": "وش صار في مشروعنا",
+    "b": [
+     "PR #1: النظام كامل",
+     "PR #2: صفحة الموقع",
+     "PR #3: الفيديو",
+     "كل وحدة انختبرت قبل الدمج"
+    ],
+    "en": "In our repository, the work arrived in three pull requests. The first added the whole system. The second added the website's home page. The third added the tutorial video. Every one was tested automatically before it was merged.",
+    "ar": "في الـ repo حقنا، الشغل وصل في 3 طلبات دمج: الأول أضاف النظام كامل، والثاني أضاف الصفحة الرئيسية للموقع، والثالث أضاف فيديو الشرح. وكل وحدة انختبرت تلقائيًا قبل ما تندمج."
+   },
+   {
+    "t": "GitHub Actions بالتفصيل",
+    "b": [
+     "الملف: .github/workflows/lunar-navigator.yml",
+     "مهمة 1: تثبيت + 14 اختبار",
+     "مهمة 2: تنزيل بيانات ناسا (مع كاش) + التحليل",
+     "النتائج: جدول في الصفحة + ملف landing-sites-nasa"
+    ],
+    "en": "GitHub Actions is driven by one file, the workflow. On every change, GitHub starts a clean Ubuntu server. Job one installs Python and the libraries, and runs the fourteen tests. Job two downloads the NASA data, cached after the first time, runs the full analysis, writes the results table on the run page, and uploads the outputs as an artifact called landing sites nasa.",
+    "ar": "GitHub Actions يشتغل بملف واحد اسمه الـ workflow. مع كل تغيير، GitHub يشغّل سيرفر Ubuntu نظيف. المهمة الأولى تثبّت Python والمكتبات وتشغّل الـ14 اختبار. والثانية تنزّل بيانات ناسا (وتنحفظ في الكاش بعد أول مرة)، وتشغّل التحليل كامل، وتكتب جدول النتائج في صفحة التشغيل، وترفع المخرجات كملف اسمه landing-sites-nasa."
+   },
+   {
+    "t": "GitHub Pages",
+    "b": [
+     "يحوّل الـ repo لموقع مجاني",
+     "index.html = الصفحة الرئيسية",
+     "eld11q.github.io/-ahs",
+     "التحديث ياخذ 1 إلى 3 دقايق"
+    ],
+    "en": "GitHub Pages turns the repository into a free website. The file index dot html is the home page. After every merge, Pages rebuilds the site in one to three minutes. That is why the first visit showed a four oh four: the build had not finished yet.",
+    "ar": "GitHub Pages يحوّل الـ repo لموقع مجاني، والملف index.html هو الصفحة الرئيسية. وبعد كل دمج، Pages يعيد بناء الموقع في 1 إلى 3 دقايق. وعشان كذا أول زيارة طلعت لك 404: البناء ما كان خلص.",
+    "img": "site.png"
+   },
+   {
+    "t": "تساعد شخص يشغّل على جهازه",
+    "b": [
+     "1. يثبّت Python 3.10+ و Git",
+     "2. git clone ثم cd",
+     "3. venv ثم pip install -r requirements.txt",
+     "4. pytest ← 14 passed",
+     "5. python -m lunar_nav --nasa"
+    ],
+    "en": "To help someone run it on their computer, walk them through five steps. Install Python three point ten or newer, and Git. Clone the repository and enter the folder. Create and activate a virtual environment, and install the requirements. Run the tests and expect fourteen passed. Then run the analysis with dash dash nasa.",
+    "ar": "عشان تساعد أحد يشغّله على جهازه، مشّه على 5 خطوات: يثبّت Python 3.10 أو أحدث، وGit. ينسخ الـ repo بـ git clone ويدخل المجلد. يسوي بيئة افتراضية ويفعّلها، ويثبّت المكتبات. يشغّل الاختبارات ويتوقع 14 passed. وبعدها يشغّل التحليل بـ ‎--nasa‎."
+   },
+   {
+    "t": "تساعد شخص يشغّل من حسابه",
+    "b": [
+     "Fork ← Create fork",
+     "Actions ← تفعيل الـ workflows",
+     "Lunar Landing Navigator ← Run workflow",
+     "تنزيل landing-sites-nasa",
+     "repo خاص؟ Settings ← Collaborators ← Add people"
+    ],
+    "en": "To help someone run it from their own GitHub account: they click Fork, then Create fork. In their copy they open Actions and enable workflows. They choose Lunar Landing Navigator and click Run workflow. When it is green, they download the artifact. If your repository is private, first invite them under Settings, Collaborators, Add people.",
+    "ar": "عشان تساعد أحد يشغّله من حسابه على GitHub: يضغط Fork بعدها Create fork. في نسخته يفتح Actions ويفعّل الـ workflows. يختار Lunar Landing Navigator ويضغط Run workflow. ولما يصير أخضر ينزّل الملف. وإذا الـ repo حقك خاص، ادعه أول من Settings ثم Collaborators ثم Add people."
+   },
+   {
+    "t": "أشهر المشاكل وحلولها",
+    "b": [
+     "python: command not found ← استخدم python3 أو أعد التثبيت مع PATH",
+     "ModuleNotFoundError ← فعّل .venv ثم pip install",
+     "مساحة القرص ← يحتاج ~2 جيجا",
+     "Actions ما يشتغل في الـ fork ← فعّله من تبويب Actions",
+     "التشغيل أحمر ← افتح الخطوة الحمراء واقرأ السجل"
+    ],
+    "en": "The most common problems. Python not found: use python three, or reinstall with Add to PATH ticked. Module not found: the virtual environment is not activated, so activate it and install again. Disk space: keep about two gigabytes free for the data. Actions not running in a fork: enable them in the Actions tab. And if a run turns red, open the red step and read its log; the last lines almost always name the cause.",
+    "ar": "أشهر المشاكل: إذا طلع python not found، استخدم python3 أو أعد التثبيت مع خيار Add to PATH. إذا طلع ModuleNotFoundError، البيئة الافتراضية مو مفعّلة، فعّلها وثبّت المكتبات مرة ثانية. مساحة القرص: خلّ تقريبًا 2 جيجا فاضية للبيانات. Actions ما يشتغل في الـ fork: فعّله من تبويب Actions. وإذا التشغيل صار أحمر، افتح الخطوة الحمراء واقرأ السجل، وآخر الأسطر غالبًا تقول لك السبب."
+   }
+  ]
+ },
+ {
+  "chapter": 8,
+  "title_ar": "أسئلة لجنة التحكيم، والحدود",
+  "title_en": "Jury questions, and the limits",
+  "scenes": [
+   {
+    "t": "س: هل هذي بيانات حقيقية؟",
+    "b": [
+     "نعم: 6 منتجات رسمية من NASA PGDA",
+     "Barker 2023 و Mazarico 2011",
+     "أي أحد يقدر ينزّلها ويعيد النتائج"
+    ],
+    "en": "Question: is this real data? Answer: yes. Six official NASA products from the Planetary Geodesy Data Archive: the LOLA maps by Barker, twenty twenty three, and the illumination maps by Mazarico, twenty eleven. Anyone can download them and reproduce our results with one command.",
+    "ar": "س: هل هذي بيانات حقيقية؟ ج: نعم. 6 منتجات رسمية من أرشيف ناسا PGDA: خرائط LOLA لـ Barker 2023، وخرائط الإضاءة لـ Mazarico 2011. وأي أحد يقدر ينزّلها ويعيد نتائجنا بأمر واحد."
+   },
+   {
+    "t": "س: كيف تعرفون إن النتائج صحيحة؟",
+    "b": [
+     "مقابل خرائط ناسا: 0.91 و 0.94",
+     "مقابل دراسة TOPSIS: 70%",
+     "مقابل مناطق ناسا: 4 من 9، و5 من 9",
+     "14 اختبار آلي"
+    ],
+    "en": "Question: how do you know the results are right? Answer: three independent checks. Our light model matches NASA's maps with correlations of zero point nine one and zero point nine four. Seventy percent of an independent study's best points fall in our top ten percent. And our regions cover four of NASA's nine, five with our candidates. Plus fourteen automated tests.",
+    "ar": "س: كيف تعرفون إن النتائج صحيحة؟ ج: بثلاث فحوصات مستقلة. نموذج الإضاءة حقنا يطابق خرائط ناسا بارتباط 0.91 و0.94. و70% من أفضل نقاط دراسة مستقلة تقع ضمن أفضل 10% عندنا. ومناطقنا تغطي 4 من 9 مناطق ناسا، و5 مع المرشحين. وفوقها 14 اختبار آلي."
+   },
+   {
+    "t": "س: وش الجديد مقارنة بناسا؟",
+    "b": [
+     "أدوات ناسا الداخلية مو متاحة للعامة",
+     "الدراسات الأكاديمية تطلع مرة وحدة ويدويًا",
+     "عندنا: مفتوح، يتكرر، دقايق",
+     "نوافذ الإطلاق الحقيقية لأي سنة"
+    ],
+    "en": "Question: what is new compared to NASA? Answer: NASA's internal tools are not public, and academic studies are usually done once, by hand, in GIS software. Ours is open, repeatable, and runs in minutes for any year or set of constraints. And it computes real launch windows, which NASA's published averages do not show.",
+    "ar": "س: وش الجديد مقارنة بناسا؟ ج: أدوات ناسا الداخلية مو متاحة للعامة، والدراسات الأكاديمية تنعمل عادةً مرة وحدة ويدويًا في برامج GIS. أما نظامنا فمفتوح، ويتكرر، ويخلص في دقايق لأي سنة أو قيود. ويحسب نوافذ الإطلاق الحقيقية، اللي ما تبينها متوسطات ناسا المنشورة."
+   },
+   {
+    "t": "س: ليش الأوزان كذا؟",
+    "b": [
+     "السلامة أولًا (30%)، ثم الطاقة (25%)",
+     "الأوزان قرار بشري، فاختبرناها",
+     "6 توزيعات: تبقى 4 إلى 7 من 9 مناطق",
+     "المستخدم يقدر يغيّرها بخيار واحد"
+    ],
+    "en": "Question: why these weights? Answer: safety first, then power. But weights are always a human judgement, so we tested six alternatives. Four to seven of our nine regions survive any of them, and region one stays strong. Users can change the weights with a single option.",
+    "ar": "س: ليش الأوزان كذا؟ ج: السلامة أولًا، بعدها الطاقة. لكن الأوزان دايم قرار بشري، فاختبرنا 6 بدائل. ومن 4 إلى 7 من مناطقنا التسع تبقى في أي واحد منها، والمنطقة 1 تبقى قوية. والمستخدم يقدر يغيّر الأوزان بخيار واحد."
+   },
+   {
+    "t": "س: وين الذكاء الاصطناعي (YOLO)؟",
+    "b": [
+     "الكود جاهز في hazards.py",
+     "يحتاج صور LROC بدقة 0.5 م + تدريب",
+     "LOLA ما تشوف الصخور الأصغر من ~100 م",
+     "الخطوة الجاية في خارطة الطريق"
+    ],
+    "en": "Question: where is the A I? Answer: the YOLO module for detecting craters and boulders is ready in hazards dot py, but it needs high resolution LROC images and a trained model, which is the next step on our roadmap. We say this honestly: LOLA data cannot see boulders smaller than about one hundred metres.",
+    "ar": "س: وين الذكاء الاصطناعي؟ ج: وحدة YOLO لكشف الحفر والصخور جاهزة في hazards.py، لكنها تحتاج صور LROC عالية الدقة ونموذج مدرّب، وهذي الخطوة الجاية في خارطة الطريق. ونقولها بأمانة: بيانات LOLA ما تشوف الصخور الأصغر من حوالي 100 م."
+   },
+   {
+    "t": "الحدود، وكيف تقولها بثقة",
+    "b": [
+     "أداة بحثية وتعليمية، مو أداة طيران معتمدة",
+     "ما نحسب المدار والإطلاق ومركبة HLS",
+     "النوافذ لأفضل نقطة، مو لكل بكسل",
+     "الصدق في الحدود يرفع ثقة اللجنة"
+    ],
+    "en": "Know the limits and state them with confidence. It is a research and education tool, not certified for flight. It does not model the orbit, launch trajectories or the lander. Launch windows are computed for the best point of each region, not every pixel. Judges trust a team more when it knows exactly what its system cannot do.",
+    "ar": "اعرف الحدود وقلها بثقة: أداة بحثية وتعليمية، مو معتمدة للطيران. ما تحسب المدار ومسارات الإطلاق ولا المركبة. ونوافذ الإطلاق محسوبة لأفضل نقطة في كل منطقة، مو لكل بكسل. واللجنة تثق في الفريق أكثر لما يعرف بالضبط وش ما يقدر عليه نظامه."
+   },
+   {
+    "t": "الملخص في جملة",
+    "b": [
+     "من بيانات ناسا الخام",
+     "إلى قرار هبوط متحقق منه",
+     "مع تواريخ الإطلاق، ومفتوح للجميع"
+    ],
+    "en": "If you remember one sentence, make it this: we turn raw NASA data into a validated landing decision, with real launch dates, in minutes, open to everyone. You are now ready. Good luck at the hackathon.",
+    "ar": "إذا بتتذكر جملة وحدة، خلها هذي: نحوّل بيانات ناسا الخام إلى قرار هبوط متحقق منه، مع تواريخ إطلاق حقيقية، في دقايق، ومفتوح للجميع. الحين أنت جاهز. بالتوفيق في الهاكثون.",
+    "img": "nasa_map_overview.jpg"
+   }
+  ]
+ }
+]
