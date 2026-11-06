@@ -12,7 +12,7 @@ data = json.loads((HERE / "expert_series.json").read_text(encoding="utf-8"))
 def fx(t):
     t = html.escape(t)
     t = re.sub(r"و(?=[A-Za-z0-9.])", "و ", t)
-    return re.sub(r"([A-Za-z][A-Za-z0-9 .\-/_:#+{}]*[A-Za-z0-9}])", r"<bdi>\1</bdi>", t)
+    return re.sub(r"(\.?[A-Za-z][A-Za-z0-9 .\-/_:#+{}]*[A-Za-z0-9}])", r"<bdi>\1</bdi>", t)
 
 
 toc = "".join(f"<li>الفصل {c['chapter']}: {fx(c['title_ar'])} <span class='en'>{html.escape(c['title_en'])}</span></li>" for c in data)
