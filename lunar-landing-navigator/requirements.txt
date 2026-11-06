@@ -1,0 +1,11 @@
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pillow>=10
+pytest>=7
+# real NASA data (--nasa)
+rasterio>=1.3      # GeoTIFF reading / co-registration
+numba>=0.58        # fast horizon ray-tracing
+astropy>=6.0       # Sun/Earth positions (built-in ephemeris, no download)
+# optional:
+# ultralytics      # YOLO crater/boulder detection
