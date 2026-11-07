@@ -6,7 +6,9 @@
 <title>Lunar Landing Navigator</title>
 <meta name="description" content="مستكشف مواقع الهبوط القمري: نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر ببيانات ناسا الرسمية ونوافذ إطلاق 2027.">
 <meta property="og:title" content="Lunar Landing Navigator · مستكشف مواقع الهبوط القمري">
-<meta property="og:image" content="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg">
+<meta property="og:image" content="https://eld11q.github.io/-ahs/site/assets/fallback.jpg">
+<meta property="og:description" content="Ranks landing sites at the lunar south pole with official NASA data and real 2027 launch windows.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23d9d4c7'/><circle cx='38' cy='40' r='8' fill='%23b8b2a3'/><circle cx='62' cy='62' r='11' fill='%23b8b2a3'/></svg>">
 <style>
 @font-face{font-family:Cairo;font-weight:400;font-display:swap;src:url(site/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
@@ -134,8 +136,9 @@ pre{background:rgba(2,6,14,.85);border:1px solid var(--line);border-radius:14px;
 .files a:hover{border-color:var(--amber)}
 .files small{display:block;color:var(--muted)}
 footer{position:relative;z-index:5;padding:40px 7vw 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);background:rgba(2,4,10,.85)}
-.no-webgl #gl{background:url(lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg) center/cover}
-@media (max-width:900px){.regions,.facts{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pipe{grid-template-columns:1fr 1fr}.vids,.files{grid-template-columns:1fr 1fr}#nav{display:none}#rail{display:none}section{padding:90px 16px}.card{padding:22px 18px}}
+.no-webgl #gl{background:linear-gradient(rgba(2,4,10,.55),rgba(2,4,10,.75)),url(site/assets/fallback.jpg) center/cover}
+.no-webgl #fader,.no-webgl #labels,.no-webgl .toggles{display:none}
+@media (max-width:900px){#rlist{grid-template-columns:1fr}.rcardwrap{max-width:none}.regions,.facts{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pipe{grid-template-columns:1fr 1fr}.vids,.files{grid-template-columns:1fr 1fr}#nav{display:none}#rail{display:none}section{padding:90px 16px}.card{padding:22px 18px}}
 @media (prefers-reduced-motion:reduce){.grain,.scroll-cue i,#loader .orb{animation:none}}
 </style>
 </head>
