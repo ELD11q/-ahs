@@ -147,7 +147,7 @@ footer{position:relative;z-index:5;padding:40px 7vw 60px;color:var(--muted);font
 <div id="loader"><div class="in"><div class="orb"></div><div class="bar"><i></i></div><small>LOADING NASA DATA</small></div></div>
 
 <nav id="nav">
-  <a href="#hero" class="on">البداية</a><a href="#terrain">التضاريس</a><a href="#regions">المناطق</a><a href="#validation">الدقة</a><a href="#learn">تعلّم</a><a href="#run">شغّله</a>
+  <a href="#hero" class="on">البداية</a><a href="#terrain">التضاريس</a><a href="#regions">المناطق</a><a href="#validation">الدقة</a><a href="#run">شغّله</a>
 </nav>
 <div id="rail"><i></i></div>
 
@@ -271,25 +271,6 @@ footer{position:relative;z-index:5;padding:40px 7vw 60px;color:var(--muted);font
   </div>
 </section>
 
-<section id="learn" data-nav>
-  <div class="card wide" data-rev>
-    <div class="k">تعلّم</div>
-    <h2>سلسلة الخبير: افهم كل قرار، وليش، والدليل</h2>
-    <p class="muted">8 فصول (27 دقيقة)، صوت إنجليزي وترجمة عربية. ومعها <a href="lunar-landing-navigator/docs/expert/Expert_Guide_AR.pdf">دليل الخبير PDF</a>.</p>
-    <div class="vids">
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_1.mp4"><span class="n">1</span><b>العلم والمشكلة</b><small>3:47</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_2.mp4"><span class="n">2</span><b>البيانات</b><small>3:29</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_3.mp4"><span class="n">3</span><b>الأدوات</b><small>4:10</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_4.mp4"><span class="n">4</span><b>الطريقة</b><small>4:31</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_5.mp4"><span class="n">5</span><b>التحقق</b><small>3:12</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_6.mp4"><span class="n">6</span><b>الكود</b><small>2:27</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_7.mp4"><span class="n">7</span><b>GitHub</b><small>2:54</small></button>
-      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_8.mp4"><span class="n">8</span><b>أسئلة اللجنة</b><small>2:41</small></button>
-    </div>
-    <div class="cta"><button class="btn" data-video="lunar-landing-navigator/docs/video/how_to_run_EN.mp4">▶ فيديو التشغيل (3 دقايق)</button></div>
-  </div>
-</section>
-
 <section id="run" data-nav>
   <div class="card wide" data-rev>
     <div class="k">شغّله بنفسك</div>
@@ -301,11 +282,11 @@ python -m venv .venv &amp;&amp; source .venv/bin/activate   # Windows: .venv\Scr
 pip install -r requirements.txt
 python -m lunar_nav --nasa -o output</pre>
     <p>أو من حسابك على GitHub: سوّ <b>Fork</b>، بعدها افتح <b>Actions</b> وفعّل الـ workflows، واختر <b>Lunar Landing Navigator</b> واضغط <b>Run workflow</b>.</p>
+    <div class="cta"><button class="btn" data-video="lunar-landing-navigator/docs/video/how_to_run_EN.mp4">▶ فيديو التشغيل (3 دقايق، إنجليزي)</button></div>
     <div class="files">
       <a href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><b>🗺️ الخريطة التفاعلية</b><small>2D مفصّلة</small></a>
       <a href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf"><b>📕 التقرير التقني</b><small>23 صفحة</small></a>
       <a href="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_AR.pdf"><b>📘 دليل المستخدم</b><small>32 صفحة</small></a>
-      <a href="lunar-landing-navigator/docs/expert/Expert_Guide_AR.pdf"><b>📗 دليل الخبير</b><small>36 صفحة</small></a>
       <a href="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT.md"><b>📄 تقرير النتائج</b><small>الأرقام كاملة</small></a>
       <a href="classic.html"><b>🧾 النسخة الكلاسيكية</b><small>صفحة بسيطة وخفيفة</small></a>
     </div>
