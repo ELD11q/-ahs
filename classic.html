@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-title-key="c_title">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lunar Landing Navigator</title>
 <meta name="description" content="Ranks landing sites at the lunar south pole with official NASA data and real 2027 launch windows. نظام لاختيار أفضل مواقع الهبوط على القطب الجنوبي للقمر.">
+<script>try{var q=new URLSearchParams(location.search).get("lang"),L=q||localStorage.getItem("lang");if(L==="en"){document.documentElement.lang="en";document.documentElement.dir="ltr"}}catch(e){}</script>
 <style>
 @font-face{font-family:Cairo;font-weight:400;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
 @font-face{font-family:Cairo;font-weight:700;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
@@ -16,7 +17,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:Cairo,"Segoe UI",Tahoma,sans-serif;line-height:1.7}
 main{max-width:1080px;margin:0 auto;padding:40px 16px 64px}
-.k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px;direction:ltr;text-align:right}
+.k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px}
 h1{font-size:clamp(30px,5vw,52px);line-height:1.2;margin:6px 0 10px}
 .lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px;margin:0}
 .en{direction:ltr;text-align:left;color:var(--muted);font-size:15px;margin-top:8px}
@@ -39,61 +40,68 @@ pre{background:#05080F;color:#D5DEEA;border-radius:12px;padding:16px;direction:l
 .ltr{direction:ltr;unicode-bidi:isolate}
 footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
 footer a{color:var(--sky)}
+[lang=en] .en{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#langbtn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--text);font:700 14px Cairo,sans-serif;cursor:pointer}
+#langbtn:hover{border-color:var(--amber)}
+#langbtn:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 @media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
-  <div class="k">LUNAR LANDING SITE NAVIGATOR</div>
-  <h1>🌕 مستكشف مواقع الهبوط القمري</h1>
-  <p class="lead">نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر، ببيانات ناسا الرسمية ونوافذ الإطلاق الحقيقية لعام 2027.</p>
+  <div class="top"><div class="k">LUNAR LANDING SITE NAVIGATOR</div><button id="langbtn" type="button" aria-label="Switch to English" title="English"><span>EN</span></button></div>
+  <h1 data-i18n="c_h1">🌕 مستكشف مواقع الهبوط القمري</h1>
+  <p class="lead" data-i18n="c_lead">نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر، ببيانات ناسا الرسمية ونوافذ الإطلاق الحقيقية لعام 2027.</p>
   <p class="en">Open-source system that ranks landing sites at the lunar south pole using official NASA data and real 2027 launch windows.</p>
 
   <div class="cta">
-    <a class="btn" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html">🗺️ افتح الخريطة التفاعلية</a>
-    <a class="btn alt" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf">📕 التقرير الكامل (PDF)</a>
-    <a class="btn alt" href="https://github.com/ELD11q/-ahs">⌨️ الكود على GitHub</a>
+    <a class="btn" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html" data-href-en="lunar-landing-navigator/results/nasa_2027/landing_sites_map_en.html" data-i18n="c_btn_map">🗺️ افتح الخريطة التفاعلية</a>
+    <a class="btn alt" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf" data-href-en="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_EN.pdf" data-i18n="c_btn_rep">📕 التقرير الكامل (PDF)</a>
+    <a class="btn alt" href="https://github.com/ELD11q/-ahs" data-i18n="c_btn_code">⌨️ الكود على GitHub</a>
+    <a class="btn alt" href="index.html" data-i18n="c_full">🌌 الموقع ثلاثي الأبعاد</a>
   </div>
 
-  <a class="hero" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><img src="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" alt="الخريطة التفاعلية لمواقع الهبوط على القطب الجنوبي"></a>
+  <a class="hero" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html" data-href-en="lunar-landing-navigator/results/nasa_2027/landing_sites_map_en.html"><img src="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" data-src-en="lunar-landing-navigator/docs/guide/img/nasa_map_overview_en.jpg" data-i18n-attr="alt:c_img_alt" alt="الخريطة التفاعلية لمواقع الهبوط على القطب الجنوبي"></a>
 
   <div class="kpis">
-    <div class="kpi"><b>0.91</b><span>ارتباط نموذج الشمس مع خرائط ناسا</span></div>
-    <div class="kpi"><b>0.94</b><span>ارتباط رؤية الأرض مع خرائط ناسا</span></div>
-    <div class="kpi"><b>70%</b><span>من أفضل نقاط دراسة TOPSIS المستقلة ضمن أفضل 10% عندنا</span></div>
-    <div class="kpi"><b>4/9</b><span>من مناطق ناسا لـ Artemis III تغطيها مناطقنا</span></div>
+    <div class="kpi"><b>0.91</b><span data-i18n="c_k1">ارتباط نموذج الشمس مع خرائط ناسا</span></div>
+    <div class="kpi"><b>0.94</b><span data-i18n="c_k2">ارتباط رؤية الأرض مع خرائط ناسا</span></div>
+    <div class="kpi"><b>70%</b><span data-i18n="c_k3">من أفضل نقاط دراسة TOPSIS المستقلة ضمن أفضل 10% عندنا</span></div>
+    <div class="kpi"><b>4/9</b><span data-i18n="c_k4">من مناطق ناسا لـ Artemis III تغطيها مناطقنا</span></div>
   </div>
 
-  <h2>🎬 فيديو: كيف تشغّل المشروع <span class="ltr" style="font-size:16px;color:var(--muted)">(English, 3 min)</span></h2>
+  <h2 data-i18n="c_vid">🎬 فيديو: كيف تشغّل المشروع <span class="ltr" style="font-size:16px;color:var(--muted)">(English, 3 min)</span></h2>
   <video controls preload="metadata" poster="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" style="width:100%;border-radius:14px;border:1px solid var(--line);background:#000">
     <source src="lunar-landing-navigator/docs/video/how_to_run_EN.mp4" type="video/mp4">
   </video>
 
-  <h2>كل الملفات</h2>
+  <h2 data-i18n="c_files">كل الملفات</h2>
   <div class="grid">
-    <a class="card" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><b>🗺️ الخريطة التفاعلية</b><span>أفضل 9 مناطق، ومناطق ناسا، ورسم 2027 لكل منطقة</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf"><b>📕 التقرير التقني</b><span>23 صفحة: المنهجية، والنتائج، والتحقق، ونموذج العمل</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_AR.pdf"><b>📘 دليل المستخدم</b><span>32 صفحة: التثبيت والتشغيل من الألف إلى الياء</span></a>
-    <a class="card" href="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT.md"><b>📄 تقرير النتائج</b><span>جداول الأرقام كاملة</span></a>
-    <a class="card" href="lunar-landing-navigator/results/nasa_2027/validation.png"><b>📈 التحقق من الدقة</b><span>نموذجنا مقابل خرائط ناسا وتقويم 2027</span></a>
-    <a class="card" href="lunar-landing-navigator/results/nasa_2027/experiments.png"><b>🧪 اختبارات المتانة</b><span>الأوزان، وحد الميلان، وسنوات 2026 إلى 2028</span></a>
+    <a class="card" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html" data-href-en="lunar-landing-navigator/results/nasa_2027/landing_sites_map_en.html" data-i18n="c_map"><b>🗺️ الخريطة التفاعلية</b><span>أفضل 9 مناطق، ومناطق ناسا، ورسم 2027 لكل منطقة</span></a>
+    <a class="card" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf" data-href-en="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_EN.pdf" data-i18n="c_rep"><b>📕 التقرير التقني</b><span>23 صفحة: المنهجية، والنتائج، والتحقق، ونموذج العمل</span></a>
+    <a class="card" href="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_AR.pdf" data-href-en="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_EN.pdf" data-i18n="c_gd"><b>📘 دليل المستخدم</b><span>32 صفحة: التثبيت والتشغيل من الألف إلى الياء</span></a>
+    <a class="card" href="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT.md" data-href-en="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT_EN.md" data-i18n="c_res"><b>📄 تقرير النتائج</b><span>جداول الأرقام كاملة</span></a>
+    <a class="card" href="lunar-landing-navigator/results/nasa_2027/validation.png" data-i18n="c_val"><b>📈 التحقق من الدقة</b><span>نموذجنا مقابل خرائط ناسا وتقويم 2027</span></a>
+    <a class="card" href="lunar-landing-navigator/results/nasa_2027/experiments.png" data-i18n="c_exp"><b>🧪 اختبارات المتانة</b><span>الأوزان، وحد الميلان، وسنوات 2026 إلى 2028</span></a>
   </div>
 
-  <h2>شغّله بنفسك</h2>
+  <h2 data-i18n="c_run">شغّله بنفسك</h2>
   <pre>git clone https://github.com/ELD11q/-ahs.git
 cd -ahs/lunar-landing-navigator
 python -m venv .venv &amp;&amp; source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python -m lunar_nav --nasa -o output     # downloads ~1.2 GB of NASA data on first run</pre>
-  <p>أو من حسابك على GitHub بدون تثبيت: سوّ <b>Fork</b>، بعدها افتح <b>Actions</b> وفعّل الـ workflows، واختر <b>Lunar Landing Navigator</b> واضغط <b>Run workflow</b>.</p>
+  <p data-i18n="c_run_p">أو من حسابك على GitHub بدون تثبيت: سوّ <b>Fork</b>، بعدها افتح <b>Actions</b> وفعّل الـ workflows، واختر <b>Lunar Landing Navigator</b> واضغط <b>Run workflow</b>.</p>
 
   <footer>
-    البيانات: <a href="https://pgda.gsfc.nasa.gov/products/90">LOLA · Barker et al. 2023</a> ·
+    <span data-i18n="ft_data">البيانات:</span> <a href="https://pgda.gsfc.nasa.gov/products/90">LOLA · Barker et al. 2023</a> ·
     <a href="https://pgda.gsfc.nasa.gov/products/69">Mazarico et al. 2011</a> ·
     <a href="https://ntrs.nasa.gov/citations/20250011660">NASA NTRS 20250011660</a> ·
     <a href="https://arxiv.org/abs/2406.19863">arXiv:2406.19863</a><br>
-    أداة بحثية وتعليمية، مو أداة طيران معتمدة.
+    <span data-i18n="ft_disc">أداة بحثية وتعليمية، مو أداة طيران معتمدة.</span>
   </footer>
 </main>
+<script src="site/i18n.js"></script>
 </body>
 </html>

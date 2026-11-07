@@ -6,6 +6,8 @@ const lite = new URLSearchParams(location.search).has("lite");
 const mobile = matchMedia("(max-width: 760px)").matches;
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const I18N = window.I18N || { lang: "ar", t: k => k, onChange() {} };
+const t = (k, v) => I18N.t(k, v);
 const hideLoader = () => $("#loader").classList.add("done");
 // never leave visitors on the loading screen
 const loaderGuard = setTimeout(hideLoader, 20000);
@@ -96,37 +98,45 @@ window.flyToRegion = flyToRegion;
 const pct = v => `${Math.round(v * 100)}%`;
 // region cards
 const list = $("#rlist");
-for (const r of DATA.regions) {
-  const el = document.createElement("button");
-  el.className = "rcard";
-  el.dataset.rank = r.rank;
-  el.innerHTML = `<span class="rk">${r.rank}</span><span class="rt"><b dir="ltr">${Math.abs(r.lat).toFixed(1)}°S ${r.lon.toFixed(0)}°E</b>
-    <small>نوافذ <b>${pct(r.availability)}</b> · أرض <b>${pct(r.earth)}</b></small></span>`;
-  el.addEventListener("click", () => flyToRegion(r.rank));
-  list.appendChild(el);
+let selected = 1;
+function renderRegionList() {
+  list.innerHTML = "";
+  for (const r of DATA.regions) {
+    const el = document.createElement("button");
+    el.className = "rcard" + (r.rank === selected ? " on" : "");
+    el.dataset.rank = r.rank;
+    el.innerHTML = `<span class="rk">${r.rank}</span><span class="rt"><b dir="ltr">${Math.abs(r.lat).toFixed(1)}°S ${r.lon.toFixed(0)}°E</b>
+      <small>${t("d_windows")} <b>${pct(r.availability)}</b> · ${t("d_earth")} <b>${pct(r.earth)}</b></small></span>`;
+    el.addEventListener("click", () => flyToRegion(r.rank));
+    list.appendChild(el);
+  }
 }
 function showRegion(rank) {
   const r = DATA.regions.find(x => x.rank === rank);
   if (!r) return;
+  selected = rank;
   const near = DATA.nasa_regions.filter(n => n.near.includes(rank)).map(n => n.name);
-  $("#rdetail").innerHTML = `<h4>المنطقة ${r.rank}</h4>
-    <div class="kv"><span>الموقع</span><b dir="ltr">${Math.abs(r.lat).toFixed(3)}°S, ${r.lon.toFixed(2)}°E</b>
-    <span>نوافذ مضيئة في 2027</span><b>${pct(r.availability)}</b>
-    <span>أفضل نافذة</span><b dir="ltr">${(r.window || "—").slice(0, 10)}</b>
-    <span>الميلان</span><b>${r.slope}°</b>
-    <span>الإضاءة (متوسط ناسا)</span><b>${pct(r.sun)}</b>
-    <span>رؤية الأرض</span><b>${pct(r.earth)}</b>
-    <span>أقرب جليد محتمل</span><b>${r.psr_km} كم</b>
-    <span>منطقة ناسا القريبة</span><b dir="ltr">${[...new Set(near)].join(" / ") || "—"}</b></div>`;
+  $("#rdetail").innerHTML = `<h4>${t("d_region", { n: r.rank })}</h4>
+    <div class="kv"><span>${t("d_loc")}</span><b dir="ltr">${Math.abs(r.lat).toFixed(3)}°S, ${r.lon.toFixed(2)}°E</b>
+    <span>${t("d_av")}</span><b>${pct(r.availability)}</b>
+    <span>${t("d_best")}</span><b dir="ltr">${(r.window || "—").slice(0, 10)}</b>
+    <span>${t("d_slope")}</span><b>${r.slope}°</b>
+    <span>${t("d_sun")}</span><b>${pct(r.sun)}</b>
+    <span>${t("d_earthv")}</span><b>${pct(r.earth)}</b>
+    <span>${t("d_ice")}</span><b>${r.psr_km} ${t("d_km")}</b>
+    <span>${t("d_nasa")}</span><b dir="ltr">${[...new Set(near)].join(" / ") || "—"}</b></div>`;
 }
+renderRegionList();
 showRegion(1);
 
 // years chart
 (() => {
-  const yrs = Object.keys(DATA.years), n = DATA.years[yrs[0]].length;
+  const yrs = Object.keys(DATA.years);
+  if (!yrs.length) return;
+  const n = DATA.years[yrs[0]].length;
   const W = 640, Hh = 260, pad = 28, bw = (W - pad * 2) / n;
   const cols = ["#7DD3FC", "#F5B942", "#4ADE80"];
-  let s = `<svg viewBox="0 0 ${W} ${Hh + 40}" role="img" aria-label="نوافذ الإطلاق لكل منطقة في 2026 و2027 و2028">`;
+  let s = `<svg viewBox="0 0 ${W} ${Hh + 40}" role="img" aria-label="${t("d_years_aria")}">`;
   for (let g = 0; g <= 4; g++) { const y = Hh - (g / 4) * (Hh - 20); s += `<line x1="${pad}" x2="${W - pad}" y1="${y}" y2="${y}" class="grid"/><text x="${pad - 6}" y="${y + 4}" class="ax" text-anchor="end">${g * 10}%</text>`; }
   for (let i = 0; i < n; i++) {
     yrs.forEach((y, k) => {
@@ -155,8 +165,11 @@ for (const el of $$("[data-rev]")) {
 ScrollTrigger.create({ trigger: "#years", start: "top 80%", onEnter: () => $("#years").classList.add("in") });
 // kinetic hero title
 const ht = $("#htitle");
-ht.innerHTML = ht.textContent.split(" ").map(w => `<span class="w"><span>${w}</span></span>`).join(" ");
-gsap.from("#htitle .w > span", { yPercent: 110, duration: 1.2, ease: "power4.out", stagger: 0.08, delay: 0.4 });
+function splitTitle(delay) {
+  ht.innerHTML = ht.textContent.trim().split(/\s+/).map(w => `<span class="w"><span>${w}</span></span>`).join(" ");
+  gsap.from("#htitle .w > span", { yPercent: 110, duration: reduceMotion ? 0 : 1.2, ease: "power4.out", stagger: 0.08, delay });
+}
+splitTitle(0.4);
 gsap.from("#hero .fade-in", { opacity: 0, y: 20, duration: 1, stagger: 0.12, delay: 0.9 });
 // progress rail
 const rail = $("#rail i");
@@ -186,8 +199,19 @@ $("#vmodal").addEventListener("close", () => { const v = $("#vmodal video"); v.p
 $("#vmodal .x").addEventListener("click", () => $("#vmodal").close());
 // copy button
 $$(".copy").forEach(b => b.addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText($(b.dataset.copy).innerText); b.textContent = "تم النسخ ✓"; setTimeout(() => (b.textContent = "نسخ"), 1600); } catch (e) {}
+  try { await navigator.clipboard.writeText($(b.dataset.copy).innerText); b.textContent = t("copied"); setTimeout(() => (b.textContent = t("copy")), 1600); } catch (e) {}
 }));
+
+// language switch: i18n.js swaps the static text; rebuild what JS generated
+I18N.onChange(() => {
+  renderRegionList();
+  showRegion(selected);
+  const yearsSvg = $("#years svg");
+  if (yearsSvg) yearsSvg.setAttribute("aria-label", t("d_years_aria"));
+  splitTitle(0.05);
+  // text length changes the page height: re-measure every scroll animation
+  requestAnimationFrame(() => { buildTimeline(); ScrollTrigger.refresh(); });
+});
 
 /* ----------------------------------------------------------------- start */
 if (scene3d) {
