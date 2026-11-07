@@ -92,3 +92,84 @@ def write_report(res, path):
     a("- IAU/USGS Gazetteer of Planetary Nomenclature.")
     Path(path).write_text("\n".join(L) + "\n", encoding="utf-8")
     return Path(path)
+
+
+def write_report_en(res, path):
+    """English counterpart of write_report (same numbers, same order)."""
+    sc = res.scene
+    v = res.validation
+    L = []
+    a = L.append
+    a(f"# Landing-site report: lunar south pole (official NASA data, {res.year} launch windows)\n")
+    a("## Data\n")
+    a("| Layer | Product | Source |\n|---|---|---|")
+    for k, p in sc.meta.get("products", {}).items():
+        a(f"| {k} | `{p['url'].rsplit('/', 1)[-1]}`: {p['desc']} | {p['ref']} |")
+    g = sc.meta.get("grid", {})
+    a(f"\nAnalysis grid: {sc.shape[1]}×{sc.shape[0]} pixels at {sc.pixel_size_m:g} m "
+      f"(±{g.get('half_width_m', 0) / 1000:.0f} km around the pole), inside the Artemis Exploration Zone (6° from the pole).\n")
+    a(f"Classes: 🟩 safe {np.mean(res.cls == GREEN) * 100:.1f}% · 🟨 marginal {np.mean(res.cls == YELLOW) * 100:.1f}% · "
+      f"🟥 unsafe / outside the zone {np.mean(res.cls == RED) * 100:.1f}% · 🟦 permanent shadow {res.layers.psr.mean() * 100:.1f}% · "
+      f"craters detected: {len(res.craters):,}\n")
+    a("## Top 9 regions\n")
+    a(f"| # | Final score | Terrain score | Fully-lit windows {res.year} | Best window (UTC) | Slope | Sunlight (NASA) | "
+      "Earth visibility (NASA) | Nearest permanent shadow | Coordinates | Nearby NASA region |")
+    a("|---|---|---|---|---|---|---|---|---|---|---|")
+    near = {}
+    for x in res.references.get("nasa_regions", []):
+        for k in x["our_final_regions_within_radius"]:
+            near.setdefault(k, set()).add(x["name"])
+    for r in res.regions:
+        e = r.extra
+        bw = e.get("best_window") or {}
+        a(f"| {r.rank} | {e.get('final_score', r.score):.3f} | {r.score:.3f} | {_p(e.get('availability'))} | "
+          f"{bw.get('start', '—')} | {r.best_slope_deg}° | {_p(r.best_illumination)} | {_p(r.best_earth_visibility)} | "
+          f"{r.best_psr_distance_km} km | {abs(r.lat_deg):.3f}°S, {r.lon_deg:.2f}°E | {' / '.join(sorted(near.get(r.rank, []))) or '—'} |")
+    a("\n## Validation\n")
+    mv = v.get("model_vs_nasa")
+    if mv:
+        a("### 1) Our illumination model vs NASA's maps\n")
+        a(f"We computed the 18.6-year average ourselves (horizon ray-tracing on LOLA + real Sun and Earth positions) for "
+          f"{mv['n_pixels']:,} points × {mv['n_epochs']:,} epochs and compared it with Mazarico et al. (2011):\n")
+        a("| | Correlation r | Mean error | Bias | Error < 5 points | Error < 10 points |\n|---|---|---|---|---|---|")
+        for k, n in (("sun", "Sun"), ("earth", "Earth")):
+            m = mv[k]
+            a(f"| {n} | {m['r']} | {m['mae'] * 100:.1f} points | {m['bias'] * 100:+.1f} points | {_p(m['within_0.05'])} | {_p(m['within_0.10'])} |")
+    tp = v.get("topsis", {})
+    a("\n### 2) Independent study (arXiv:2406.19863, TOPSIS)\n")
+    a(f"- {_p(tp.get('share_top10pct'))} of their top 20 points fall in our top 10% "
+      f"(median: above {_p(tp.get('median_percentile'))} of the area).")
+    b = tp.get("best_point_358") or {}
+    if b:
+        a(f"- Their best point (#358, Nobile Rim 2) scores {b.get('our_score')} in our map, above "
+          f"{_p(b.get('our_percentile'))} of the area, classified {'safe' if b.get('our_class') == GREEN else 'not safe'}.")
+    a("\n| Point | Region | R (TOPSIS) | Our score | Our percentile | Slope |\n|---|---|---|---|---|---|")
+    for x in res.references.get("topsis", []):
+        a(f"| {x['id']} | {x['region']} | {x['topsis']} | {x['our_score']} | {_p(x['our_percentile'])} | {x['slope']}° |")
+    nr = v.get("nasa_regions", {})
+    a("\n### 3) NASA's nine Artemis III regions (October 2024)\n")
+    a(f"- {nr.get('n_with_our_final_region')}/9 NASA regions have one of our nine regions nearby; "
+      f"{nr.get('n_with_our_candidate')}/9 have one of our 13 candidates.")
+    a("- NASA does not publish region boundaries, so each region is placed at the centre of the feature it is named after "
+      "(IAU gazetteer), with a match radius of the feature radius + 10 km (20–50 km).\n")
+    a("| NASA region | Feature | Match radius | Nearest of ours | Ours inside | Best nearby (percentile) |\n|---|---|---|---|---|---|")
+    for x in res.references.get("nasa_regions", []):
+        a(f"| {x['name']} | {x['feature']} | {x['match_radius_km']:.0f} km | {x['km_to_nearest_final_region']} km | "
+          f"{', '.join('#%d' % k for k in x['our_final_regions_within_radius']) or '—'} | {_p(x['best_percentile_within_radius'])} |")
+    a("\n## Notes and limits\n")
+    a("- NASA's 18.6-year averages include polar winters, so they are lower than a summer mission window; this is why we "
+      f"compute the real {res.year} windows for every candidate and give them 40% of the final ranking.")
+    a("- A fully-lit window = 6.5 consecutive days with more than half of the Sun's disc above the horizon every hour, "
+      "for an observer 2 m above the ground.")
+    a("- NASA's regions also depend on constraints we do not model: the NRHO orbit, launch trajectories, the SpaceX HLS "
+      "design, and high-resolution LROC NAC images of boulders. Differences in some regions are expected.")
+    a("- Roughness comes from LOLA (100 m baseline); smaller boulders need NAC images + YOLO.")
+    a("\n## References\n")
+    a("- Barker, M.K. et al. (2023). A New View of the Lunar South Pole from LOLA. PGDA product 90.")
+    a("- Mazarico, E. et al. (2011). Illumination conditions of the lunar polar regions using LOLA topography. Icarus 211.")
+    a("- Peña-Asensio, E., Neira-Acosta, Á.-S., Sánchez-Lozano, J.M. (2024). arXiv:2406.19863.")
+    a("- NASA (2025). Artemis III Site Selection Update: Downselection From Thirteen to Nine Candidate Regions. NTRS 20250011660.")
+    a("- Archinal, B.A. et al. (2011). Report of the IAU WGCCRE: 2009. Celest. Mech. Dyn. Astr. 109.")
+    a("- IAU/USGS Gazetteer of Planetary Nomenclature.")
+    Path(path).write_text("\n".join(L) + "\n", encoding="utf-8")
+    return Path(path)

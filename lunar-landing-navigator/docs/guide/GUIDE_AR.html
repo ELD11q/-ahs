@@ -177,7 +177,7 @@ figcaption{font-size:13px;color:var(--muted);margin-top:4px}
 <li>نزّل المشروع:
 <pre><code>git clone https://github.com/ELD11q/-ahs.git
 cd -ahs/lunar-landing-navigator</code></pre>
-بما إن الـ repo خاص، GitHub بيطلب منك تسجل دخول. وتقدر بدل كذا تضغط <b>Code ← Download ZIP</b> من صفحة الـ repo.</li>
+الـ repo عام، فما يحتاج تسجيل دخول. وتقدر بعد تضغط <b>Code ← Download ZIP</b> من صفحة الـ repo.</li>
 <li>سوّ بيئة بايثون خاصة بالمشروع (مستحسن):
 <pre><code># ويندوز
 python -m venv .venv
@@ -199,7 +199,7 @@ source .venv/bin/activate</code></pre></li>
 </ul></li>
 <li>تأكد إن كل شي شغال:
 <pre><code>python -m pytest -q
-# المفروض يطلع: 14 passed</code></pre></li>
+# المفروض يطلع: 15 passed</code></pre></li>
 </ol>
 
 <h2>7. أول تشغيل (البيانات التجريبية)</h2>
@@ -220,7 +220,7 @@ Top regions:
 <h3>المخرجات (مجلد <code>output/</code>)</h3>
 <table>
 <tr><th>الملف</th><th>وش فيه</th></tr>
-<tr><td><code>landing_sites_map.html</code></td><td>الخريطة التفاعلية، تفتحها بأي متصفح وتشتغل بدون إنترنت</td></tr>
+<tr><td><code>landing_sites_map.html</code> · <code>landing_sites_map_en.html</code></td><td>الخريطة التفاعلية بالعربي والإنجليزي، تفتحها بأي متصفح وتشتغل بدون إنترنت</td></tr>
 <tr><td><code>summary.png</code></td><td>صورة فيها كل الطبقات جنب بعض</td></tr>
 <tr><td><code>ranked_regions.csv</code></td><td>ترتيب المناطق، تقدر تفتحه بـ Excel</td></tr>
 <tr><td><code>ranked_regions.json</code></td><td>نفس الترتيب بصيغة JSON، للبرامج</td></tr>
@@ -263,7 +263,7 @@ Top regions:
 <h3>وش يسوي في كل تشغيل؟</h3>
 <ol class="steps">
 <li>يجهز سيرفر Ubuntu عليه Python 3.12 ويثبت المكتبات.</li>
-<li>يشغّل الاختبارات الـ14، وإذا فشل واحد يوقف ويعلمك.</li>
+<li>يشغّل الاختبارات الـ15، وإذا فشل واحد يوقف ويعلمك.</li>
 <li>ينزّل بيانات ناسا الرسمية (حوالي 1.2 جيجا) من خوادم NASA Goddard. أول مرة بس، وبعدها يحفظها في الكاش.</li>
 <li>يشغّل التحليل كامل على بيانات ناسا، مع نوافذ 2027 والتحقق من الدقة. ياخذ حوالي 3 إلى 5 دقايق.</li>
 <li>يكتب جدول أفضل المناطق ونتائج التحقق في صفحة نتيجة التشغيل نفسها.</li>
@@ -274,8 +274,8 @@ Top regions:
 <li>افتح الـ repo في GitHub واضغط تبويب <b>Actions</b>.</li>
 <li>من القائمة اليسار اختر <b>Lunar Landing Navigator</b>.</li>
 <li>اضغط <b>Run workflow</b>. تقدر تغيّر الإعدادات أو تخليها زي ما هي، وبعدين اضغط الزر الأخضر <b>Run workflow</b>.</li>
-<li>انتظر دقيقتين تقريبًا لين تطلع علامة ✅.</li>
-<li>افتح التشغيل، وبتلقى جدول النتائج في الصفحة، وتحته قسم <b>Artifacts</b> فيه ملف <b>landing-sites</b>. نزّله وفك الضغط، وافتح <code>landing_sites_map.html</code>.</li>
+<li>انتظر كم دقيقة لين تطلع علامة ✅.</li>
+<li>افتح التشغيل، وبتلقى جدول النتائج في الصفحة، وتحته قسم <b>Artifacts</b> فيه ملف <b>landing-sites-nasa</b>. نزّله وفك الضغط، وافتح <code>landing_sites_map.html</code>.</li>
 </ol>
 <h3>الإعدادات اللي تقدر تغيّرها وقت التشغيل اليدوي</h3>
 <table>
@@ -286,7 +286,7 @@ Top regions:
 <tr><td><code>dem_url</code> و <code>pixel_size</code> و <code>downsample</code> و <code>dem_scale</code></td><td>لوضع custom بس: رابط الملف، ودقة البكسل، ومعامل التصغير، ومعامل التحويل لمتر</td></tr>
 </table>
 <div class="note">سيرفرات GitHub متصلة بالإنترنت، فتنزّل بيانات ناسا مباشرة من مصدرها الرسمي (<span class="ltr">pgda.gsfc.nasa.gov</span>) في كل تشغيل جديد، وبعدها تحفظها في الكاش عشان التشغيلات الجاية تكون أسرع.</div>
-<div class="note warn"><b>عن الـ repo الخاص:</b> GitHub Actions تشتغل على الـ repo الخاص، والحساب المجاني فيه 2000 دقيقة تشغيل في الشهر، وكل تشغيل كامل على بيانات ناسا ياخذ حوالي 5 دقايق. أما نشر الخريطة كموقع عام عن طريق GitHub Pages فيحتاج repo عام أو حساب مدفوع، عشان كذا النتائج تنزل كملف.</div>
+<div class="note warn"><b>عام أو خاص:</b> الـ repo عام، فدقايق GitHub Actions مجانية، والموقع منشور على GitHub Pages في <b class="ltr">eld11q.github.io/-ahs</b>. ولو خليته خاص بعدين (Settings ← General ← Danger Zone ← Change visibility)، الحساب المجاني فيه 2000 دقيقة تشغيل في الشهر، وGitHub Pages يحتاج وقتها حساب مدفوع.</div>
 
 <h2>10. التحليل على بيانات ناسا الحقيقية: النتائج والتحقق</h2>
 <p>هذا هو الوضع الرئيسي للمشروع. أمر واحد ينزّل بيانات ناسا الرسمية ويحللها كاملة:</p>
@@ -350,7 +350,7 @@ Top regions:
 <li>ناسا تعتمد كمان على قيود ما تدخل في نموذجنا: مدار NRHO، ومسارات الإطلاق، وتصميم مركبة SpaceX HLS، وصور LROC بدقة 0.5 م للصخور.</li>
 </ul>
 عشان كذا التطابق الجزئي متوقع، وما عدّلنا النموذج عشان "نطابق" ناسا بالقوة، لأن هذا يخرّب قيمة التحقق.</div>
-<p>كل هذي الأرقام تنحفظ تلقائي في <code>REPORT.md</code> و <code>validation.json</code> داخل مجلد المخرجات، ونسخة منها موجودة في المشروع في <code>results/nasa_2027/</code>.</p>
+<p>كل هذي الأرقام تنحفظ تلقائي في <code>REPORT.md</code> و <code>REPORT_EN.md</code> و <code>validation.json</code> داخل مجلد المخرجات، ونسخة منها موجودة في المشروع في <code>results/nasa_2027/</code>.</p>
 
 <h3>هـ) ملف ارتفاعات من اختيارك (وضع custom)</h3>
 <pre><code>python scripts/download_nasa_data.py --list         # روابط المصادر الرسمية
@@ -455,6 +455,7 @@ python -m lunar_nav --demo --seed 42 --size 800</code></pre>
 <tr><td>test_pipeline_end_to_end</td><td>النظام كامل يشتغل، والترتيب صحيح، وما فيه نقطة هبوط حمراء</td></tr>
 <tr><td>test_steep_areas_are_red</td><td>كل منطقة ميلانها فوق 10° أو فيها ظل دائم تطلع حمراء</td></tr>
 <tr><td>test_html_export</td><td>الخريطة تنحفظ وتشتغل بدون إنترنت</td></tr>
+<tr><td>test_english_map_has_no_arabic</td><td>الخريطة الإنجليزية ما فيها ولا كلمة عربي</td></tr>
 <tr><td>test_ephemeris_matches_known_…</td><td>مواقع الشمس والأرض تطابق الأرقام المعروفة: الميل 1.54°، والتمايل 6.7° و7.9°، وأقرب وأبعد مسافة للأرض</td></tr>
 <tr><td>test_numba_horizon_agrees_…</td><td>حساب الأفق السريع يطابق الحساب المرجعي</td></tr>
 <tr><td>test_flat_ground_at_pole_…</td><td>الأرض المستوية في القطب تشوف الشمس والأرض تقريبًا نص الوقت</td></tr>
