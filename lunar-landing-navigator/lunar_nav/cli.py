@@ -102,7 +102,7 @@ def main(argv=None):
     if a.nasa:
         from .config import MissionConstraints
         from .nasa_pipeline import run_nasa
-        from .report import write_report
+        from .report import write_report, write_report_en
         from .viz import write_validation_figure
         cfg.constraints = MissionConstraints.nasa_long_term()
         cfg.constraints.max_slope_deg = a.max_slope
@@ -115,6 +115,7 @@ def main(argv=None):
         (out / "validation.json").write_text(json.dumps(
             {"validation": slim, "references": res.references}, indent=2, default=float), encoding="utf-8")
         write_report(res, out / "REPORT.md")
+        write_report_en(res, out / "REPORT_EN.md")
     else:
         if a.demo:
             scene = synthetic_south_pole(a.size, seed=a.seed)
@@ -128,6 +129,7 @@ def main(argv=None):
         res = run(scene, cfg, a.yolo_weights, yimg)
 
     write_html(res, out / "landing_sites_map.html")
+    write_html(res, out / "landing_sites_map_en.html", lang="en")
     write_png_summary(res, out / "summary.png")
     rows = [r.to_dict() for r in res.regions]
     with open(out / "ranked_regions.csv", "w", newline="", encoding="utf-8") as f:
@@ -149,8 +151,8 @@ def main(argv=None):
         print(f"{r.rank:>2} {sc:6.2f} {r.safe_fraction * 100:4.0f}% {r.best_slope_deg:5.1f}° "
               f"{r.best_illumination * 100:4.0f}% {r.best_earth_visibility * 100:4.0f}% "
               f"{r.best_psr_distance_km:7.2f} {av}   {r.lat_deg:.3f}, {r.lon_deg:.1f}E")
-    print(f"\nwrote {out}/landing_sites_map.html, summary.png, ranked_regions.csv/json"
-          + (", validation.png/json, REPORT.md" if a.nasa else ", layers.npz"))
+    print(f"\nwrote {out}/landing_sites_map.html, landing_sites_map_en.html, summary.png, ranked_regions.csv/json"
+          + (", validation.png/json, REPORT.md, REPORT_EN.md" if a.nasa else ", layers.npz"))
     return res
 
 

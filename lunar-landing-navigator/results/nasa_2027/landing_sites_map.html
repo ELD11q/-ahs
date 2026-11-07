@@ -681,6 +681,9 @@ font-family:"Segoe UI",Tahoma,system-ui,sans-serif}
 .app{display:grid;grid-template-columns:400px 1fr;height:100vh}
 aside{background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:18px 16px}
 h1{font-size:19px;margin:0 0 4px}
+.langsw{float:left;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:700;font-size:13px;margin:-4px 0 6px 10px;transition:border-color .2s,background .2s}
+.langsw:hover{border-color:var(--sky);background:#0c2233}
+html[dir=ltr] .langsw{float:right;margin:-4px 0 6px 10px}
 .sub{color:var(--muted);font-size:13px;margin-bottom:12px;line-height:1.6}
 .badge{display:inline-block;border-radius:6px;padding:2px 8px;font-size:12px;margin-bottom:10px;line-height:1.6}
 .b-demo{background:#3b2a07;color:#facc15;border:1px solid #6b4f0e}
@@ -728,6 +731,7 @@ bdi{unicode-bidi:isolate}
 <body>
 <div class="app">
 <aside>
+  <a class="langsw" href="landing_sites_map_en.html" lang="en" title="English version">EN</a>
   <h1>🌕 مستكشف مواقع الهبوط القمري</h1>
   <div class="sub" id="sub"></div>
   <div id="badge"></div>

@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lunar Landing Site Navigator: Technical Report</title>
+<style>
+@font-face{font-family:Cairo;font-weight:400;src:url(../guide/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:700;src:url(../guide/fonts/cairo-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:400;src:url(../guide/fonts/cairo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2212}
+@font-face{font-family:Cairo;font-weight:700;src:url(../guide/fonts/cairo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2212}
+:root{--navy:#0B1220;--ink:#14213D;--muted:#55607A;--line:#E1E5EE;--soft:#F5F7FB;--amber:#F5B942;--amberd:#B7791F;--blue:#2F5BD3;--sky:#38BDF8;--green:#16A34A;--red:#DC2626}
+*{box-sizing:border-box}
+html{background:#fff}
+body{margin:0;font-family:Cairo,"DejaVu Sans",sans-serif;color:var(--ink);font-size:13.5px;line-height:1.85;background:#fff}
+main{max-width:820px;margin:0 auto;padding:0 16px 40px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.small{font-size:11.5px}
+.nw{white-space:nowrap}
+h1,h2,h3{line-height:1.35}
+h2.ch{font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:12px}
+h2.ch .n{background:var(--ink);color:var(--amber);border-radius:10px;min-width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:20px}
+.chsub{color:var(--muted);margin:0 0 18px;font-size:14px;border-bottom:3px solid var(--amber);padding-bottom:10px}
+h3{font-size:16.5px;margin:22px 0 6px;color:var(--ink)}
+h3::before{content:"";display:inline-block;width:8px;height:8px;background:var(--amber);border-radius:2px;margin-right:8px;vertical-align:2px}
+p{margin:7px 0}
+ul,ol{margin:6px 0;padding-left:22px}
+li{margin:3px 0}
+code,pre{font-family:"DejaVu Sans Mono",monospace;font-size:11.5px;direction:ltr;unicode-bidi:isolate}
+code{background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+pre{background:var(--navy);color:#E2E8F0;border-radius:8px;padding:12px 14px;text-align:left;white-space:pre-wrap;break-inside:avoid;line-height:1.6;margin:10px 0}
+pre code{background:none;border:0;color:inherit;padding:0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;break-inside:avoid}
+th,td{border-bottom:1px solid var(--line);padding:6px 7px;text-align:left;vertical-align:top}
+th{background:var(--ink);color:#fff;font-weight:700}
+tr:nth-child(even) td{background:#FAFBFD}
+tr.hl td{background:#FFF4D6 !important;font-weight:700}
+figure{margin:14px 0;break-inside:avoid;text-align:center}
+figure img{max-width:100%;border-radius:8px;border:1px solid var(--line)}
+figcaption{font-size:11.5px;color:var(--muted);margin-top:5px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0;break-inside:avoid}
+.kpi{background:var(--soft);border:1px solid var(--line);border-top:4px solid var(--amber);border-radius:10px;padding:10px 12px}
+.kpi b{display:block;font-size:24px;color:var(--ink);line-height:1.3}
+.kpi span{font-size:11.5px;color:var(--muted);line-height:1.5;display:block}
+.note{border-left:4px solid var(--blue);background:#EEF3FF;padding:9px 14px;border-radius:6px;margin:12px 0;break-inside:avoid}
+.warn{border-left-color:var(--amber);background:#FFF8E6}
+.ok{border-left-color:var(--green);background:#EAF8EF}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fff;break-inside:avoid}
+.card h4{margin:0 0 4px;font-size:14px;color:var(--blue)}
+.bmc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;break-inside:avoid}
+.bmc div{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;font-size:12px;line-height:1.7}
+.bmc div b{display:block;color:var(--amberd);font-size:13px}
+.bmc .v{background:#FFF4D6;border-color:#F5D58A}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps>li{counter-increment:s;position:relative;padding-left:34px;margin:8px 0;break-inside:avoid}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--amber);text-align:center;line-height:24px;font-weight:700;font-size:12px}
+section.chapter{break-before:page;padding-top:8px}
+/* cover */
+.cover{break-after:page;background:var(--navy);color:#EEF2F8;margin:0 -16px;padding:56px 48px;min-height:1040px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
+.cover .k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px;text-align:left}
+.cover h1{font-size:40px;margin:0;line-height:1.3}
+.cover .s{font-size:16px;color:#B8C4D6;max-width:620px}
+.cover img{width:100%;border-radius:12px;margin-top:10px;border:1px solid #23314D}
+.cover .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.cover .meta span{background:#16233A;color:#7DD3FC;border-radius:16px;padding:3px 12px;font-size:12px}
+.cover .foot{font-size:12px;color:#8A97AD;border-top:1px solid #23314D;padding-top:12px}
+.toc{columns:2;column-gap:30px;padding-left:22px;font-size:14px}
+.toc li{break-inside:avoid;margin:4px 0}
+@page{size:A4;margin:18mm 15mm 18mm 15mm}
+@page :first{margin:0}
+@media print{main{padding:0}.cover{margin:0;min-height:297mm;width:210mm;padding:22mm 18mm}}
+@media (max-width:640px){.kpis{grid-template-columns:1fr 1fr}.grid2,.bmc{grid-template-columns:1fr}.toc{columns:1}.cover{min-height:auto}}
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ COVER ============ -->
+<section class="cover">
+  <div class="k">LUNAR LANDING SITE NAVIGATOR · TECHNICAL REPORT</div>
+  <h1>Lunar Landing Site Navigator<br><span style="color:var(--amber)">The complete report, from A to Z</span></h1>
+  <div class="s">An open-source system that picks the best landing sites at the lunar south pole from official NASA data and the real 2027 launch windows. Its accuracy is checked against NASA's own maps, an independent published study, and NASA's official Artemis III regions.</div>
+  <img src="../guide/img/nasa_map_overview_en.jpg" alt="Interactive map">
+  <div class="meta"><span>NASA PGDA data</span><span>LOLA · Barker 2023</span><span>Mazarico 2011</span><span>Python · numba · astropy</span><span>GitHub Actions</span></div>
+  <div class="foot">Version 1.0 · November 2026 · github.com/ELD11q/-ahs · [Team name]</div>
+</section>
+
+<!-- ============ EXEC SUMMARY ============ -->
+<section>
+<h2 class="ch"><span class="n">★</span>Executive summary</h2>
+<p class="chsub">The idea and the result on one page</p>
+<p><b>The problem:</b> the lunar south pole is the first target of Artemis III because it has craters in permanent shadow that may hold water ice. But the Sun never rises more than about 1.5° above the horizon there, so shadows are long and the terrain is rough. Choosing where to land means analysing a very large amount of data.</p>
+<p><b>The solution:</b> a Python system that downloads 6 official NASA products (1.2 GB) and puts them on one 480×480 km grid at 80 m (36 million pixels). It then scores every point on five criteria: slope, sunlight, Earth visibility, distance to ice, and rocks. It picks 13 candidate regions, then the best 9, and computes the real 2027 launch windows for each one, hour by hour.</p>
+<div class="kpis">
+<div class="kpi"><b>{{SUN_R}}</b><span>correlation of our Sun model with NASA's maps</span></div>
+<div class="kpi"><b>{{EARTH_R}}</b><span>correlation of our Earth-visibility model with NASA</span></div>
+<div class="kpi"><b>{{TOP10}}</b><span>of the TOPSIS study's best points fall in our top 10%</span></div>
+<div class="kpi"><b>{{NASA_FINAL}}/9</b><span>of NASA's Artemis III regions covered by our regions</span></div>
+</div>
+<p><b>Best region:</b> {{R1_LATLON}} near Mons Mouton. It gets 6.5 days of continuous sunlight for <b>{{R1_AV}}</b> of the possible 2027 start times, Earth is visible {{R1_EARTH}} of the time, and the nearest permanent shadow (possible ice) is {{R1_PSR}} km away. The best launch window starts on <span class="ltr">{{R1_WIN}}</span>. It stays the best region in 2026, 2027 and 2028.</p>
+<p><b>The value:</b> work that takes weeks of manual GIS analysis comes out of one command in about 3 minutes, and it can be repeated for any year or set of constraints. The core is open source; the Open-Core business model is in chapter 10.</p>
+<h3>Contents</h3>
+<ol class="toc">
+<li>The problem, and why the south pole</li><li>How NASA chooses landing sites</li><li>System architecture</li><li>The official data</li>
+<li>Method, step by step</li><li>Results</li><li>Accuracy checks</li><li>Robustness tests</li>
+<li>Running it from A to Z</li><li>Business model and hackathon pitch</li><li>Limits and roadmap</li><li>References and appendices</li>
+</ol>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">1</span>The problem, and why the south pole</h2>
+<p class="chsub">The most important place on the Moon, and the hardest place to land</p>
+<div class="grid2">
+<div class="card"><h4>Why it matters</h4>
+<ul><li>Craters in <b>permanent shadow</b>, at about −230 °C, that may hold water ice.</li>
+<li>Water means drinking water, oxygen, and hydrogen fuel for rockets.</li>
+<li>Nearby peaks are <b>lit most of the time</b>, which means almost continuous solar power.</li></ul></div>
+<div class="card"><h4>Why it is hard</h4>
+<ul><li>The Sun never rises more than ~1.5° above the horizon, so any hill blocks it.</li>
+<li>Earth sometimes drops below the horizon and direct contact is lost.</li>
+<li>Slopes, craters and boulders; the lander needs a slope under 8° to 10°.</li></ul></div>
+</div>
+<h3>What makes a site safe</h3>
+<table>
+<tr><th>Condition</th><th>Value in the system</th><th>Reason</th></tr>
+<tr><td>Slope</td><td>red above 10°, yellow between 8° and 10°</td><td>keep the lander stable and upright</td></tr>
+<tr><td>Sunlight</td><td>6.5 days of continuous light (the mission length)</td><td>power and temperature</td></tr>
+<tr><td>Contact with Earth</td><td>share of time Earth is above the horizon</td><td>direct-to-Earth (DTE) communication</td></tr>
+<tr><td>Near permanent shadow</td><td>ideal ≤ 2 km, no value beyond 15 km</td><td>walking to the ice</td></tr>
+<tr><td>Rocks and craters</td><td>roughness at 100 m + detected craters</td><td>landing safety</td></tr>
+<tr><td>Exploration zone</td><td>within 6° of the pole (~84°S)</td><td>Artemis III requirement</td></tr>
+<tr><td>Landing ellipse</td><td>a 200 m radius circle around each point must be fully safe</td><td>limited landing accuracy</td></tr>
+</table>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">2</span>How NASA chooses landing sites</h2>
+<p class="chsub">The LRO spacecraft, and from 13 regions to 9</p>
+<p>The <b>LRO</b> spacecraft (Lunar Reconnaissance Orbiter) has orbited the Moon since 2009 and collects data with three instruments:</p>
+<table>
+<tr><th>Instrument</th><th>Measures</th><th>In our project</th></tr>
+<tr><td>LOLA</td><td>laser heights, and from them slope, roughness and illumination</td><td>Barker 2023 maps + Mazarico 2011 illumination maps</td></tr>
+<tr><td>Diviner</td><td>temperature, and from it rock abundance</td><td>roughness from LOLA, with a <code>--rocks</code> option</td></tr>
+<tr><td>LROC NAC</td><td>~0.5 m images of craters and boulders</td><td>ready YOLO module (<code>hazards.py</code>)</td></tr>
+</table>
+<p>In 2022 NASA announced <b>13 candidate regions</b> for Artemis III, each about 15×15 km. In October 2024 it narrowed them to <b>9 regions</b>: Peak near Cabeus B, Haworth, Malapert Massif, Mons Mouton Plateau, Mons Mouton, Nobile Rim 1, Nobile Rim 2, de Gerlache Rim 2 and Slater Plain. According to NASA's summary (NTRS 20250011660), the downselection was based on:</p>
+<ul>
+<li>Year-round <i>mission availability</i>: all launch, orbit and lighting constraints combined.</li>
+<li>Terrain safety: a "sufficient" low-slope area, avoiding craters and boulders.</li>
+<li>Direct contact with Earth, and continuous lighting for the whole surface stay (5.75 to 6.25 days).</li>
+<li>Keeping several regions, because "each region alone offers limited opportunities".</li>
+</ul>
+<div class="note ok">Our project follows the same logic: we pick 13 and then 9, give 40% of the final ranking to launch-window availability, reward a "sufficient" safe area rather than the "largest", and force a distance between regions so they are diverse.</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">3</span>System architecture</h2>
+<p class="chsub">From raw files to a landing decision</p>
+<figure>
+<svg viewBox="0 0 800 330" width="100%" role="img" aria-label="System architecture" style="font-family:Cairo,sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#55607A"/></marker></defs>
+<g font-size="13" text-anchor="middle">
+<rect x="20" y="20" width="160" height="78" rx="10" fill="#0B1220"/><text x="100" y="50" fill="#F5B942" font-weight="700">NASA PGDA</text><text x="100" y="72" fill="#B8C4D6" font-size="11">6 products · 1.2 GB</text><text x="100" y="88" fill="#B8C4D6" font-size="11">nasa.py</text>
+<rect x="210" y="20" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="295" y="50" font-weight="700">One common grid</text><text x="295" y="72" fill="#55607A" font-size="11">80 m · 6000×6000</text><text x="295" y="88" fill="#55607A" font-size="11">rasterio</text>
+<rect x="410" y="20" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="495" y="50" font-weight="700">Craters and hazard</text><text x="495" y="72" fill="#55607A" font-size="11">hazards.py</text><text x="495" y="88" fill="#55607A" font-size="11">20,564 craters</text>
+<rect x="610" y="20" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="695" y="50" font-weight="700">Scores and classes</text><text x="695" y="72" fill="#55607A" font-size="11">scoring.py</text><text x="695" y="88" fill="#55607A" font-size="11">green · yellow · red</text>
+<rect x="610" y="140" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="695" y="170" font-weight="700">13 candidate regions</text><text x="695" y="192" fill="#55607A" font-size="11">regions.py</text><text x="695" y="208" fill="#55607A" font-size="11">15×15 km · ≥20 km apart</text>
+<rect x="410" y="140" width="170" height="78" rx="10" fill="#FFF4D6" stroke="#F5B942"/><text x="495" y="170" font-weight="700">2027 windows</text><text x="495" y="192" fill="#55607A" font-size="11">ephemeris + sunmodel</text><text x="495" y="208" fill="#55607A" font-size="11">hourly · 128 directions</text>
+<rect x="210" y="140" width="170" height="78" rx="10" fill="#fff" stroke="#9AA5BD"/><text x="295" y="170" font-weight="700">Best 9</text><text x="295" y="192" fill="#55607A" font-size="11">60% terrain</text><text x="295" y="208" fill="#55607A" font-size="11">40% window availability</text>
+<rect x="20" y="140" width="160" height="78" rx="10" fill="#EAF8EF" stroke="#16A34A"/><text x="100" y="170" font-weight="700">Validation</text><text x="100" y="192" fill="#55607A" font-size="11">NASA · TOPSIS</text><text x="100" y="208" fill="#55607A" font-size="11">Artemis III</text>
+<rect x="210" y="250" width="370" height="62" rx="10" fill="#0B1220"/><text x="395" y="277" fill="#fff" font-weight="700">Outputs: interactive map · report · images · CSV/JSON</text><text x="395" y="298" fill="#B8C4D6" font-size="11">viz.py · report.py · GitHub Actions</text>
+</g>
+<g stroke="#55607A" stroke-width="1.6" fill="none" marker-end="url(#a)">
+<path d="M180 59 H208"/><path d="M380 59 H408"/><path d="M580 59 H608"/><path d="M695 98 V138"/>
+<path d="M610 179 H582"/><path d="M410 179 H382"/><path d="M210 179 H182"/><path d="M100 218 V281 H208"/>
+</g>
+</svg>
+<figcaption>Figure 1: the stages of the system; every box is a separate, tested module</figcaption>
+</figure>
+<h3>Code modules</h3>
+<table>
+<tr><th>File</th><th>Role</th></tr>
+<tr><td><code>nasa.py</code></td><td>product catalogue, resumable download, reprojection onto one grid</td></tr>
+<tr><td><code>ephemeris.py</code></td><td>Sun and Earth positions (astropy/ERFA) + lunar orientation (IAU 2009)</td></tr>
+<tr><td><code>sunmodel.py</code></td><td>horizon ray-tracing and time-series visibility (numba, parallel)</td></tr>
+<tr><td><code>terrain.py</code> · <code>hazards.py</code></td><td>slope, roughness, crater detection, optional YOLO, hazard map</td></tr>
+<tr><td><code>scoring.py</code> · <code>regions.py</code></td><td>weighted score, classes, region selection, coordinate conversion</td></tr>
+<tr><td><code>nasa_pipeline.py</code></td><td>ties everything together: candidates, windows, final pick, validation</td></tr>
+<tr><td><code>reference.py</code></td><td>NASA's nine regions, the TOPSIS top 20 points, IAU landmarks</td></tr>
+<tr><td><code>experiments.py</code></td><td>robustness tests: weights, slope limit, years</td></tr>
+<tr><td><code>viz.py</code> · <code>report.py</code> · <code>cli.py</code></td><td>interactive map, images, report, command line</td></tr>
+</table>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">4</span>The official data</h2>
+<p class="chsub">6 products from NASA Goddard, free and open</p>
+<table>
+<tr><th>Layer</th><th>File</th><th>Resolution</th><th>Reference</th></tr>
+<tr><td>Elevation</td><td class="small">LDEM_80S_80MPP_ADJ.TIF</td><td>80 m</td><td>Barker et al. 2023 · PGDA 90</td></tr>
+<tr><td>Slope</td><td class="small">LDSM_80S_80MPP_ADJ.TIF</td><td>80 m</td><td>Barker et al. 2023</td></tr>
+<tr><td>Roughness (100 m)</td><td class="small">LDRM_80S_50MPP_ADJ_ROUGH_100M.TIF</td><td>50 m</td><td>Barker et al. 2023</td></tr>
+<tr><td>Average illumination</td><td class="small">AVGVISIB_75S_120M_201608.TIF</td><td>120 m</td><td>Mazarico et al. 2011 · PGDA 69</td></tr>
+<tr><td>Average Earth visibility</td><td class="small">AVGVISIB_75S_120M_201608_EARTH.TIF</td><td>120 m</td><td>Mazarico et al. 2011</td></tr>
+<tr><td>Permanent shadow</td><td class="small">LPSR_75S_120M_201608.TIF</td><td>120 m</td><td>Mazarico et al. 2011</td></tr>
+</table>
+<ul>
+<li>All files use a polar stereographic projection (sphere of radius 1737.4 km, longitude 0 pointing up), so they line up exactly with no distortion.</li>
+<li>We checked the coordinates: the centre of Shackleton crater (from the IAU gazetteer) comes out at −2788 m depth inside a permanent shadow, and the inverse transform returns the same coordinates.</li>
+<li>The illumination averages are computed hour by hour over a full 18.6-year cycle and include the polar winter. That is why even the best sites average only about 0.35 to 0.5, and we calibrated the thresholds on this distribution: median 0.29, top 1% at 0.49.</li>
+</ul>
+<figure><img src="../guide/img/nasa_summary.jpg" alt="Layers"><figcaption>Figure 2: the layers on real data: slope, average illumination, Earth visibility, hazard, score, and classes inside the exploration zone (stars = NASA regions)</figcaption></figure>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">5</span>Method, step by step</h2>
+<p class="chsub">How every pixel becomes a decision</p>
+<h3>5.1 Slope, roughness and craters</h3>
+<p>Slope comes from NASA's official product. Roughness at a 100 m baseline becomes a 0 to 1 hazard index (above 3 m counts as rocky and rough). Craters are detected from the elevation map by subtracting a smoothed copy at 3 scales, which finds 20,564 craters larger than 400 m.</p>
+<h3>5.2 The physical illumination engine</h3>
+<ol class="steps">
+<li><b>Horizon:</b> for each point we trace rays over the LOLA map in 64 to 128 directions out to 150 km, with bilinear sampling and the Moon's curvature <code>d²/2R</code>.</li>
+<li><b>Sun and Earth positions:</b> from the ERFA ephemeris built into astropy, converted to the lunar frame with the IAU 2009 model (Archinal 2011). Checked values: Sun elevation ±1.55°, Earth libration ±6.8° and ±7.7°, distance 357 to 407 thousand km.</li>
+<li><b>Visibility:</b> for every moment we compute the body's elevation and azimuth in the grid frame (with parallax for Earth), compare it with the horizon, and compute the visible part of the disc (Sun 0.53°, Earth 1.9°).</li>
+<li><b>Speed:</b> written in numba and runs on all cores: 111 thousand points × 13.6 thousand moments in about 35 seconds.</li>
+</ol>
+<h3>5.3 Scores and classes</h3>
+<table>
+<tr><th>Criterion</th><th>Conversion to 0–1</th><th>Weight</th></tr>
+<tr><td>Slope</td><td>1 − slope ÷ 10°</td><td>30%</td></tr>
+<tr><td>Sunlight</td><td>NASA average ÷ 0.5 (capped at 1)</td><td>25%</td></tr>
+<tr><td>Earth visibility</td><td>NASA average ÷ 0.6 (capped at 1)</td><td>15%</td></tr>
+<tr><td>Near permanent shadow</td><td>1 up to 2 km, then falls to 0 at 15 km</td><td>15%</td></tr>
+<tr><td>Rocks and craters</td><td>1 − hazard index</td><td>15%</td></tr>
+</table>
+<p><b>Red:</b> slope above 10°, permanent shadow, illumination below 0.15, hazard above 0.6, or outside the exploration zone, all grown by 200 m for the landing ellipse. <b>Yellow:</b> slope above 8°, Earth visibility below 0.15, or score below 0.55. <b>Green:</b> everything else.</p>
+<h3>5.4 Choosing regions</h3>
+<p>A 15×15 km window slides in 7.5 km steps. Region score = 30% for the safe area (full at 15% of its area) + 70% for the mean of the top 5% of scores inside it. We then pick 13 regions that do not overlap, with at least 20 km between their best points.</p>
+<h3>5.5 Launch windows and the final pick</h3>
+<p>For the best point of every candidate region we compute sunlight and Earth visibility every hour through the year (for an observer 2 m above the ground). A <b>valid window</b> = 6.5 continuous days with more than half of the Sun's disc visible every hour. <b>Availability</b> = the share of start times (every 6 hours) that give a valid window. <b>Final score</b> = 60% terrain score + 40% availability, and then the best 9.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">6</span>Results</h2>
+<p class="chsub">The best 9 regions on real NASA data, with 2027 windows</p>
+<table>
+<tr><th>#</th><th>Location</th><th>Score</th><th>2027 windows</th><th>Best 2027 window (month-day)</th><th>Slope</th><th>Sunlight</th><th>Earth</th><th>Ice</th><th>Safe</th><th>NASA region</th></tr>
+{{ROWS_REGIONS}}
+</table>
+<p class="small">Sunlight and Earth visibility are NASA's 18.6-year averages at the best point. "Safe" = green share of the region. "Ice" = distance to the nearest permanent shadow.</p>
+<figure><img src="../guide/img/nasa_map_region_en.jpg" alt="Region 1"><figcaption>Figure 3: region 1 near Mons Mouton in the interactive map, with its details and the day-by-day Sun and Earth chart for 2027</figcaption></figure>
+<div class="note">Four of our regions (1, 3, 5 and 6) lie around Mons Mouton, where NASA picked two regions. In every region the best point has a slope below 1°, and the nearest ice is 0.6 to 2.3 km away.</div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">7</span>Accuracy checks</h2>
+<p class="chsub">Three independent references</p>
+<h3>7.1 Our model vs NASA's official maps</h3>
+<p>We computed the 18.6-year average ourselves for {{NPIX}} points × {{NEPOCH}} moments and compared it point by point with the maps of Mazarico et al. (2011):</p>
+<table>
+<tr><th></th><th>Correlation r</th><th>Mean error</th><th>Bias</th><th>Error under 5 points</th><th>Error under 10 points</th></tr>
+<tr><td>☀️ Sun</td><td><b>{{SUN_R}}</b></td><td>{{SUN_MAE}} points</td><td>{{SUN_BIAS}} points</td><td>{{SUN_W5}}</td><td>{{SUN_W10}}</td></tr>
+<tr><td>🌍 Earth</td><td><b>{{EARTH_R}}</b></td><td>{{EARTH_MAE}} points</td><td>{{EARTH_BIAS}} points</td><td>{{EARTH_W5}}</td><td>{{EARTH_W10}}</td></tr>
+</table>
+<figure><img src="../guide/img/nasa_validation.png" alt="Validation"><figcaption>Figure 4: left and centre: our model vs NASA. Right: the 2027 calendar of each region (yellow = Sun, blue = Earth only, black = dark)</figcaption></figure>
+<h3>7.2 Against the independent TOPSIS study (arXiv:2406.19863)</h3>
+<p>This study ranked 1247 points in NASA's regions with TOPSIS and different data (5 m maps, horizon views, minerals). <b>{{TOP10}}</b> of their top 20 points fall in the top 10% of our map, and the median is above {{TMED}}. Their best point (#358, Nobile Rim 2) scores {{S358}} with us, higher than {{P358}} of the area.</p>
+<table>
+<tr><th>Point</th><th>Region</th><th>Their R</th><th>Our score</th><th>Our percentile</th><th>Slope</th></tr>
+{{ROWS_TOPSIS}}
+</table>
+<h3>7.3 Against NASA's nine regions</h3>
+<p>Our nine regions cover <b>{{NASA_FINAL}}/9</b> of NASA's regions, and our 13 candidates cover <b>{{NASA_CAND}}/9</b>. NASA does not publish region boundaries, so we place each one at the centre of the landmark it is named after (IAU gazetteer), with a match radius = landmark radius + 10 km (between 20 and 50 km).</p>
+<table>
+<tr><th>NASA region</th><th>Landmark</th><th>Radius</th><th>Our nearest region</th><th>Our regions inside</th><th>Best nearby score</th></tr>
+{{ROWS_NASA}}
+</table>
+<div class="note warn"><b>Why they differ:</b> the Cabeus B landmark itself lies outside the 84° circle (while the region NASA named after it is closer to the pole). NASA also uses constraints our model does not include: the NRHO orbit, launch trajectories, the SpaceX HLS lander design, and 0.5 m LROC images. We did not tune the model to "match" NASA, so the check stays honest.</div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">8</span>Robustness tests</h2>
+<p class="chsub">Do the results change if we change the assumptions? (runtime {{EXP_RUNTIME}} s)</p>
+<figure><img src="../guide/img/nasa_experiments.png" alt="Robustness"><figcaption>Figure 5: the effect of weights, slope limit and year on the results</figcaption></figure>
+<h3>8.1 Different weights for the decision maker</h3>
+<table>
+<tr><th>Profile</th><th>Slope</th><th>Sunlight</th><th>Earth</th><th>Ice</th><th>Rocks</th><th>Shared with baseline</th></tr>
+{{ROWS_PROFILES}}
+</table>
+<h3>8.2 Maximum slope limit</h3>
+<table><tr><th>8°</th><th>10° (baseline)</th><th>12°</th></tr><tr>{{ROWS_SLOPE}}</tr></table>
+<h3>8.3 Launch windows over three years</h3>
+<table>
+<tr><th>Region</th><th>2026</th><th>2027</th><th>2028</th></tr>
+{{ROWS_YEARS}}
+</table>
+<div class="note ok"><b>Bottom line:</b> region 1 stays the best in every year, and changing the slope limit barely changes the results. With the weights, giving top priority to Earth contact changes some regions, which gives the decision maker a clear view of the alternatives.</div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">9</span>Running it from A to Z</h2>
+<p class="chsub">On your computer, and on GitHub's servers</p>
+<h3>9.1 On your computer</h3>
+<ol class="steps">
+<li>Install Python 3.10 or newer, and Git.</li>
+<li>Get the project:<pre><code>git clone https://github.com/ELD11q/-ahs.git
+cd -ahs/lunar-landing-navigator
+python -m venv .venv &amp;&amp; source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt</code></pre></li>
+<li>Check that everything works: <code>python -m pytest -q</code> should print 15 passed.</li>
+<li>Run the full analysis on NASA data:<pre><code>python -m lunar_nav --nasa -o output          # first run downloads ~1.2 GB
+python -m lunar_nav.experiments -o output       # robustness tests (optional)</code></pre></li>
+<li>Open <code>output/landing_sites_map_en.html</code> in a browser, and read <code>output/REPORT_EN.md</code>.</li>
+</ol>
+<h3>9.2 Useful options</h3>
+<table>
+<tr><th>Option</th><th>What it does</th></tr>
+<tr><td><code>--year 2028</code></td><td>launch-window year</td></tr>
+<tr><td><code>--max-slope 8</code></td><td>slope limit</td></tr>
+<tr><td><code>--weights '{"illumination":0.4}'</code></td><td>change the criteria weights</td></tr>
+<tr><td><code>--half-width-km 240 --res 80</code></td><td>area size and resolution</td></tr>
+<tr><td><code>--demo</code></td><td>fast demo mode with generated data</td></tr>
+<tr><td><code>--dem file.tif --pixel-size 20</code></td><td>an elevation file of your choice</td></tr>
+</table>
+<h3>9.3 On GitHub's servers</h3>
+<p>The file <code>.github/workflows/lunar-navigator.yml</code> runs the tests, then the full analysis on NASA data on every update (the data is cached). To run it by hand: <b>Actions → Lunar Landing Navigator → Run workflow</b>, then pick the mode (nasa / demo / custom) and the year. The results appear on the run page and download as an artifact called <b>landing-sites-nasa</b>.</p>
+<h3>9.4 Outputs</h3>
+<table>
+<tr><th>File</th><th>Content</th></tr>
+<tr><td><code>landing_sites_map.html</code> · <code>landing_sites_map_en.html</code></td><td>interactive map that works offline (~5 MB), Arabic and English</td></tr>
+<tr><td><code>REPORT.md</code> · <code>REPORT_EN.md</code></td><td>report with every number, Arabic and English</td></tr>
+<tr><td><code>summary.png</code> · <code>validation.png</code></td><td>layer and validation panels</td></tr>
+<tr><td><code>ranked_regions.csv/json</code> · <code>validation.json</code></td><td>full data for programs and Excel</td></tr>
+</table>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">10</span>Business model and hackathon pitch</h2>
+<p class="chsub">Open-Core: the core is open, advanced services are paid</p>
+<div class="bmc">
+<div><b>Key partners</b>Saudi Space Agency, universities and research centres, a cloud provider, commercial lunar lander companies</div>
+<div><b>Key activities</b>engine development, ongoing scientific validation, data updates, scientific publishing</div>
+<div class="v"><b>Value proposition</b>a validated landing decision in minutes instead of weeks, with a launch-window calendar and full transparency because it is open source</div>
+<div><b>Key resources</b>NASA open data, the physics engine, team expertise, validation results</div>
+<div><b>Customer relationships</b>open community on GitHub, paid support, training workshops</div>
+<div class="v"><b>Customer segments</b>space agencies, lander and payload companies, universities and robotics teams, education and hackathons</div>
+<div><b>Channels</b>GitHub, conferences and papers, hackathons, direct partnerships</div>
+<div><b>Cost structure</b>cloud compute and storage, team, validation, marketing. The data itself is free</div>
+<div class="v"><b>Revenue streams</b>professional cloud subscription, custom site studies, an API, training and certificates</div>
+</div>
+<h3>Proposed plans</h3>
+<table>
+<tr><th>Plan</th><th>Price</th><th>Includes</th><th>Customer</th></tr>
+<tr><td>Open</td><td>free</td><td>full code, NASA data, map, report</td><td>students and researchers</td></tr>
+<tr><td>Pro cloud</td><td>[$__ per month]</td><td>5 to 20 m resolution, custom constraints, windows for any year, API</td><td>companies and teams</td></tr>
+<tr><td>Enterprise</td><td>[$__ per study]</td><td>full site study for a specific mission, report, support</td><td>agencies</td></tr>
+</table>
+<p class="small">Prices in brackets are placeholders, to be set after market validation.</p>
+<h3>Competitive edge</h3>
+<ul>
+<li>NASA's internal tools are not public, and academic studies (such as TOPSIS) are one-off and done by hand in GIS software.</li>
+<li>Our system is <b>open, repeatable and validated</b>, and reruns the analysis for any year or constraints in minutes.</li>
+<li>It computes the <b>real launch windows</b>, which NASA says are decisive and which its published averages do not cover.</li>
+<li>Arabic and English, suited to the region's emerging space programmes.</li>
+</ul>
+<h3>The 3-minute hackathon pitch</h3>
+<ol class="steps">
+<li><b>30 s, the problem:</b> the south pole has water, but landing there is hard.</li>
+<li><b>30 s, the solution:</b> one command turns NASA data into a decision.</li>
+<li><b>60 s, live demo:</b> open the map, click region 1, turn on the illumination layer.</li>
+<li><b>30 s, accuracy:</b> 0.91 and 0.94, 70%, and 4 of 9.</li>
+<li><b>30 s, business model and roadmap.</b></li>
+</ol>
+<h3>Roadmap</h3>
+<table>
+<tr><th>Stage</th><th>Time</th><th>Deliverables</th></tr>
+<tr><td>First model ✓</td><td>now</td><td>NASA data, 2027 windows, validation, GitHub Actions</td></tr>
+<tr><td>Higher resolution</td><td>3 months</td><td>5 m LOLA maps for the final regions, LROC images + YOLO for boulders, per-pixel windows</td></tr>
+<tr><td>Cloud platform</td><td>6 months</td><td>web app, API, rover path planning into permanent shadow</td></tr>
+<tr><td>Expansion</td><td>12 months</td><td>the north pole, Mars, agency partnerships</td></tr>
+</table>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">11</span>Limits and roadmap</h2>
+<p class="chsub">What the system can do, and what it cannot</p>
+<ul>
+<li>A research and education tool, <b>not a certified flight tool</b>.</li>
+<li>Boulders smaller than about 100 m do not show in LOLA data; they need LROC NAC images with a trained YOLO model (the code is ready, the trained model is not).</li>
+<li>Launch windows are computed for the best point of each candidate region, not for every pixel.</li>
+<li>The illumination model is very close to NASA's but not identical: the difference is 3.7 points for the Sun and 5.8 for Earth, because of horizon resolution and disc modelling.</li>
+<li>It does not include the NRHO orbit, launch trajectories, HLS lander constraints, or temperature.</li>
+<li>NASA's regions are placed at landmark centres, because their official boundaries are not published.</li>
+</ul>
+<h3>Code quality</h3>
+<ul>
+<li>15 automated tests, covering slope on a known surface, a reference horizon, astronomical libration, the stereographic transform, the full pipeline, and the maps (including a check that the English map has no Arabic text).</li>
+<li>Continuous integration on GitHub Actions on every update.</li>
+<li>Every number in this report is generated automatically from the result files (<code>docs/report/build_report.py</code>).</li>
+</ul>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="chapter">
+<h2 class="ch"><span class="n">12</span>References and appendices</h2>
+<p class="chsub">Scientific sources and data</p>
+<h3>Sources that came with the project idea</h3>
+<ol>
+<li>NASA Scientific Visualization Studio: illumination at the south pole. <span class="small">svs.gsfc.nasa.gov/vis/a000000/a003500/a003587/</span></li>
+<li>NASA (2025). <i>Artemis III Site Selection Update: Downselection From Thirteen to Nine Candidate Regions.</i> NTRS 20250011660.</li>
+<li>Aerospace America (AIAA). <i>The Choice.</i> <span class="small">aerospaceamerica.aiaa.org/features/the-choice/</span></li>
+<li>Peña-Asensio, E., Neira-Acosta, Á.-S., Sánchez-Lozano, J.M. (2024). <i>Evaluating potential landing sites for the Artemis III mission using a multi-criteria decision making approach.</i> arXiv:2406.19863.</li>
+</ol>
+<h3>Data and methods</h3>
+<ol start="5">
+<li>Barker, M.K. et al. (2023). <i>A New View of the Lunar South Pole from LOLA.</i> NASA PGDA product 90.</li>
+<li>Mazarico, E., Neumann, G.A., Smith, D.E., Zuber, M.T., Torrence, M.H. (2011). <i>Illumination conditions of the lunar polar regions using LOLA topography.</i> Icarus 211, 1066–1081. PGDA product 69.</li>
+<li>Smith, D.E. et al. (2010). <i>The Lunar Orbiter Laser Altimeter Investigation on the LRO Mission.</i> Space Sci. Rev. 150.</li>
+<li>Archinal, B.A. et al. (2011). <i>Report of the IAU WGCCRE: 2009.</i> Celest. Mech. Dyn. Astr. 109, 101–135.</li>
+<li>Robinson, M.S. et al. (2010). <i>LROC Instrument Overview.</i> Space Sci. Rev. 150.</li>
+<li>Bandfield, J.L. et al. (2011). <i>Lunar surface rock abundance … Diviner.</i> JGR Planets 116.</li>
+<li>Robbins, S.J. (2019). <i>A New Global Database of Lunar Impact Craters &gt;1–2 km.</i> JGR Planets 124.</li>
+<li>IAU / USGS. <i>Gazetteer of Planetary Nomenclature.</i></li>
+<li>Astropy Collaboration (2022). <i>The Astropy Project.</i> ApJ 935, 167. · Lam, S.K. et al. (2015). <i>Numba.</i> LLVM-HPC.</li>
+</ol>
+<h3>Appendix A: glossary</h3>
+<table>
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>PSR</td><td>Permanently Shadowed Region</td></tr>
+<tr><td>LOLA / LRO</td><td>Lunar Orbiter Laser Altimeter / Lunar Reconnaissance Orbiter</td></tr>
+<tr><td>DEM</td><td>digital elevation model</td></tr>
+<tr><td>Libration</td><td>the Moon's apparent wobble, which moves Earth in the polar sky</td></tr>
+<tr><td>TOPSIS</td><td>a multi-criteria decision method</td></tr>
+<tr><td>AEZ</td><td>Artemis Exploration Zone (within 6° of the pole)</td></tr>
+<tr><td>NRHO</td><td>Near-Rectilinear Halo Orbit, used by Artemis</td></tr>
+</table>
+<div class="note">Repository: github.com/ELD11q/-ahs · folder <code>lunar-landing-navigator/</code> · results <code>results/nasa_2027/</code> · guide <code>docs/guide/</code> · this report <code>docs/report/</code></div>
+</section>
+
+</main>
+</body>
+</html>

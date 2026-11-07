@@ -365,7 +365,7 @@ section.chapter{break-before:page;padding-top:8px}
 cd -ahs/lunar-landing-navigator
 python -m venv .venv &amp;&amp; source .venv/bin/activate   # ويندوز: .venv\Scripts\activate
 pip install -r requirements.txt</code></pre></li>
-<li>تأكد إن كل شي شغال: <code>python -m pytest -q</code>، والمفروض يطلع 14 passed.</li>
+<li>تأكد إن كل شي شغال: <code>python -m pytest -q</code>، والمفروض يطلع 15 passed.</li>
 <li>شغّل التحليل الكامل على بيانات ناسا:<pre><code>python -m lunar_nav --nasa -o output          # أول مرة ينزّل ~1.2 GB
 python -m lunar_nav.experiments -o output       # اختبارات المتانة (اختياري)</code></pre></li>
 <li>افتح <code>output/landing_sites_map.html</code> في المتصفح، واقرأ <code>output/REPORT.md</code>.</li>
@@ -385,8 +385,8 @@ python -m lunar_nav.experiments -o output       # اختبارات المتان�
 <h3>9.4 المخرجات</h3>
 <table>
 <tr><th>الملف</th><th>المحتوى</th></tr>
-<tr><td><code>landing_sites_map.html</code></td><td>خريطة تفاعلية تشتغل بدون إنترنت (~5 MB)</td></tr>
-<tr><td><code>REPORT.md</code></td><td>تقرير عربي بكل الأرقام</td></tr>
+<tr><td><code>landing_sites_map.html</code> · <code>landing_sites_map_en.html</code></td><td>خريطة تفاعلية تشتغل بدون إنترنت (~5 MB)، عربي وإنجليزي</td></tr>
+<tr><td><code>REPORT.md</code> · <code>REPORT_EN.md</code></td><td>تقرير بكل الأرقام، عربي وإنجليزي</td></tr>
 <tr><td><code>summary.png</code> · <code>validation.png</code></td><td>لوحات الطبقات والتحقق</td></tr>
 <tr><td><code>ranked_regions.csv/json</code> · <code>validation.json</code></td><td>البيانات الكاملة للبرامج وExcel</td></tr>
 </table>
@@ -454,7 +454,7 @@ python -m lunar_nav.experiments -o output       # اختبارات المتان�
 </ul>
 <h3>جودة الكود</h3>
 <ul>
-<li>14 اختبار آلي تشمل: الميلان على سطح معروف، والأفق المرجعي، والتمايل الفلكي، والتحويل الستيريوغرافي، والنظام كامل، والخريطة.</li>
+<li>15 اختبار آلي تشمل: الميلان على سطح معروف، والأفق المرجعي، والتمايل الفلكي، والتحويل الستيريوغرافي، والنظام كامل، والخريطة.</li>
 <li>تكامل مستمر على GitHub Actions مع كل تحديث.</li>
 <li>كل أرقام هذا التقرير تتولد آليًا من ملفات النتائج (<code>docs/report/build_report.py</code>).</li>
 </ul>
