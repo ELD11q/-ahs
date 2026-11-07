@@ -89,3 +89,11 @@ def test_html_export(tmp_path, demo_result):
     html = p.read_text(encoding="utf-8")
     assert "L.map(" in html and "data:image/webp;base64" in html
     assert "cdnjs" not in html  # leaflet is inlined, works offline
+
+
+def test_english_map_has_no_arabic(tmp_path, demo_result):
+    import re
+    from lunar_nav.viz import write_html
+    html = write_html(demo_result, tmp_path / "map_en.html", lang="en").read_text(encoding="utf-8")
+    assert 'lang="en" dir="ltr"' in html
+    assert not re.search("[؀-ۿ]", html)
