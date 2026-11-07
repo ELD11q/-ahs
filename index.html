@@ -4,110 +4,325 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lunar Landing Navigator</title>
-<meta name="description" content="Ranks landing sites at the lunar south pole with official NASA data and real 2027 launch windows. نظام لاختيار أفضل مواقع الهبوط على القطب الجنوبي للقمر.">
+<meta name="description" content="مستكشف مواقع الهبوط القمري: نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر ببيانات ناسا الرسمية ونوافذ إطلاق 2027.">
+<meta property="og:title" content="Lunar Landing Navigator · مستكشف مواقع الهبوط القمري">
+<meta property="og:image" content="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23d9d4c7'/><circle cx='38' cy='40' r='8' fill='%23b8b2a3'/><circle cx='62' cy='62' r='11' fill='%23b8b2a3'/></svg>">
 <style>
-@font-face{font-family:Cairo;font-weight:400;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
-@font-face{font-family:Cairo;font-weight:700;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
-@font-face{font-family:Cairo;font-weight:400;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F}
-@font-face{font-family:Cairo;font-weight:700;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F}
-:root{--bg:#0B1220;--panel:#121B2E;--line:#23314D;--text:#EEF2F8;--muted:#9AA7BD;--amber:#F5B942;--sky:#7DD3FC;--green:#4ADE80}
-:root[data-theme="light"]{--bg:#F6F4EE;--panel:#FFFFFF;--line:#E1E5EE;--text:#14213D;--muted:#55607A;--amber:#B7791F;--sky:#2F5BD3;--green:#15803D}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#F6F4EE;--panel:#FFFFFF;--line:#E1E5EE;--text:#14213D;--muted:#55607A;--amber:#B7791F;--sky:#2F5BD3;--green:#15803D}}
+@font-face{font-family:Cairo;font-weight:400;font-display:swap;src:url(site/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:700;font-display:swap;src:url(site/fonts/cairo-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:400;font-display:swap;src:url(site/fonts/cairo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2212}
+@font-face{font-family:Cairo;font-weight:700;font-display:swap;src:url(site/fonts/cairo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F,U+2190-21FF,U+2212}
+:root{--bg:#02040a;--glass:rgba(12,18,32,.62);--line:rgba(160,180,220,.16);--text:#EEF2F8;--muted:#9AA7BD;--amber:#F5B942;--sky:#7DD3FC;--green:#4ADE80;--red:#F87171;--blue:#60A5FA}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:Cairo,"Segoe UI",Tahoma,sans-serif;line-height:1.7}
-main{max-width:1080px;margin:0 auto;padding:40px 16px 64px}
-.k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px;direction:ltr;text-align:right}
-h1{font-size:clamp(30px,5vw,52px);line-height:1.2;margin:6px 0 10px}
-.lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px;margin:0}
-.en{direction:ltr;text-align:left;color:var(--muted);font-size:15px;margin-top:8px}
-.hero{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin:28px 0;display:block}
-.hero img{width:100%;display:block}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;background:var(--amber);color:#0B1220;font-weight:700;text-decoration:none}
-.btn.alt{background:var(--panel);color:var(--text);border:1px solid var(--line)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
-.kpi b{display:block;font-size:28px;color:var(--amber)}
+html{background:var(--bg)}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;color:var(--text);background:var(--bg);font-family:Cairo,"Segoe UI",Tahoma,sans-serif;line-height:1.75;overflow-x:hidden}
+a{color:var(--sky)}
+#gl{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
+#fader{position:fixed;inset:0;background:radial-gradient(circle at 50% 55%,#fff8e6 0%,#f5b942 18%,#02040a 62%);opacity:0;pointer-events:none;z-index:1}
+#labels{position:fixed;inset:0;pointer-events:none;z-index:2}
+.lbl{position:absolute;left:0;top:0;transition:opacity .35s;white-space:nowrap;direction:ltr}
+.lbl.reg{pointer-events:auto;cursor:pointer}
+.lbl.reg b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:rgba(2,6,14,.85);border:2px solid var(--green);color:#fff;font-size:15px;box-shadow:0 0 18px rgba(74,222,128,.55)}
+.lbl.reg:first-child b{border-color:var(--amber);box-shadow:0 0 22px rgba(245,185,66,.8)}
+.lbl.nasa{color:var(--sky);font-size:13px;text-shadow:0 0 6px #000,0 0 3px #000;display:flex;gap:4px;align-items:center}
+.lbl.nasa i{font-style:normal;font-size:18px}
+.lbl.lm{color:#cbd5e1;font-size:12px;text-shadow:0 0 5px #000,0 0 3px #000;opacity:.8}
+.grain{position:fixed;inset:-50%;z-index:3;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{to{transform:translate(4%,3%)}}
+/* loader */
+#loader{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;place-items:center;transition:opacity 1s .2s,visibility 1s .2s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .in{display:flex;flex-direction:column;gap:14px;align-items:center}
+#loader .orb{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e9e4d8,#8d887c 60%,#2a2a2a);box-shadow:-14px 0 40px rgba(245,185,66,.25) inset;animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loader .bar{width:220px;height:3px;background:#1c2536;border-radius:3px;overflow:hidden}
+#loader .bar i{display:block;height:100%;width:0;background:var(--amber);transition:width .3s}
+#loader small{color:var(--muted);letter-spacing:2px;direction:ltr}
+/* nav */
+#nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:20;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(8,12,22,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+#nav a{color:var(--muted);text-decoration:none;font-size:13.5px;padding:6px 14px;border-radius:999px;transition:.3s}
+#nav a.on,#nav a:hover{color:#0b1220;background:var(--amber)}
+#rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);width:3px;height:36vh;background:rgba(255,255,255,.08);border-radius:3px;z-index:20}
+#rail i{display:block;width:100%;height:0;background:linear-gradient(var(--amber),var(--sky));border-radius:3px}
+/* sections */
+main{position:relative;z-index:5}
+section{min-height:100vh;display:flex;align-items:center;padding:110px 7vw}
+section.short{min-height:70vh}
+.card{max-width:540px;background:var(--glass);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);border:1px solid var(--line);border-radius:22px;padding:28px 30px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.card.left{margin-right:auto}
+.card.wide{max-width:1100px;margin:0 auto;width:100%}
+.k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px}
+h2{font-size:clamp(28px,4vw,48px);line-height:1.2;margin:6px 0 12px}
+h3{margin:0 0 6px}
+p{margin:8px 0;color:#D5DEEA}
+.muted{color:var(--muted)}
+.big{font-size:clamp(46px,6vw,80px);font-weight:700;line-height:1;color:var(--amber)}
+/* hero */
+#hero{min-height:100vh;align-items:flex-end;padding-bottom:12vh}
+#hero .wrap{max-width:900px}
+#htitle{font-size:clamp(40px,7.5vw,108px);line-height:1.05;margin:10px 0 18px;font-weight:700;text-shadow:0 10px 50px rgba(0,0,0,.6)}
+#htitle .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+#htitle .w>span{display:inline-block}
+#hero .sub{font-size:clamp(16px,2vw,21px);color:#C9D4E6;max-width:680px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.04);backdrop-filter:blur(10px);cursor:pointer;font:inherit;font-weight:700;transition:transform .25s,background .25s}
+.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1)}
+.btn.pri{background:var(--amber);color:#0b1220;border-color:var(--amber)}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px;letter-spacing:3px;display:flex;flex-direction:column;align-items:center;gap:8px;direction:ltr}
+.scroll-cue i{width:1px;height:42px;background:linear-gradient(var(--amber),transparent);animation:cue 2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.fact{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px}
+.fact b{display:block;font-size:26px;color:var(--amber);direction:ltr;text-align:right}
+.fact span{font-size:12.5px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-left:6px;vertical-align:-1px}
+.toggles{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:14px}
+.toggles label{display:flex;gap:6px;align-items:center;cursor:pointer}
+/* regions */
+.rcardwrap{max-width:470px}
+.regions{display:flex;flex-direction:column;gap:14px;width:100%}
+#rdetail{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+#rlist{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rcard{all:unset;cursor:pointer;display:flex;gap:10px;align-items:center;padding:7px 10px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.25s}
+.rcard:hover,.rcard.on{border-color:var(--amber);background:rgba(245,185,66,.08)}
+.rcard .rk{display:grid;place-items:center;min-width:34px;height:34px;border-radius:50%;background:var(--green);color:#04210f;font-weight:700}
+.rcard[data-rank="1"] .rk{background:var(--amber)}
+.rcard small{display:block;color:var(--muted);font-size:12.5px}
+.rcard small b{color:var(--text)}
+#rdetail h4{margin:0 0 8px;font-size:22px;color:var(--amber)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}
+.kv span{color:var(--muted)}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}
+.kpi{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:16px}
+.kpi b{display:block;font-size:clamp(30px,3.6vw,46px);color:var(--amber);line-height:1.1;direction:ltr;text-align:right}
 .kpi span{font-size:13px;color:var(--muted)}
-h2{font-size:24px;margin:36px 0 12px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:6px}
-.card:hover{border-color:var(--amber)}
-.card b{font-size:18px}
-.card span{font-size:14px;color:var(--muted)}
-pre{background:#05080F;color:#D5DEEA;border-radius:12px;padding:16px;direction:ltr;text-align:left;overflow-x:auto;font-size:14px;line-height:1.6}
-.ltr{direction:ltr;unicode-bidi:isolate}
-footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
-footer a{color:var(--sky)}
-@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+/* years */
+#years svg{width:100%;height:auto}
+#years .grid{stroke:rgba(255,255,255,.08)}
+#years .ax{fill:var(--muted);font-size:12px;font-family:Cairo,sans-serif}
+#years .yb{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0);transition:transform .9s cubic-bezier(.2,.8,.2,1) var(--d)}
+#years.in .yb{transform:scaleY(1)}
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px;counter-reset:s}
+.step{position:relative;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:16px 14px;counter-increment:s}
+.step::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--amber);color:#0b1220;font-weight:700;margin-bottom:8px}
+.step b{display:block;margin-bottom:4px}
+.step span{font-size:13px;color:var(--muted)}
+/* videos */
+.vids{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.vid{all:unset;cursor:pointer;border-radius:16px;padding:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.25s;display:flex;flex-direction:column;gap:4px}
+.vid:hover{border-color:var(--amber);transform:translateY(-3px)}
+.vid .n{font-size:28px;font-weight:700;color:var(--amber);line-height:1}
+.vid small{color:var(--muted)}
+dialog{border:none;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%}
+dialog::backdrop{background:rgba(0,0,0,.82);backdrop-filter:blur(6px)}
+dialog video{width:100%;border-radius:16px;background:#000;display:block}
+dialog .x{position:absolute;top:-44px;left:0;background:none;border:1px solid var(--line);color:#fff;border-radius:999px;padding:4px 14px;cursor:pointer;font:inherit}
+/* code */
+pre{background:rgba(2,6,14,.85);border:1px solid var(--line);border-radius:14px;padding:16px;direction:ltr;text-align:left;overflow-x:auto;font-size:13.5px;line-height:1.7;color:#D5DEEA;margin:10px 0}
+.copy{float:left;margin-top:-4px}
+.files{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.files a{text-decoration:none;color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:12px 14px;transition:.25s}
+.files a:hover{border-color:var(--amber)}
+.files small{display:block;color:var(--muted)}
+footer{position:relative;z-index:5;padding:40px 7vw 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);background:rgba(2,4,10,.85)}
+.no-webgl #gl{background:url(lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg) center/cover}
+@media (max-width:900px){.regions,.facts{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.pipe{grid-template-columns:1fr 1fr}.vids,.files{grid-template-columns:1fr 1fr}#nav{display:none}#rail{display:none}section{padding:90px 16px}.card{padding:22px 18px}}
+@media (prefers-reduced-motion:reduce){.grain,.scroll-cue i,#loader .orb{animation:none}}
 </style>
 </head>
 <body>
+<canvas id="gl" aria-label="مشهد ثلاثي الأبعاد للقمر وتضاريس القطب الجنوبي"></canvas>
+<div id="fader"></div>
+<div id="labels"></div>
+<div class="grain"></div>
+<div id="loader"><div class="in"><div class="orb"></div><div class="bar"><i></i></div><small>LOADING NASA DATA</small></div></div>
+
+<nav id="nav">
+  <a href="#hero" class="on">البداية</a><a href="#terrain">التضاريس</a><a href="#regions">المناطق</a><a href="#validation">الدقة</a><a href="#learn">تعلّم</a><a href="#run">شغّله</a>
+</nav>
+<div id="rail"><i></i></div>
+
 <main>
-  <div class="k">LUNAR LANDING SITE NAVIGATOR</div>
-  <h1>🌕 مستكشف مواقع الهبوط القمري</h1>
-  <p class="lead">نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر، ببيانات ناسا الرسمية ونوافذ الإطلاق الحقيقية لعام 2027.</p>
-  <p class="en">Open-source system that ranks landing sites at the lunar south pole using official NASA data and real 2027 launch windows.</p>
+<div id="story">
 
-  <div class="cta">
-    <a class="btn" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html">🗺️ افتح الخريطة التفاعلية</a>
-    <a class="btn alt" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf">📕 التقرير الكامل (PDF)</a>
-    <a class="btn alt" href="https://github.com/ELD11q/-ahs">⌨️ الكود على GitHub</a>
+<section id="hero" data-nav>
+  <div class="wrap">
+    <div class="k fade-in">LUNAR LANDING SITE NAVIGATOR</div>
+    <h1 id="htitle">أين نهبط على القمر؟</h1>
+    <p class="sub fade-in">نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر، ببيانات ناسا الرسمية ونوافذ الإطلاق الحقيقية لعام 2027، ودقته متحقق منها.</p>
+    <div class="cta fade-in">
+      <a class="btn pri jump" href="#terrain">ابدأ الرحلة ↓</a>
+      <a class="btn" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html">الخريطة التفاعلية</a>
+      <a class="btn" href="https://github.com/ELD11q/-ahs">GitHub</a>
+    </div>
+    <div class="chips fade-in"><span class="chip">NASA LOLA · Barker 2023</span><span class="chip">Mazarico 2011</span><span class="chip">Artemis III</span><span class="chip">three.js · numba · astropy</span></div>
   </div>
+  <div class="scroll-cue">SCROLL<i></i></div>
+</section>
 
-  <a class="hero" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><img src="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" alt="الخريطة التفاعلية لمواقع الهبوط على القطب الجنوبي"></a>
-
-  <div class="kpis">
-    <div class="kpi"><b>0.91</b><span>ارتباط نموذج الشمس مع خرائط ناسا</span></div>
-    <div class="kpi"><b>0.94</b><span>ارتباط رؤية الأرض مع خرائط ناسا</span></div>
-    <div class="kpi"><b>70%</b><span>من أفضل نقاط دراسة TOPSIS المستقلة ضمن أفضل 10% عندنا</span></div>
-    <div class="kpi"><b>4/9</b><span>من مناطق ناسا لـ Artemis III تغطيها مناطقنا</span></div>
+<section data-nav id="why">
+  <div class="card" data-rev>
+    <div class="k">لماذا القطب الجنوبي؟</div>
+    <h2>جليد ماء في حفر ما شافت الشمس من مليارات السنين</h2>
+    <p>حفر ظلها دائم، حرارتها أقل من ‎−200°C‎، يُحتمل فيها جليد ماء: شرب، وأكسجين، ووقود صواريخ. والدليل من LCROSS (2009) و M3 على Chandrayaan-1 (2018) و Diviner على LRO.</p>
+    <div class="facts">
+      <div class="fact"><b>1.5°</b><span>أعلى ارتفاع للشمس فوق الأفق</span></div>
+      <div class="fact"><b>±6.8°</b><span>تمايل الأرض في السماء</span></div>
+      <div class="fact"><b>6.5 يوم</b><span>مدة المهمة على السطح</span></div>
+    </div>
   </div>
+</section>
 
-  <h2>🎬 فيديو: كيف تشغّل المشروع <span class="ltr" style="font-size:16px;color:var(--muted)">(English, 3 min)</span></h2>
-  <video controls preload="metadata" poster="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" style="width:100%;border-radius:14px;border:1px solid var(--line);background:#000">
-    <source src="lunar-landing-navigator/docs/video/how_to_run_EN.mp4" type="video/mp4">
-  </video>
-
-  <h2>🎓 سلسلة الخبير: افهم المشروع من الألف إلى الياء</h2>
-  <p style="color:var(--muted);margin-top:-4px">8 فصول (حوالي 27 دقيقة)، بصوت إنجليزي وترجمة عربية. كل قرار في المشروع: وش هو، وليش، والدليل عليه. ومعها <a href="lunar-landing-navigator/docs/expert/Expert_Guide_AR.pdf" style="color:var(--sky)">دليل الخبير PDF</a> بنفس الكلام مكتوب.</p>
-  <div class="grid">
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_1.mp4"><b>1 · العلم والمشكلة</b><span>الجليد، والشمس الواطية، وتمايل الأرض، وكيف تختار ناسا · 3:47</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_2.mp4"><b>2 · البيانات</b><span>ليش Barker 2023 وMazarico، وليش 80 م · 3:29</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_3.mp4"><b>3 · الأدوات</b><span>Python وnumba وastropy وLeaflet، وليش كل وحدة · 4:10</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_4.mp4"><b>4 · الطريقة</b><span>كل قرار: الميلان، والأوزان، ونوافذ 2027، و60/40 · 4:31</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_5.mp4"><b>5 · التحقق</b><span>0.91 و0.94، وTOPSIS، و4 من 9، والمتانة · 3:12</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_6.mp4"><b>6 · الكود</b><span>كل ملف وش يسوي، والأوامر، والمخرجات · 2:27</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_7.mp4"><b>7 · GitHub</b><span>المفاهيم، وActions، وPages، وكيف تساعد غيرك · 2:54</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/videos/chapter_8.mp4"><b>8 · أسئلة اللجنة</b><span>الأسئلة المتوقعة وأجوبتها، والحدود · 2:41</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/expert/Expert_Guide_AR.pdf"><b>📗 دليل الخبير (PDF)</b><span>36 صفحة: نص السلسلة كامل للمذاكرة</span></a>
+<section class="short" id="descent">
+  <div class="card left" data-rev>
+    <div class="k">النزول</div>
+    <h2>نتجه للقطب الجنوبي</h2>
+    <p>الحلقة الذهبية على القمر هي منطقة استكشاف Artemis: داخل 6° من القطب. ناسا اختارت 13 منطقة فيها، وبعدين 9.</p>
   </div>
+</section>
 
-  <h2>كل الملفات</h2>
-  <div class="grid">
-    <a class="card" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><b>🗺️ الخريطة التفاعلية</b><span>أفضل 9 مناطق، ومناطق ناسا، ورسم 2027 لكل منطقة</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf"><b>📕 التقرير التقني</b><span>23 صفحة: المنهجية، والنتائج، والتحقق، ونموذج العمل</span></a>
-    <a class="card" href="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_AR.pdf"><b>📘 دليل المستخدم</b><span>32 صفحة: التثبيت والتشغيل من الألف إلى الياء</span></a>
-    <a class="card" href="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT.md"><b>📄 تقرير النتائج</b><span>جداول الأرقام كاملة</span></a>
-    <a class="card" href="lunar-landing-navigator/results/nasa_2027/validation.png"><b>📈 التحقق من الدقة</b><span>نموذجنا مقابل خرائط ناسا وتقويم 2027</span></a>
-    <a class="card" href="lunar-landing-navigator/results/nasa_2027/experiments.png"><b>🧪 اختبارات المتانة</b><span>الأوزان، وحد الميلان، وسنوات 2026 إلى 2028</span></a>
+<section class="short" id="dive"><div></div></section>
+
+<section id="terrain" data-nav>
+  <div class="card" data-rev>
+    <div class="k">التضاريس الحقيقية · 480 × 480 كم</div>
+    <h2>هذا القطب الجنوبي، من ليزر LOLA</h2>
+    <p>كل نقطة هنا ارتفاع حقيقي قاسه ليزر مركبة LRO (ارتفاع مضخّم ×3.2 عشان يوضح). الأزرق مناطق ظل دائم، يعني جليد محتمل.</p>
+    <div class="legend"><span><i style="background:var(--blue)"></i>ظل دائم (جليد محتمل)</span></div>
   </div>
+</section>
 
-  <h2>شغّله بنفسك</h2>
-  <pre>git clone https://github.com/ELD11q/-ahs.git
+<section id="shadows">
+  <div class="card left" data-rev>
+    <div class="k">يوم قطبي</div>
+    <h2>شوف الظلال تتحرك</h2>
+    <p>الشمس عند القطب ما تطلع فوق الرأس، تدور على الأفق. فالظلال تلف حول كل جبل، وقاع الحفر ما يوصله الضوء أبد. وهذا اللي يخلي اختيار مكان الهبوط صعب.</p>
+    <div class="toggles"><label><input type="checkbox" id="tg-sun" checked> حرّك الشمس</label></div>
+  </div>
+</section>
+
+<section id="classes">
+  <div class="card" data-rev>
+    <div class="k">التصنيف</div>
+    <h2>36 مليون بكسل، كل واحد له نقاط</h2>
+    <p>الميلان 30%، والإضاءة 25%، ورؤية الأرض 15%، والقرب من الجليد 15%، والصخور 15%. وأي خطر داخل 200 م (قطع الهبوط) يخلي النقطة حمراء.</p>
+    <div class="legend"><span><i style="background:var(--green)"></i>آمن</span><span><i style="background:#EAB308"></i>متوسط</span><span><i style="background:var(--red)"></i>خطر</span></div>
+    <div class="toggles"><label><input type="checkbox" id="tg-classes" checked> طبقة التصنيف</label></div>
+  </div>
+</section>
+
+<section id="regions" data-nav>
+  <div class="card left rcardwrap" data-rev>
+    <div class="k">النتائج</div>
+    <h2>أفضل 9 مناطق للهبوط</h2>
+    <p class="muted">اضغط أي منطقة والكاميرا تطير لها. النجوم ★ مناطق ناسا لـ Artemis III.</p>
+    <div class="regions">
+      <div id="rlist"></div>
+      <div id="rdetail"></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /story -->
+
+<section id="windows">
+  <div class="card wide" data-rev>
+    <div class="k">نوافذ الإطلاق</div>
+    <h2>متى نهبط؟ نسبة أوقات البدء اللي تعطي 6.5 يوم ضوء متواصل</h2>
+    <p class="muted">محسوبة ساعة بساعة بمواقع الشمس والأرض الحقيقية (astropy + نموذج IAU 2009)، فوق أفق حقيقي في 128 اتجاه. المنطقة 1 الأفضل في السنوات الثلاث.</p>
+    <div id="years"></div>
+  </div>
+</section>
+
+<section id="validation" data-nav>
+  <div class="card wide" data-rev>
+    <div class="k">التحقق</div>
+    <h2>ما اكتفينا بالنتائج، قارنّاها بثلاث مراجع مستقلة</h2>
+    <div class="kpis">
+      <div class="kpi"><b data-count="0.91" data-dec="2">0</b><span>ارتباط الشمس مع خرائط ناسا</span></div>
+      <div class="kpi"><b data-count="0.94" data-dec="2">0</b><span>ارتباط رؤية الأرض مع ناسا</span></div>
+      <div class="kpi"><b data-count="70" data-suf="%">0</b><span>من أفضل نقاط دراسة TOPSIS المستقلة ضمن أفضل 10% عندنا</span></div>
+      <div class="kpi"><b data-count="4" data-suf="/9">0/9</b><span>من مناطق ناسا تغطيها مناطقنا (5 من 9 مع المرشحين)</span></div>
+    </div>
+    <p class="muted">111,556 نقطة × 13,588 لحظة زمنية على 18.6 سنة. وما عدّلنا النموذج عشان يطابق ناسا بالقوة.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="card wide" data-rev>
+    <div class="k">كيف يشتغل</div>
+    <h2>من بيانات ناسا الخام إلى قرار هبوط</h2>
+    <div class="pipe">
+      <div class="step"><b>6 ملفات من ناسا</b><span>LOLA وخرائط الإضاءة، 1.2 جيجا</span></div>
+      <div class="step"><b>شبكة وحدة</b><span>480 كم · 80 م · 36 مليون بكسل</span></div>
+      <div class="step"><b>نقاط وتصنيف</b><span>5 معايير بأوزان</span></div>
+      <div class="step"><b>13 ← 9</b><span>60% تضاريس + 40% نوافذ 2027</span></div>
+      <div class="step"><b>تحقق</b><span>ناسا · TOPSIS · Artemis III</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="learn" data-nav>
+  <div class="card wide" data-rev>
+    <div class="k">تعلّم</div>
+    <h2>سلسلة الخبير: افهم كل قرار، وليش، والدليل</h2>
+    <p class="muted">8 فصول (27 دقيقة)، صوت إنجليزي وترجمة عربية. ومعها <a href="lunar-landing-navigator/docs/expert/Expert_Guide_AR.pdf">دليل الخبير PDF</a>.</p>
+    <div class="vids">
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_1.mp4"><span class="n">1</span><b>العلم والمشكلة</b><small>3:47</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_2.mp4"><span class="n">2</span><b>البيانات</b><small>3:29</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_3.mp4"><span class="n">3</span><b>الأدوات</b><small>4:10</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_4.mp4"><span class="n">4</span><b>الطريقة</b><small>4:31</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_5.mp4"><span class="n">5</span><b>التحقق</b><small>3:12</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_6.mp4"><span class="n">6</span><b>الكود</b><small>2:27</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_7.mp4"><span class="n">7</span><b>GitHub</b><small>2:54</small></button>
+      <button class="vid" data-video="lunar-landing-navigator/docs/expert/videos/chapter_8.mp4"><span class="n">8</span><b>أسئلة اللجنة</b><small>2:41</small></button>
+    </div>
+    <div class="cta"><button class="btn" data-video="lunar-landing-navigator/docs/video/how_to_run_EN.mp4">▶ فيديو التشغيل (3 دقايق)</button></div>
+  </div>
+</section>
+
+<section id="run" data-nav>
+  <div class="card wide" data-rev>
+    <div class="k">شغّله بنفسك</div>
+    <h2>ثلاث أوامر، أو من GitHub بدون تثبيت</h2>
+    <button class="btn copy" data-copy="#cmds">نسخ</button>
+    <pre id="cmds">git clone https://github.com/ELD11q/-ahs.git
 cd -ahs/lunar-landing-navigator
 python -m venv .venv &amp;&amp; source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python -m lunar_nav --nasa -o output     # downloads ~1.2 GB of NASA data on first run</pre>
-  <p>أو من حسابك على GitHub بدون تثبيت: سوّ <b>Fork</b>، بعدها افتح <b>Actions</b> وفعّل الـ workflows، واختر <b>Lunar Landing Navigator</b> واضغط <b>Run workflow</b>.</p>
-
-  <footer>
-    البيانات: <a href="https://pgda.gsfc.nasa.gov/products/90">LOLA · Barker et al. 2023</a> ·
-    <a href="https://pgda.gsfc.nasa.gov/products/69">Mazarico et al. 2011</a> ·
-    <a href="https://ntrs.nasa.gov/citations/20250011660">NASA NTRS 20250011660</a> ·
-    <a href="https://arxiv.org/abs/2406.19863">arXiv:2406.19863</a><br>
-    أداة بحثية وتعليمية، مو أداة طيران معتمدة.
-  </footer>
+python -m lunar_nav --nasa -o output</pre>
+    <p>أو من حسابك على GitHub: سوّ <b>Fork</b>، بعدها افتح <b>Actions</b> وفعّل الـ workflows، واختر <b>Lunar Landing Navigator</b> واضغط <b>Run workflow</b>.</p>
+    <div class="files">
+      <a href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><b>🗺️ الخريطة التفاعلية</b><small>2D مفصّلة</small></a>
+      <a href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf"><b>📕 التقرير التقني</b><small>23 صفحة</small></a>
+      <a href="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_AR.pdf"><b>📘 دليل المستخدم</b><small>32 صفحة</small></a>
+      <a href="lunar-landing-navigator/docs/expert/Expert_Guide_AR.pdf"><b>📗 دليل الخبير</b><small>36 صفحة</small></a>
+      <a href="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT.md"><b>📄 تقرير النتائج</b><small>الأرقام كاملة</small></a>
+      <a href="classic.html"><b>🧾 النسخة الكلاسيكية</b><small>صفحة بسيطة وخفيفة</small></a>
+    </div>
+  </div>
+</section>
 </main>
+
+<footer>
+  البيانات: <a href="https://pgda.gsfc.nasa.gov/products/90">LOLA · Barker et al. 2023</a> · <a href="https://pgda.gsfc.nasa.gov/products/69">Mazarico et al. 2011</a> · صور القمر: <a href="https://svs.gsfc.nasa.gov/4720">NASA SVS CGI Moon Kit</a> · <a href="https://ntrs.nasa.gov/citations/20250011660">NTRS 20250011660</a> · <a href="https://arxiv.org/abs/2406.19863">arXiv:2406.19863</a><br>
+  three.js · GSAP · Lenis · أداة بحثية وتعليمية، مو أداة طيران معتمدة.
+</footer>
+
+<dialog id="vmodal"><button class="x" aria-label="إغلاق">✕ إغلاق</button><video controls playsinline preload="none"></video></dialog>
+
+<script src="site/vendor/gsap.min.js"></script>
+<script src="site/vendor/ScrollTrigger.min.js"></script>
+<script src="site/vendor/lenis.min.js"></script>
+<script type="module" src="site/app.js"></script>
 </body>
 </html>
