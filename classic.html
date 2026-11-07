@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lunar Landing Navigator</title>
+<meta name="description" content="Ranks landing sites at the lunar south pole with official NASA data and real 2027 launch windows. نظام لاختيار أفضل مواقع الهبوط على القطب الجنوبي للقمر.">
+<style>
+@font-face{font-family:Cairo;font-weight:400;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:700;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:Cairo;font-weight:400;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F}
+@font-face{font-family:Cairo;font-weight:700;src:url(lunar-landing-navigator/docs/guide/fonts/cairo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-024F,U+2000-206F}
+:root{--bg:#0B1220;--panel:#121B2E;--line:#23314D;--text:#EEF2F8;--muted:#9AA7BD;--amber:#F5B942;--sky:#7DD3FC;--green:#4ADE80}
+:root[data-theme="light"]{--bg:#F6F4EE;--panel:#FFFFFF;--line:#E1E5EE;--text:#14213D;--muted:#55607A;--amber:#B7791F;--sky:#2F5BD3;--green:#15803D}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#F6F4EE;--panel:#FFFFFF;--line:#E1E5EE;--text:#14213D;--muted:#55607A;--amber:#B7791F;--sky:#2F5BD3;--green:#15803D}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Cairo,"Segoe UI",Tahoma,sans-serif;line-height:1.7}
+main{max-width:1080px;margin:0 auto;padding:40px 16px 64px}
+.k{color:var(--amber);font-weight:700;letter-spacing:2px;font-size:13px;direction:ltr;text-align:right}
+h1{font-size:clamp(30px,5vw,52px);line-height:1.2;margin:6px 0 10px}
+.lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px;margin:0}
+.en{direction:ltr;text-align:left;color:var(--muted);font-size:15px;margin-top:8px}
+.hero{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin:28px 0;display:block}
+.hero img{width:100%;display:block}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;background:var(--amber);color:#0B1220;font-weight:700;text-decoration:none}
+.btn.alt{background:var(--panel);color:var(--text);border:1px solid var(--line)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.kpi b{display:block;font-size:28px;color:var(--amber)}
+.kpi span{font-size:13px;color:var(--muted)}
+h2{font-size:24px;margin:36px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:6px}
+.card:hover{border-color:var(--amber)}
+.card b{font-size:18px}
+.card span{font-size:14px;color:var(--muted)}
+pre{background:#05080F;color:#D5DEEA;border-radius:12px;padding:16px;direction:ltr;text-align:left;overflow-x:auto;font-size:14px;line-height:1.6}
+.ltr{direction:ltr;unicode-bidi:isolate}
+footer{margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--sky)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div class="k">LUNAR LANDING SITE NAVIGATOR</div>
+  <h1>🌕 مستكشف مواقع الهبوط القمري</h1>
+  <p class="lead">نظام مفتوح المصدر يختار أفضل مواقع الهبوط على القطب الجنوبي للقمر، ببيانات ناسا الرسمية ونوافذ الإطلاق الحقيقية لعام 2027.</p>
+  <p class="en">Open-source system that ranks landing sites at the lunar south pole using official NASA data and real 2027 launch windows.</p>
+
+  <div class="cta">
+    <a class="btn" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html">🗺️ افتح الخريطة التفاعلية</a>
+    <a class="btn alt" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf">📕 التقرير الكامل (PDF)</a>
+    <a class="btn alt" href="https://github.com/ELD11q/-ahs">⌨️ الكود على GitHub</a>
+  </div>
+
+  <a class="hero" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><img src="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" alt="الخريطة التفاعلية لمواقع الهبوط على القطب الجنوبي"></a>
+
+  <div class="kpis">
+    <div class="kpi"><b>0.91</b><span>ارتباط نموذج الشمس مع خرائط ناسا</span></div>
+    <div class="kpi"><b>0.94</b><span>ارتباط رؤية الأرض مع خرائط ناسا</span></div>
+    <div class="kpi"><b>70%</b><span>من أفضل نقاط دراسة TOPSIS المستقلة ضمن أفضل 10% عندنا</span></div>
+    <div class="kpi"><b>4/9</b><span>من مناطق ناسا لـ Artemis III تغطيها مناطقنا</span></div>
+  </div>
+
+  <h2>🎬 فيديو: كيف تشغّل المشروع <span class="ltr" style="font-size:16px;color:var(--muted)">(English, 3 min)</span></h2>
+  <video controls preload="metadata" poster="lunar-landing-navigator/docs/guide/img/nasa_map_overview.jpg" style="width:100%;border-radius:14px;border:1px solid var(--line);background:#000">
+    <source src="lunar-landing-navigator/docs/video/how_to_run_EN.mp4" type="video/mp4">
+  </video>
+
+  <h2>كل الملفات</h2>
+  <div class="grid">
+    <a class="card" href="lunar-landing-navigator/results/nasa_2027/landing_sites_map.html"><b>🗺️ الخريطة التفاعلية</b><span>أفضل 9 مناطق، ومناطق ناسا، ورسم 2027 لكل منطقة</span></a>
+    <a class="card" href="lunar-landing-navigator/docs/report/Lunar_Navigator_Report_AR.pdf"><b>📕 التقرير التقني</b><span>23 صفحة: المنهجية، والنتائج، والتحقق، ونموذج العمل</span></a>
+    <a class="card" href="lunar-landing-navigator/docs/guide/Lunar_Navigator_Guide_AR.pdf"><b>📘 دليل المستخدم</b><span>32 صفحة: التثبيت والتشغيل من الألف إلى الياء</span></a>
+    <a class="card" href="https://github.com/ELD11q/-ahs/blob/main/lunar-landing-navigator/results/nasa_2027/REPORT.md"><b>📄 تقرير النتائج</b><span>جداول الأرقام كاملة</span></a>
+    <a class="card" href="lunar-landing-navigator/results/nasa_2027/validation.png"><b>📈 التحقق من الدقة</b><span>نموذجنا مقابل خرائط ناسا وتقويم 2027</span></a>
+    <a class="card" href="lunar-landing-navigator/results/nasa_2027/experiments.png"><b>🧪 اختبارات المتانة</b><span>الأوزان، وحد الميلان، وسنوات 2026 إلى 2028</span></a>
+  </div>
+
+  <h2>شغّله بنفسك</h2>
+  <pre>git clone https://github.com/ELD11q/-ahs.git
+cd -ahs/lunar-landing-navigator
+python -m venv .venv &amp;&amp; source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python -m lunar_nav --nasa -o output     # downloads ~1.2 GB of NASA data on first run</pre>
+  <p>أو من حسابك على GitHub بدون تثبيت: سوّ <b>Fork</b>، بعدها افتح <b>Actions</b> وفعّل الـ workflows، واختر <b>Lunar Landing Navigator</b> واضغط <b>Run workflow</b>.</p>
+
+  <footer>
+    البيانات: <a href="https://pgda.gsfc.nasa.gov/products/90">LOLA · Barker et al. 2023</a> ·
+    <a href="https://pgda.gsfc.nasa.gov/products/69">Mazarico et al. 2011</a> ·
+    <a href="https://ntrs.nasa.gov/citations/20250011660">NASA NTRS 20250011660</a> ·
+    <a href="https://arxiv.org/abs/2406.19863">arXiv:2406.19863</a><br>
+    أداة بحثية وتعليمية، مو أداة طيران معتمدة.
+  </footer>
+</main>
+</body>
+</html>
